@@ -1,8 +1,9 @@
 body {
     background-image: url("http://cs-server.usc.edu:45678/hw/hw8/images/background.png");
+    font-family: Times;
+    font-weight: bolder;
 }
-.starter-template {
+#input-div {
+    border-radius: 5px;
     background-color: white;
-    padding: 40px 15px;
-    text-align: center;
 }
