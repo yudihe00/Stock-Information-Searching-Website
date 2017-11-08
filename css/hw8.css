@@ -1,5 +1,5 @@
-body {
-    background-image: url("http://cs-server.usc.edu:45678/hw/hw8/images/background.png");
+body#bodyClass {
+    background: url("http://cs-server.usc.edu:45678/hw/hw8/images/background.png") !important;
     font-family: Times;
     font-weight: bolder;
 }
@@ -11,6 +11,6 @@ body {
     background-color: white;
 }
 
-md-autocomplete md-progress-linear { 
-    display: none; 
+#md-auto md-progress-linear {
+    display: none;
 }
