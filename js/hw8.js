@@ -1,7 +1,8 @@
 var jsonObj = {};
 var ajaxCallNum = 0;
 var error = {};
-
+var phpUrl = "http://localhost/hw8ng/php/multiAjax.php";
+// var phpUrl = "php/multiAjax.php";
 // set initial value to 0
 function initStat() {
     jsonObj = {};
@@ -43,7 +44,7 @@ function jqueryGetData(functionName, initData) {
     $.ajax({
         type: "GET",
         dataType: "json", // dataType send back
-        url: "php/multiAjax.php",
+        url: phpUrl,
         data: data,  // data send to server
         success: function (data) {
             saveJson(functionName, data);
@@ -80,7 +81,7 @@ $("document").ready(function () {
         $.ajax({
             type: "GET",
             dataType: "json", // dataType send back
-            url: "php/multiAjax.php",
+            url: phpUrl,
             data: data,  // data send to server
             success: function (data) {
                 saveJson("basic info", data);
