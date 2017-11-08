@@ -1,16 +1,25 @@
-body#bodyClass {
-    background: url("http://cs-server.usc.edu:45678/hw/hw8/images/background.png") !important;
+body {
+    background: url("http://cs-server.usc.edu:45678/hw/hw8/images/background.png");
     font-family: Times;
     font-weight: bolder;
 }
-#input-div {
+#input-div  {
     border-radius: 5px;
     background-color: white;
 }
-#test-div {
+
+#favorite-list  {
+    border-radius: 5px;
     background-color: white;
 }
 
-#md-auto md-progress-linear {
-    display: none;
+#test-div  {
+    background-color: white;
 }
+
+/*.col-md-12.col-xs-12.col-sm-12 {*/
+    /*border-radius: 5px;*/
+    /*background-color: white;*/
+/*}*/
+
+
