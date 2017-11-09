@@ -23,15 +23,148 @@ function saveError(item) {
 }
 
 
+
+// draw price and volume charts
+function priceAndVolume()
+{
+
+    var arrayDate=[];
+    var arrayClose=[];
+    for(num in jsonObj["basic info"]["arrayDate"]) {
+        arrayDate.push(jsonObj["basic info"]["arrayDate"][num]);
+    }
+    for(num in jsonObj["basic info"]["arrayPrice"]) {
+        arrayClose.push(jsonObj["basic info"]["arrayPrice"][num]);
+    }
+
+    arrayClose = arrayClose.map(Number);
+    var maxClose = Math.max.apply(null,arrayClose);
+    var minClose = Math.min.apply(null,arrayClose);
+
+
+    var arrayVolume =[];
+    for(num in jsonObj["basic info"]["arrayVolume"]) {
+        arrayVolume.push(jsonObj["basic info"]["arrayVolume"][num]);
+    }
+
+    arrayVolume = arrayVolume.map(Number);
+    var maxVolume = Math.max.apply(null,arrayVolume);
+
+    var symbol = jsonObj["basic info"]["symbol"];
+    var timeStamp = jsonObj["basic info"]["time stamp"];
+
+    var chart= new Highcharts.chart('indicator-chart', {
+        chart: {
+            zoomType: 'xy',
+            borderWidth: 1,
+            borderColor: '#D6D6D6',
+            // alignTicks: false
+        },
+        title: {
+            text: 'Stock Price (' + timeStamp + ')'
+        },
+        subtitle: {
+            text: '<a href="https://www.alphavantage.co/" >Source: Alpha Vantage </a>',
+            useHTML: true
+
+        },
+        xAxis: [{
+
+            categories: arrayDate,
+            minTickInterval: 5
+
+        }],
+        yAxis: [{ // Primary yAxis
+            labels: {
+
+                style: {
+                    color: Highcharts.getOptions().colors[1]
+                }
+            },
+            min: minClose-2,
+            max: maxClose+2,
+            // startOnTick: false,
+            // tickInterval: 2,
+            title: {
+                text: 'Stock Price',
+                style: {
+                    color: Highcharts.getOptions().colors[1]
+                }
+            }
+        }, { // Secondary yAxis
+            title: {
+
+                text: 'Volume',
+                style: {
+                    color: Highcharts.getOptions().colors[1]
+                }
+            },
+            max: maxVolume*5,
+            // tickInterval: 2,
+            labels: {
+
+                formatter: function (){
+                    return this.value/1000000 + 'M';
+                },
+
+                style: {
+                    color: Highcharts.getOptions().colors[1]
+                }
+            },
+
+            opposite: true
+        }],
+
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            x: -5,
+            verticalAlign: 'top',
+            y: 250,
+            reversed: true,
+            floating: false,
+            backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
+        },
+        series: [{
+            name: symbol+' Volume',
+            type: 'column',
+            yAxis: 1,
+            color: '#FFFFFF',
+            zIndex: 2,
+            data: arrayVolume
+
+        }
+            , {
+                name: symbol+" ",
+                type: 'area',
+
+                color: '#D6391F',
+                fillOpacity: 0.6,
+                lineWidth: 1,
+                data: arrayClose,
+                zIndex: 1,
+                tooltip: {
+                    valueDecimals: 2
+                }
+
+            }]
+    });
+}
+
+
+
+
+
 // check if all jquery is done
 function checkAllJqueryDone() {
     if (ajaxCallNum == 9) {
-        if(error=={}) {
+        // if(error=={}) {
             //draw price chart
+            priceAndVolume();
 
-        } else {
-            //show warning
-        }
+        // } else {
+        //     //show warning
+        // }
     }
 
 }
@@ -162,6 +295,10 @@ $("document").ready(function () {
 
     });
 });
+
+
+
+
 
 
 
