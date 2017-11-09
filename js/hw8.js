@@ -28,7 +28,7 @@ function checkAllJqueryDone() {
     if (ajaxCallNum == 9) {
         if(error=={}) {
             //draw price chart
-            
+
         } else {
             //show warning
         }
