@@ -165,61 +165,63 @@
           <span class="glyphicon glyphicon-link" aria-hidden="true"></span>
           &nbsp; News Feed</button>
 
-      </div>
+      </div >
 
-      <div class="col-md-6 col-xs-12 col-sm-12" id="detail-table-div">
-        <div class="panel-body">
-          <div class="col-md-8 col-xs-8 col-sm-8" >Stock Details</div>
-          <div class="col-md-4 col-xs-4 col-sm-4" >buttons</div>
+
+
+        <div class="col-md-6 col-xs-12 col-sm-12" id="detail-table-div">
+          <div class="panel-body">
+            <div class="col-md-8 col-xs-8 col-sm-8" >Stock Details</div>
+            <div class="col-md-4 col-xs-4 col-sm-4" >buttons</div>
+          </div>
+
+          <!-- Stock Detail Table -->
+          <table class="table table-striped" id="stock-detail-table">
+            <tr>
+              <th class="col-md-6">Stock Ticker Symbol</th>
+              <td id="symbol"></td>
+            </tr>
+            <tr>
+              <th class="col-md-6">Last Price</th>
+              <td id="last-price"></td>
+            </tr>
+            <tr>
+              <th class="col-md-6">Change(Change Percent)</th>
+              <td id="change-and-percent"></td>
+            </tr>
+            <tr>
+              <th class="col-md-6">Timestamp</th>
+              <td id="timestamp"></td>
+            </tr>
+            <tr>
+              <th class="col-md-6">Open</th>
+              <td id="open"></td>
+            </tr>
+            <tr>
+              <th class="col-md-6">Close</th>
+              <td id="close"></td>
+            </tr>
+            <tr>
+              <th class="col-md-6">Day's Range</th>
+              <td id="range"></td>
+            </tr>
+            <tr>
+              <th class="col-md-6">Volume</th>
+              <td id="volume"></td>
+            </tr>
+
+          </table>
         </div>
 
-        <!-- Stock Detail Table -->
-        <table class="table table-striped" id="stock-detail-table">
-          <tr>
-            <th class="col-md-6">Stock Ticker Symbol</th>
-            <td id="symbol"></td>
-          </tr>
-          <tr>
-            <th class="col-md-6">Last Price</th>
-            <td id="last-price"></td>
-          </tr>
-          <tr>
-            <th class="col-md-6">Change(Change Percent)</th>
-            <td id="change-and-percent"></td>
-          </tr>
-          <tr>
-            <th class="col-md-6">Timestamp</th>
-            <td id="timestamp"></td>
-          </tr>
-          <tr>
-            <th class="col-md-6">Open</th>
-            <td id="open"></td>
-          </tr>
-          <tr>
-            <th class="col-md-6">Close</th>
-            <td id="close"></td>
-          </tr>
-          <tr>
-            <th class="col-md-6">Day's Range</th>
-            <td id="range"></td>
-          </tr>
-          <tr>
-            <th class="col-md-6">Volume</th>
-            <td id="volume"></td>
-          </tr>
+        <div class="col-md-6 col-xs-12 col-sm-12" id="detail-chart-div" >
 
-        </table>
-      </div>
+          <div class="panel-body">
+            9 indicators
+          </div>
+          <div id="indicator-chart" style="height:370px;padding-bottom: 10px;">
 
-      <div class="col-md-6 col-xs-12 col-sm-12" id="detail-chart-div">
-
-        <div class="panel-body">
-          9 indicators
+          </div>
         </div>
-        <div id="indicator-chart">
-
-        </div>
-      </div>
 
 
 

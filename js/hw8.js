@@ -209,10 +209,11 @@ function priceAndVolume()
             zoomType: 'xy',
             borderWidth: 1,
             borderColor: '#D6D6D6',
+            marginBottom: 100 //put legend at bottom
             // alignTicks: false
         },
         title: {
-            text: 'Stock Price (' + timeStamp + ')'
+            text: symbol+" Stock Price and Volume"
         },
         subtitle: {
             text: '<a href="https://www.alphavantage.co/" >Source: Alpha Vantage </a>',
@@ -267,13 +268,13 @@ function priceAndVolume()
         }],
 
         legend: {
-            layout: 'vertical',
-            align: 'right',
-            x: -5,
-            verticalAlign: 'top',
-            y: 250,
-            reversed: true,
-            floating: false,
+            //layout: 'vertical',
+            align: 'center',
+            //x: -5,
+            verticalAlign: 'bottom',
+            //y: 250,
+            //reversed: true,
+            //floating: false,
             backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
         },
         series: [{
@@ -282,7 +283,9 @@ function priceAndVolume()
             yAxis: 1,
             color: '#FFFFFF',
             zIndex: 2,
-            data: arrayVolume
+            data: arrayVolume,
+            // pointWidth: 1
+
 
         }
             , {
