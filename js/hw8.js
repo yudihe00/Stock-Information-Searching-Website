@@ -26,9 +26,12 @@ function saveError(item) {
 // check if all jquery is done
 function checkAllJqueryDone() {
     if (ajaxCallNum == 9) {
-        $(".whole-json-data").html(
-            "<br> whole-json-data" + JSON.stringify(jsonObj)
-        );
+        if(error=={}) {
+            //draw price chart
+            
+        } else {
+            //show warning
+        }
     }
 
 }
@@ -89,6 +92,30 @@ $("document").ready(function () {
                     "<br />JSON: " + data["json"] //data is a json object
                 );
                 ajaxCallNum++;
+                $("#symbol").html(jsonObj["basic info"]["symbol"]);
+                $("#timestamp").html(jsonObj["basic info"]["time stamp"]);
+                $("#last-price").html(jsonObj["basic info"]["last price"]);
+
+                if (jsonObj["basic info"]["change"]>0) {
+                    $("#change-and-percent").html(
+                        jsonObj["basic info"]["change"]+"("+jsonObj["basic info"]["change percent"]+")"+"&nbsp"+
+                        '<img src="http://cs-server.usc.edu:45678/hw/hw8/images/Up.png"width=\"15px\" height=\"20px\">'
+                    );
+                    $("#change-and-percent").css({'color':'green'});
+                } else {
+                    $("#change-and-percent").html(
+                        jsonObj["basic info"]["change"]+"("+jsonObj["basic info"]["change percent"]+")"+"&nbsp"+
+                        '<img src="http://cs-server.usc.edu:45678/hw/hw8/images/Down.png" width="15px" height="20px">'
+                    );
+                    $("#change-and-percent").css({'color':'red'});
+
+                }
+
+                $("#open").html(jsonObj["basic info"]["open"]);
+                $("#close").html(jsonObj["basic info"]["close"]);
+                $("#volume").html(jsonObj["basic info"]["volume"]);
+                $("#range").html(jsonObj["basic info"]["day's range"]);
+
                 checkAllJqueryDone();
 
             },
@@ -125,10 +152,16 @@ $("document").ready(function () {
         // use get STOCH data
         jqueryGetData("STOCH", $(this).serialize());
 
-
+        if(ajaxCallNum==9) {
+            if(error=={}) { //no error show results
+                $("#symbol").html("test");
+                // jsonObj["basic info"]["symbol"]
+            }
+        }
         return false;
 
     });
 });
 
-$("[name='my-checkbox']").bootstrapSwitch();
+
+

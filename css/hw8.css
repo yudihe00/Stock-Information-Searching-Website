@@ -3,7 +3,10 @@ body {
     font-family: Times;
     font-weight: bolder;
 }
-#input-div  {
+
+
+
+#input-div,#test-div, #detail-info   {
     border-radius: 5px;
     background-color: white;
 }
@@ -13,9 +16,15 @@ body {
     background-color: white;
 }
 
-#test-div  {
-    background-color: white;
+
+#favorite-table > thead {
+    background-color: #f5f5f5;
 }
+
+#favorite-table > tbody > tr:nth-child(2n) > td {
+    background-color: #f5f5f5;
+}
+
 
 /*.col-md-12.col-xs-12.col-sm-12 {*/
     /*border-radius: 5px;*/
