@@ -1161,11 +1161,13 @@ function drawHisCharts(symbol) {
             },
             tooltip: {
                 split: false,
+                xDateFormat: '%A, %b %d, %Y',
             },
 
             series: [{
                 name: symbol,
                 data: hisData,
+                type:'area',
                 tooltip: {
                     valueDecimals: 2
                 }
