@@ -1,7 +1,8 @@
 var jsonObj = {};
 var ajaxCallNum = 0;
 var error = {};
-var phpUrl = "http://localhost/hw8ng/php/multiAjax.php";
+var phpUrl = "http://localhost/hw8-2/php/multiAjax.php";
+// var phpUrl = "http://localhost/hw8-2/php/multiAjax.php";
 // var phpUrl = "php/multiAjax.php";
 // set initial value to 0
 function initStat() {
@@ -1095,11 +1096,11 @@ function MACDcharts() {
     });
 }
 
-// draw hisroty chart
+// draw history chart
 function drawHisCharts(symbol) {
     var hisData = [];
 //        var symbol = 'FB';
-    var phpUrl = 'http://localhost/hw8-2/php/historyData.php?symbol=';
+    phpUrl = phpUrl+"?input=";
     phpUrl = phpUrl + symbol;
     $.getJSON(phpUrl, function (data) {
         // data format
