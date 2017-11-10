@@ -1,4 +1,5 @@
 <?php
+header("Access-Control-Allow-Origin: *");
 date_default_timezone_set('America/New_York');
 if (is_ajax()) {
 	if (isset($_GET["action"]) && !empty($_GET["action"])) { //Checks if action value exists
