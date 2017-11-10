@@ -40,6 +40,14 @@ function checkAllJqueryDone() {
         if(isEmpty(error)) {
             //draw price chart
             priceAndVolume();
+            SMAcharts();
+            EMAcharts();
+            RSIcharts();
+            ADXcharts();
+            CCIcharts();
+            STOCHcharts();
+            BBANDScharts();
+            MACDcharts();
 
         } else {
             //show warning
@@ -164,12 +172,7 @@ $("document").ready(function () {
         // use get STOCH data
         jqueryGetData("STOCH", $(this).serialize());
 
-        if(ajaxCallNum==9) {
-            if(error=={}) { //no error show results
-                $("#symbol").html("test");
-                // jsonObj["basic info"]["symbol"]
-            }
-        }
+
         return false;
 
     });
@@ -178,7 +181,6 @@ $("document").ready(function () {
 // draw price and volume charts
 function priceAndVolume()
 {
-
     var arrayDate=[];
     var arrayClose=[];
     for(num in jsonObj["basic info"]["arrayDate"]) {
@@ -192,7 +194,6 @@ function priceAndVolume()
     var maxClose = Math.max.apply(null,arrayClose);
     var minClose = Math.min.apply(null,arrayClose);
 
-
     var arrayVolume =[];
     for(num in jsonObj["basic info"]["arrayVolume"]) {
         arrayVolume.push(jsonObj["basic info"]["arrayVolume"][num]);
@@ -204,7 +205,7 @@ function priceAndVolume()
     var symbol = jsonObj["basic info"]["symbol"];
     var timeStamp = jsonObj["basic info"]["time stamp"];
 
-    var chart= new Highcharts.chart('indicator-chart', {
+    var chart= new Highcharts.chart('price-chart', {
         chart: {
             zoomType: 'xy',
             borderWidth: 1,
@@ -218,17 +219,13 @@ function priceAndVolume()
         subtitle: {
             text: '<a href="https://www.alphavantage.co/" >Source: Alpha Vantage </a>',
             useHTML: true
-
         },
         xAxis: [{
-
             categories: arrayDate,
             minTickInterval: 5
-
         }],
         yAxis: [{ // Primary yAxis
             labels: {
-
                 style: {
                     color: Highcharts.getOptions().colors[1]
                 }
@@ -254,27 +251,19 @@ function priceAndVolume()
             max: maxVolume*5,
             // tickInterval: 2,
             labels: {
-
                 formatter: function (){
                     return this.value/1000000 + 'M';
                 },
-
                 style: {
                     color: Highcharts.getOptions().colors[1]
                 }
             },
-
             opposite: true
         }],
 
         legend: {
-            //layout: 'vertical',
             align: 'center',
-            //x: -5,
             verticalAlign: 'bottom',
-            //y: 250,
-            //reversed: true,
-            //floating: false,
             backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
         },
         series: [{
@@ -285,13 +274,10 @@ function priceAndVolume()
             zIndex: 2,
             data: arrayVolume,
             // pointWidth: 1
-
-
         }
             , {
                 name: symbol+" ",
                 type: 'area',
-
                 color: '#D6391F',
                 fillOpacity: 0.6,
                 lineWidth: 1,
@@ -305,6 +291,803 @@ function priceAndVolume()
     });
 }
 
+// SMAcharts, one line
+function SMAcharts() {
+    var symbol = jsonObj["basic info"]["symbol"];
+
+    var arrayDate=[];
+    var arraySma=[];
+    for(num in jsonObj["basic info"]["arrayDate"]) {
+        arrayDate.push(jsonObj["basic info"]["arrayDate"][num]);
+    }
+
+
+    for(num in jsonObj["SMA"]["SMA"]) {
+        arraySma.push(jsonObj["SMA"]["SMA"][num]);
+    }
+    arraySma = arraySma.map(Number);
+
+    var maxSma = Math.max.apply(null,arraySma);
+    var minSma = Math.min.apply(null,arraySma);
+
+    var chart= new Highcharts.chart('sma-chart', {
+        chart: {
+            zoomType: 'xy',
+            borderWidth: 1,
+            borderColor: '#D6D6D6',
+            marginBottom: 100 //put legend at bottom
+            // alignTicks: false
+        },
+        title: {
+            text: 'Simple Moving Average (SMA)' //change
+        },
+        subtitle: {
+            text: '<a href="https://www.alphavantage.co/" >Source: Alpha Vantage </a>',
+            useHTML: true
+
+        },
+        xAxis: [{
+
+            categories: arrayDate,
+            minTickInterval: 5
+
+        }],
+        yAxis: [{ // Primary yAxis
+            labels: {
+
+                style: {
+                    color: Highcharts.getOptions().colors[1]
+                }
+            },
+            min: minSma,
+            max: maxSma,
+            // startOnTick: false,
+            // tickInterval: 2,
+            title: {
+                text: 'SMA',   // change
+                style: {
+                    color: Highcharts.getOptions().colors[1]
+                }
+            }
+        }],
+
+        legend: {
+            //layout: 'vertical',
+            align: 'center',
+            //x: -5,
+            verticalAlign: 'bottom',
+            //y: 250,
+            //reversed: true,
+            //floating: false,
+            backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
+        },
+        series: [{
+            name: symbol+" ",
+            type: 'line',
+            color: '#D6391F',
+            fillOpacity: 0.6,
+            lineWidth: 1,
+            marker: {
+                radius: 2
+            },
+            data: arraySma,
+            zIndex: 1
+        }]
+    });
+}
+
+
+// EMAcharts, one line
+function EMAcharts() {
+    var symbol = jsonObj["basic info"]["symbol"];
+
+    var arrayDate=[];
+    var arraySma=[];
+    for(num in jsonObj["basic info"]["arrayDate"]) {
+        arrayDate.push(jsonObj["basic info"]["arrayDate"][num]);
+    }
+
+
+    for(num in jsonObj["EMA"]["EMA"]) {
+        arraySma.push(jsonObj["EMA"]["EMA"][num]);
+    }
+    arraySma = arraySma.map(Number);
+
+    var maxSma = Math.max.apply(null,arraySma);
+    var minSma = Math.min.apply(null,arraySma);
+
+    var chart= new Highcharts.chart('ema-chart', {
+        chart: {
+            zoomType: 'xy',
+            borderWidth: 1,
+            borderColor: '#D6D6D6',
+            marginBottom: 100 //put legend at bottom
+            // alignTicks: false
+        },
+        title: {
+            text: 'Exponential Moving Average (EMA)' //change
+        },
+        subtitle: {
+            text: '<a href="https://www.alphavantage.co/" >Source: Alpha Vantage </a>',
+            useHTML: true
+
+        },
+        xAxis: [{
+
+            categories: arrayDate,
+            minTickInterval: 5
+
+        }],
+        yAxis: [{ // Primary yAxis
+            labels: {
+
+                style: {
+                    color: Highcharts.getOptions().colors[1]
+                }
+            },
+            min: minSma,
+            max: maxSma,
+            // startOnTick: false,
+            // tickInterval: 2,
+            title: {
+                text: 'EMA',   // change
+                style: {
+                    color: Highcharts.getOptions().colors[1]
+                }
+            }
+        }],
+
+        legend: {
+            //layout: 'vertical',
+            align: 'center',
+            //x: -5,
+            verticalAlign: 'bottom',
+            //y: 250,
+            //reversed: true,
+            //floating: false,
+            backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
+        },
+        series: [{
+            name: symbol+" ",
+            type: 'line',
+            color: '#D6391F',
+            fillOpacity: 0.6,
+            lineWidth: 1,
+            marker: {
+                radius: 2
+            },
+            data: arraySma,
+            zIndex: 1
+        }]
+    });
+}
+
+// RSIcharts, one line
+function RSIcharts() {  //change
+    var symbol = jsonObj["basic info"]["symbol"];
+
+    var arrayDate=[];
+    var arraySma=[];
+    for(num in jsonObj["basic info"]["arrayDate"]) {
+        arrayDate.push(jsonObj["basic info"]["arrayDate"][num]);
+    }
+
+
+    for(num in jsonObj["RSI"]["RSI"]) { //change
+        arraySma.push(jsonObj["RSI"]["RSI"][num]); //change
+    }
+    arraySma = arraySma.map(Number);
+
+    var maxSma = Math.max.apply(null,arraySma);
+    var minSma = Math.min.apply(null,arraySma);
+
+    var chart= new Highcharts.chart('rsi-chart', { //change
+        chart: {
+            zoomType: 'xy',
+            borderWidth: 1,
+            borderColor: '#D6D6D6',
+            marginBottom: 100 //put legend at bottom
+            // alignTicks: false
+        },
+        title: {
+            text: 'Relative Strength Index (RSI)' //change
+        },
+        subtitle: {
+            text: '<a href="https://www.alphavantage.co/" >Source: Alpha Vantage </a>',
+            useHTML: true
+
+        },
+        xAxis: [{
+
+            categories: arrayDate,
+            minTickInterval: 5
+
+        }],
+        yAxis: [{ // Primary yAxis
+            labels: {
+
+                style: {
+                    color: Highcharts.getOptions().colors[1]
+                }
+            },
+            min: minSma,
+            max: maxSma,
+            // startOnTick: false,
+            // tickInterval: 2,
+            title: {
+                text: 'RSI',   // change
+                style: {
+                    color: Highcharts.getOptions().colors[1]
+                }
+            }
+        }],
+
+        legend: {
+            //layout: 'vertical',
+            align: 'center',
+            //x: -5,
+            verticalAlign: 'bottom',
+            //y: 250,
+            //reversed: true,
+            //floating: false,
+            backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
+        },
+        series: [{
+            name: symbol+" ",
+            type: 'line',
+            color: '#D6391F',
+            fillOpacity: 0.6,
+            lineWidth: 1,
+            marker: {
+                radius: 2
+            },
+            data: arraySma,
+            zIndex: 1
+        }]
+    });
+}
+
+// ADXcharts, one line
+function ADXcharts() {  //change
+    var symbol = jsonObj["basic info"]["symbol"];
+
+    var arrayDate=[];
+    var arraySma=[];
+    for(num in jsonObj["basic info"]["arrayDate"]) {
+        arrayDate.push(jsonObj["basic info"]["arrayDate"][num]);
+    }
+
+
+    for(num in jsonObj["ADX"]["ADX"]) { //change
+        arraySma.push(jsonObj["ADX"]["ADX"][num]); //change
+    }
+    arraySma = arraySma.map(Number);
+
+    var maxSma = Math.max.apply(null,arraySma);
+    var minSma = Math.min.apply(null,arraySma);
+
+    var chart= new Highcharts.chart('adx-chart', { //change
+        chart: {
+            zoomType: 'xy',
+            borderWidth: 1,
+            borderColor: '#D6D6D6',
+            marginBottom: 100 //put legend at bottom
+            // alignTicks: false
+        },
+        title: {
+            text: 'Average Directional Movement Index (ADX)' //change
+        },
+        subtitle: {
+            text: '<a href="https://www.alphavantage.co/" >Source: Alpha Vantage </a>',
+            useHTML: true
+
+        },
+        xAxis: [{
+
+            categories: arrayDate,
+            minTickInterval: 5
+
+        }],
+        yAxis: [{ // Primary yAxis
+            labels: {
+
+                style: {
+                    color: Highcharts.getOptions().colors[1]
+                }
+            },
+            min: minSma,
+            max: maxSma,
+            // startOnTick: false,
+            // tickInterval: 2,
+            title: {
+                text: 'ADX',   // change
+                style: {
+                    color: Highcharts.getOptions().colors[1]
+                }
+            }
+        }],
+
+        legend: {
+            //layout: 'vertical',
+            align: 'center',
+            //x: -5,
+            verticalAlign: 'bottom',
+            //y: 250,
+            //reversed: true,
+            //floating: false,
+            backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
+        },
+        series: [{
+            name: symbol+" ",
+            type: 'line',
+            color: '#D6391F',
+            fillOpacity: 0.6,
+            lineWidth: 1,
+            marker: {
+                radius: 2
+            },
+            data: arraySma,
+            zIndex: 1
+        }]
+    });
+}
+
+// CCIcharts, one line
+function CCIcharts() {  //change
+    var symbol = jsonObj["basic info"]["symbol"];
+
+    var arrayDate=[];
+    var arraySma=[];
+    for(num in jsonObj["basic info"]["arrayDate"]) {
+        arrayDate.push(jsonObj["basic info"]["arrayDate"][num]);
+    }
+
+
+    for(num in jsonObj["CCI"]["CCI"]) { //change
+        arraySma.push(jsonObj["CCI"]["CCI"][num]); //change
+    }
+    arraySma = arraySma.map(Number);
+
+    var maxSma = Math.max.apply(null,arraySma);
+    var minSma = Math.min.apply(null,arraySma);
+
+    var chart= new Highcharts.chart('cci-chart', { //change
+        chart: {
+            zoomType: 'xy',
+            borderWidth: 1,
+            borderColor: '#D6D6D6',
+            marginBottom: 100 //put legend at bottom
+            // alignTicks: false
+        },
+        title: {
+            text: 'Commodity Channel Index (CCI)' //change
+        },
+        subtitle: {
+            text: '<a href="https://www.alphavantage.co/" >Source: Alpha Vantage </a>',
+            useHTML: true
+
+        },
+        xAxis: [{
+
+            categories: arrayDate,
+            minTickInterval: 5
+
+        }],
+        yAxis: [{ // Primary yAxis
+            labels: {
+
+                style: {
+                    color: Highcharts.getOptions().colors[1]
+                }
+            },
+            min: minSma,
+            max: maxSma,
+            // startOnTick: false,
+            // tickInterval: 2,
+            title: {
+                text: 'CCI',   // change
+                style: {
+                    color: Highcharts.getOptions().colors[1]
+                }
+            }
+        }],
+
+        legend: {
+            //layout: 'vertical',
+            align: 'center',
+            //x: -5,
+            verticalAlign: 'bottom',
+            //y: 250,
+            //reversed: true,
+            //floating: false,
+            backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
+        },
+        series: [{
+            name: symbol+" ",
+            type: 'line',
+            color: '#D6391F',
+            fillOpacity: 0.6,
+            lineWidth: 1,
+            marker: {
+                radius: 2
+            },
+            data: arraySma,
+            zIndex: 1
+        }]
+    });
+}
+
+// STOCH charts, two lines
+function STOCHcharts() {
+    var symbol = jsonObj["basic info"]["symbol"];
+
+    var arrayDate=[];
+    var arraySma=[];
+    var arrayK=[];
+
+    for(num in jsonObj["basic info"]["arrayDate"]) {
+        arrayDate.push(jsonObj["basic info"]["arrayDate"][num]);
+    }
+
+    for(num in jsonObj["STOCH"]["STOCH"]["SlowD"]) { //change
+        arraySma.push(jsonObj["STOCH"]["STOCH"]["SlowD"][num]); //change
+    }
+    arraySma = arraySma.map(Number);
+
+    for(num in jsonObj["STOCH"]["STOCH"]["SlowK"]) { //change
+        arrayK.push(jsonObj["STOCH"]["STOCH"]["SlowK"][num]); //change
+    }
+    arrayK = arrayK.map(Number);
+
+    var maxSma = Math.max.apply(null,arraySma);
+    var minSma = Math.min.apply(null,arraySma);
+
+    var maxK = Math.max.apply(null,arrayK);
+    var minK = Math.min.apply(null,arrayK);
+
+
+    // var minY = Math.min(minSma,minK),
+    // var maxY = Math.max(maxSma,maxK),
+
+    var chart= new Highcharts.chart('stoch-chart', { //change
+        chart: {
+            zoomType: 'xy',
+            borderWidth: 1,
+            borderColor: '#D6D6D6',
+            marginBottom: 100 //put legend at bottom
+            // alignTicks: false
+        },
+        title: {
+            text: "Stochastic Oscillator (STOCH)" //change
+        },
+        subtitle: {
+            text: '<a href="https://www.alphavantage.co/" >Source: Alpha Vantage </a>',
+            useHTML: true
+
+        },
+        xAxis: [{
+
+            categories: arrayDate,
+            minTickInterval: 5
+
+        }],
+        yAxis: [{ // Primary yAxis
+            labels: {
+
+                style: {
+                    color: Highcharts.getOptions().colors[1]
+                }
+            },
+            min: Math.min(minSma,minK),
+            max: Math.max(maxSma,maxK),
+            // startOnTick: false,
+            // tickInterval: 2,
+            title: {
+                text: 'STOCH',   // change
+                style: {
+                    color: Highcharts.getOptions().colors[1]
+                }
+            }
+        }],
+
+        legend: {
+            align: 'center',
+            verticalAlign: 'bottom',
+            backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
+        },
+        series: [{
+            name: symbol+" SlowD",
+            type: 'line',
+            // color: '#D6391F',
+            fillOpacity: 0.6,
+            lineWidth: 1,
+            marker: {
+                radius: 2
+            },
+            data: arraySma,
+            zIndex: 1
+
+        }
+            ,{
+                name: symbol+" SlowK",
+                type: 'line',
+                color: '#D6391F',
+                fillOpacity: 0.6,
+                lineWidth: 1,
+                marker: {
+                    radius: 2
+                },
+                data: arrayK,
+                zIndex: 2
+
+            }
+
+
+        ]
+    });
+}
+
+// BBANDS charts, three lines
+function BBANDScharts() {
+    var symbol = jsonObj["basic info"]["symbol"];
+
+    var arrayDate=[];
+    var arraySma=[];
+    var arrayK=[];
+    var arrayUpper = [];
+
+    for(num in jsonObj["basic info"]["arrayDate"]) {
+        arrayDate.push(jsonObj["basic info"]["arrayDate"][num]);
+    }
+    var indicatorName="BBANDS";
+
+    for(num in jsonObj[indicatorName][indicatorName]["Real Middle Band"]) { //change
+        arraySma.push(jsonObj[indicatorName][indicatorName]["Real Middle Band"][num]); //change
+    }
+    arraySma = arraySma.map(Number);
+
+    for(num in jsonObj[indicatorName][indicatorName]["Real Lower Band"]) { //change
+        arrayK.push(jsonObj[indicatorName][indicatorName]["Real Lower Band"][num]); //change
+    }
+    arrayK = arrayK.map(Number);
+
+    for(num in jsonObj[indicatorName][indicatorName]["Real Upper Band"]) { //change
+        arrayUpper.push(jsonObj[indicatorName][indicatorName]["Real Upper Band"][num]); //change
+    }
+    arrayUpper = arrayUpper.map(Number);
+
+    var maxSma = Math.max.apply(null,arraySma);
+    var minSma = Math.min.apply(null,arraySma);
+
+    var maxK = Math.max.apply(null,arrayK);
+    var minK = Math.min.apply(null,arrayK);
+
+    var maxUpper = Math.max.apply(null,arrayUpper);
+    var minUpper = Math.min.apply(null,arrayUpper);
+
+    var chart= new Highcharts.chart('bbands-chart', { //change
+        chart: {
+            zoomType: 'xy',
+            borderWidth: 1,
+            borderColor: '#D6D6D6',
+            marginBottom: 100 //put legend at bottom
+            // alignTicks: false
+        },
+        title: {
+            text: "Bollinger Bands (BBANDS)" //change
+        },
+        subtitle: {
+            text: '<a href="https://www.alphavantage.co/" >Source: Alpha Vantage </a>',
+            useHTML: true
+
+        },
+        xAxis: [{
+
+            categories: arrayDate,
+            minTickInterval: 5
+
+        }],
+        yAxis: [{ // Primary yAxis
+            labels: {
+
+                style: {
+                    color: Highcharts.getOptions().colors[1]
+                }
+            },
+            min: minK,              //change
+            max: maxUpper,          //change
+            // startOnTick: false,
+            // tickInterval: 2,
+            title: {
+                text: 'BBANDS',   // change
+                style: {
+                    color: Highcharts.getOptions().colors[1]
+                }
+            }
+        }],
+
+        legend: {
+            align: 'center',
+            verticalAlign: 'bottom',
+            backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
+        },
+        series: [{
+            name: symbol+" Real Middle Band",
+            type: 'line',
+            color: '#D6391F',
+            fillOpacity: 0.6,
+            lineWidth: 1,
+            marker: {
+                radius: 2
+            },
+            data: arraySma,
+            zIndex: 1
+
+        }
+            ,{
+                name: symbol+" Real Lower Band",
+                type: 'line',
+                // color: '#D6391F',
+                fillOpacity: 0.6,
+                lineWidth: 1,
+                marker: {
+                    radius: 2
+                },
+                data: arrayK,
+                zIndex: 2
+
+            }
+
+            ,{
+                name: symbol+" Real Upper Band",
+                type: 'line',
+                // color: '#D6391F',
+                fillOpacity: 0.6,
+                lineWidth: 1,
+                marker: {
+                    radius: 2
+                },
+                data: arrayUpper,
+                zIndex: 3
+
+
+            }
+
+
+        ]
+    });
+}
+
+// MACD charts, three lines
+function MACDcharts() {
+    var symbol = jsonObj["basic info"]["symbol"];
+
+    var arrayDate=[];
+    var arraySma=[];
+    var arrayK=[];
+    var arrayUpper = [];
+
+    for(num in jsonObj["basic info"]["arrayDate"]) {
+        arrayDate.push(jsonObj["basic info"]["arrayDate"][num]);
+    }
+    var indicatorName="MACD"; //change
+
+    for(num in jsonObj[indicatorName][indicatorName]["MACD_Signal"]) { //change
+        arraySma.push(jsonObj[indicatorName][indicatorName]["MACD_Signal"][num]); //change
+    }
+    arraySma = arraySma.map(Number);
+
+    for(num in jsonObj[indicatorName][indicatorName]["MACD_Hist"]) { //change
+        arrayK.push(jsonObj[indicatorName][indicatorName]["MACD_Hist"][num]); //change
+    }
+    arrayK = arrayK.map(Number);
+
+    for(num in jsonObj[indicatorName][indicatorName]["MACD"]) { //change
+        arrayUpper.push(jsonObj[indicatorName][indicatorName]["MACD"][num]); //change
+    }
+    arrayUpper = arrayUpper.map(Number);
+
+    var maxSma = Math.max.apply(null,arraySma);
+    var minSma = Math.min.apply(null,arraySma);
+
+    var maxK = Math.max.apply(null,arrayK);
+    var minK = Math.min.apply(null,arrayK);
+
+    var maxUpper = Math.max.apply(null,arrayUpper);
+    var minUpper = Math.min.apply(null,arrayUpper);
+
+    var chart= new Highcharts.chart('macd-chart', { //change
+        chart: {
+            zoomType: 'xy',
+            borderWidth: 1,
+            borderColor: '#D6D6D6',
+            marginBottom: 100 //put legend at bottom
+            // alignTicks: false
+        },
+        title: {
+            text: "Moving Average Convergence/Divergence (MACD)" //change
+        },
+        subtitle: {
+            text: '<a href="https://www.alphavantage.co/" >Source: Alpha Vantage </a>',
+            useHTML: true
+
+        },
+        xAxis: [{
+
+            categories: arrayDate,
+            minTickInterval: 5
+
+        }],
+        yAxis: [{ // Primary yAxis
+            labels: {
+
+                style: {
+                    color: Highcharts.getOptions().colors[1]
+                }
+            },
+            min: minK,              //change
+            max: maxUpper,          //change
+            // startOnTick: false,
+            // tickInterval: 2,
+            title: {
+                text: 'MACD',   // change
+                style: {
+                    color: Highcharts.getOptions().colors[1]
+                }
+            }
+        }],
+
+        legend: {
+            align: 'center',
+            verticalAlign: 'bottom',
+            backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
+        },
+        series: [{
+            name: symbol+" MACD_Signal",
+            type: 'line',
+            color: '#D6391F',
+            fillOpacity: 0.6,
+            lineWidth: 1,
+            marker: {
+                radius: 2
+            },
+            data: arraySma,
+            zIndex: 1
+
+        }
+            ,{
+                name: symbol+" MACD_Hist",
+                type: 'line',
+                // color: '#D6391F',
+                fillOpacity: 0.6,
+                lineWidth: 1,
+                marker: {
+                    radius: 2
+                },
+                data: arrayK,
+                zIndex: 2
+
+            }
+
+            ,{
+                name: symbol+" MACD",
+                type: 'line',
+                // color: '#D6391F',
+                fillOpacity: 0.6,
+                lineWidth: 1,
+                marker: {
+                    radius: 2
+                },
+                data: arrayUpper,
+                zIndex: 3
+
+
+            }
+
+
+        ]
+    });
+}
 
 
 

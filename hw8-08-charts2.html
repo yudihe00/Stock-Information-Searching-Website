@@ -122,7 +122,7 @@
     <hr align="center" class="col-md-12 col-xs-12 col-sm-12"/>
   </div>
 
-  <!--favorite-list-->
+  <!--favorite-list !!need to work!!-->
   <div class="col-md-12 col-xs-12 col-sm-12" id="favorite-list" style="margin-bottom: 10px;">
     <div class="panel panel-default" style="margin-top: 10px; ">
       <!-- Default panel contents -->
@@ -153,6 +153,8 @@
     <div class="panel panel-default" style="margin-top: 10px">
 
       <div class="panel-heading" >Stock Details</div>
+
+      <!--3 buttons choose showed info-->
       <div class="panel-body" id="details-buttons">
         <button type="button" class="btn btn-sm btn-primary" name="current-stock">
           <span class="glyphicon glyphicon-dashboard" aria-hidden="true"></span>
@@ -223,32 +225,46 @@
             <li><a data-toggle="tab" href="#sma">SMA</a></li>
             <li><a data-toggle="tab" href="#ema">EMA</a></li>
             <li><a data-toggle="tab" href="#stoch">STOCH</a></li>
+            <li><a data-toggle="tab" href="#rsi">RSI</a></li>
+            <li><a data-toggle="tab" href="#adx">ADX</a></li>
+            <li><a data-toggle="tab" href="#cci">CCI</a></li>
+            <li><a data-toggle="tab" href="#bbands">BBANDS</a></li>
+            <li><a data-toggle="tab" href="#macd">MACD</a></li>
           </ul>
 
           <!--tab content-->
           <div class="tab-content">
             <div id="price" class="tab-pane fade in active">
-              <h3>Price</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+              <div id="price-chart" style="height:360px;padding-bottom: 10px;"></div>
             </div>
             <div id="sma" class="tab-pane fade">
-              <h3>sma</h3>
-              <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+              <div id="sma-chart" style="height:360px;padding-bottom: 10px;"></div>
             </div>
             <div id="ema" class="tab-pane fade">
-              <h3>ema</h3>
-              <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+              <div id="ema-chart" style="height:360px;padding-bottom: 10px;"></div>
             </div>
             <div id="stoch" class="tab-pane fade">
-              <h3>stoch</h3>
-              <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+              <div id="stoch-chart" style="height:360px;padding-bottom: 10px;"></div>
+            </div>
+            <div id="rsi" class="tab-pane fade">
+              <div id="rsi-chart" style="height:360px;padding-bottom: 10px;"></div>
+            </div>
+            <div id="adx" class="tab-pane fade">
+              <div id="adx-chart" style="height:360px;padding-bottom: 10px;"></div>
+            </div>
+            <div id="cci" class="tab-pane fade">
+              <div id="cci-chart" style="height:360px;padding-bottom: 10px;"></div>
+            </div>
+            <div id="bbands" class="tab-pane fade">
+              <div id="bbands-chart" style="height:360px;padding-bottom: 10px;"></div>
+            </div>
+            <div id="macd" class="tab-pane fade">
+              <div id="macd-chart" style="height:360px;padding-bottom: 10px;"></div>
             </div>
           </div>
 
         </div>
-        <div id="indicator-chart" style="height:370px;padding-bottom: 10px;">
-
-        </div>
+        <!--<div id="indicator-chart" style="height:370px;padding-bottom: 10px;"></div>-->
       </div>
 
 
@@ -274,7 +290,7 @@
 
 </div>
 
-<!-- for auto complete -->
+<!-- js for auto complete -->
 <script>
     var app = angular.module('myApp', ['ngMaterial']);
 
@@ -319,9 +335,6 @@
         };
     });
 </script>
-
-
-
 
 
 </body>
