@@ -179,8 +179,7 @@ $("document").ready(function () {
 });
 
 // draw price and volume charts
-function priceAndVolume()
-{
+function priceAndVolume() {
     var arrayDate=[];
     var arrayClose=[];
     for(num in jsonObj["basic info"]["arrayDate"]) {
