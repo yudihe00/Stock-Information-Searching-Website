@@ -208,6 +208,7 @@ function priceAndVolume() {
         chart: {
             zoomType: 'xy',
             borderWidth: 1,
+            zoomType: 'x',
             borderColor: '#D6D6D6',
             marginBottom: 100 //put legend at bottom
             // alignTicks: false
