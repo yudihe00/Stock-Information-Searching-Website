@@ -136,6 +136,10 @@ $("document").ready(function () {
                 $("#volume").html(jsonObj["basic info"]["volume"]);
                 $("#range").html(jsonObj["basic info"]["day's range"]);
 
+
+                // draw histrory charts
+                drawHisCharts(jsonObj["basic info"]["symbol"]);
+
                 checkAllJqueryDone();
 
             },
@@ -171,6 +175,8 @@ $("document").ready(function () {
 
         // use get STOCH data
         jqueryGetData("STOCH", $(this).serialize());
+
+
 
 
         return false;
@@ -1087,6 +1093,85 @@ function MACDcharts() {
 
         ]
     });
+}
+
+// draw hisroty chart
+function drawHisCharts(symbol) {
+    var hisData = [];
+//        var symbol = 'FB';
+    var phpUrl = 'http://localhost/hw8-2/php/historyData.php?symbol=';
+    phpUrl = phpUrl + symbol;
+    $.getJSON(phpUrl, function (data) {
+        // data format
+        for (var num in data["arrayDate"]) {
+            var temp = [];
+            temp.push(data["arrayDate"][num] * 1000);
+            price = Number(data["arrayPrice"][num]);
+            temp.push(price);
+            hisData[num] = temp;
+        }
+
+        // Create the chart
+        Highcharts.stockChart('historical-charts-container', { //change
+
+            rangeSelector: {
+                allButtonsEnabled: true,
+                buttons: [
+                    {
+                        type: 'week',
+                        count: 1,
+                        text: '1w'
+                    }, {
+                        type: 'month',
+                        count: 1,
+                        text: '1m'
+                    }, {
+                        type: 'month',
+                        count: 3,
+                        text: '3m'
+                    }, {
+                        type: 'month',
+                        count: 6,
+                        text: '6m'
+                    }, {
+                        type: 'ytd',
+                        text: 'YTD'
+                    }, {
+                        type: 'year',
+                        count: 1,
+                        text: '1y'
+                    }, {
+                        type: 'all',
+                        text: 'All'
+                    }],
+                buttonTheme: {
+                    width: 60
+                },
+                selected: 0
+            },
+
+            title: {
+                text: symbol + ' Stock Price'
+            },
+            subtitle: {
+                text: '<a href="https://www.alphavantage.co/" >Source: Alpha Vantage </a>',
+                useHTML: true
+
+            },
+            tooltip: {
+                split: false,
+            },
+
+            series: [{
+                name: symbol,
+                data: hisData,
+                tooltip: {
+                    valueDecimals: 2
+                }
+            }]
+        });
+    });
+
 }
 
 

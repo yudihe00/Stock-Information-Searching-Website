@@ -1,17 +1,19 @@
 <?php
 header("Access-Control-Allow-Origin: *");
+header('Content-Type: application/json');
 
 if(isset($_GET["symbol"]) && !empty($_GET["symbol"])) {
-        $input = $_GET["symbol"];
-        $input = strtoupper($input);
-        return getHisData();
+       $input = $_GET["symbol"];
+       $input = strtoupper($input);
+       // echo $symbol."</b>";
+       return getHisData($input);
 }
+// getHisData();
 
-
-function getHisData(){
+function getHisData($symbol){
     // $return = $_GET; // $return is an object
     // $symbol = $return["symbol"];
-    $symbol="AAPL";
+    // $symbol="AAPL";
     $symbol = strtoupper($symbol); //change to uppercase
 
     $jsonUrl = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&outputsize=full&symbol=".$symbol."&apikey=932OED6JIOLP723M";

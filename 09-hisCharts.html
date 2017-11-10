@@ -10,81 +10,86 @@
 <body>
 <div id="container" style="height: 400px; min-width: 310px"></div>
 <script>
-    var hisData=[];
-    var symbol = 'AAPL';
-    var phpUrl='http://localhost/hw8-2/php/historyData.php?symbol=';
-    phpUrl=phpUrl+symbol;
-    $.getJSON(phpUrl, function (data) {
 
-        // data format
-        for(num in data["arrayDate"]) {
-            var temp=[];
-            temp.push(data["arrayDate"][num]*1000);
-            price=Number(data["arrayPrice"][num]);
-            temp.push(price);
-            hisData[num] = temp;
-        }
+    drawHisCharts("AAPL");
+    function drawHisCharts(symbol) {
+        var hisData = [];
+//        var symbol = 'FB';
+        var phpUrl = 'http://localhost/hw8-2/php/historyData.php?action=drawHisChart?symbol=';
+        phpUrl = phpUrl + symbol;
+        $.getJSON(phpUrl, function (data) {
+            // data format
+            for (num in data["arrayDate"]) {
+                var temp = [];
+                temp.push(data["arrayDate"][num] * 1000);
+                price = Number(data["arrayPrice"][num]);
+                temp.push(price);
+                hisData[num] = temp;
+            }
 
-        // Create the chart
-        Highcharts.stockChart('container', {
+            // Create the chart
+            Highcharts.stockChart('container', { //change
 
-            rangeSelector: {
-                allButtonsEnabled: true,
-                buttons: [
-                    {
-                        type: 'week',
-                        count: 1,
-                        text: '1w'
-                    },{
-                        type: 'month',
-                        count: 1,
-                        text: '1m'
-                    }, {
-                        type: 'month',
-                        count: 3,
-                        text: '3m'
-                    }, {
-                        type: 'month',
-                        count: 6,
-                        text: '6m'
-                    }, {
-                        type: 'ytd',
-                        text: 'YTD'
-                    }, {
-                        type: 'year',
-                        count: 1,
-                        text: '1y'
-                    }, {
-                        type: 'all',
-                        text: 'All'
-                    }],
-                buttonTheme: {
-                    width: 60
+                rangeSelector: {
+                    allButtonsEnabled: true,
+                    buttons: [
+                        {
+                            type: 'week',
+                            count: 1,
+                            text: '1w'
+                        }, {
+                            type: 'month',
+                            count: 1,
+                            text: '1m'
+                        }, {
+                            type: 'month',
+                            count: 3,
+                            text: '3m'
+                        }, {
+                            type: 'month',
+                            count: 6,
+                            text: '6m'
+                        }, {
+                            type: 'ytd',
+                            text: 'YTD'
+                        }, {
+                            type: 'year',
+                            count: 1,
+                            text: '1y'
+                        }, {
+                            type: 'all',
+                            text: 'All'
+                        }],
+                    buttonTheme: {
+                        width: 60
+                    },
+                    selected: 0
                 },
-                selected: 0
-            },
 
-            title: {
-                text: symbol+ ' Stock Price'
-            },
-            subtitle: {
-                text: '<a href="https://www.alphavantage.co/" >Source: Alpha Vantage </a>',
-                useHTML: true
+                title: {
+                    text: symbol + ' Stock Price'
+                },
+                subtitle: {
+                    text: '<a href="https://www.alphavantage.co/" >Source: Alpha Vantage </a>',
+                    useHTML: true
 
-            },
-            tooltip:{
-                split: false,
-            },
-
-            series: [{
-                name: symbol,
-                data: hisData,
+                },
                 tooltip: {
-                    valueDecimals: 2
-                }
-            }]
+                    split: false,
+                },
+
+                series: [{
+                    name: symbol,
+                    data: hisData,
+                    tooltip: {
+                        valueDecimals: 2
+                    }
+                }]
+            });
         });
-    });
+
+    }
+
 
 </script>
 

@@ -38,6 +38,9 @@
   <!-- Custom styles for this template -->
   <link href="css/hw8.css" rel="stylesheet">
 
+  <!--for highStock-->
+  <script src="https://code.highcharts.com/stock/highstock.js"></script>
+  <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
 
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
   <!--[if lt IE 9]>
@@ -169,6 +172,7 @@
       </ul>
       <!--the 3 tabs content-->
       <div class="tab-content">
+        <!--curretn stock-->
         <div id="current-stock" class="tab-pane fade in active">
           <!--stock detail table-->
           <div class="col-md-6 col-xs-12 col-sm-12" id="detail-table-div" style="margin-top: 10px">
@@ -266,9 +270,9 @@
             <!--<div id="indicator-chart" style="height:370px;padding-bottom: 10px;"></div>-->
           </div>
         </div>
+        <!--historical charts-->
         <div id="historical-charts" class="tab-pane fade">
-          <h3>Menu 1</h3>
-          <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+          <div id="historical-charts-container" class="col-md-12 col-xs-12 col-sm-12"></div>
         </div>
         <div id="news-feed" class="tab-pane fade">
           <h3>Menu 2</h3>

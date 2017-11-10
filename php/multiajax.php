@@ -242,4 +242,7 @@ function getStockData(){
 	$dataJson["json"] = json_encode($dataJson); //return the string of json, saved as a string value in $return object
 	echo json_encode($dataJson);
 }
+
+// draw history charts
+
 ?>
