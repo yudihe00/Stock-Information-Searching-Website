@@ -1,6 +1,8 @@
 <?php
 header('Access-Control-Allow-Origin: *');
 date_default_timezone_set('America/New_York');
+
+// get data for current stock tab
 if (is_ajax()) {
     if (isset($_GET["action"]) && !empty($_GET["action"])) { //Checks if action value exists
         $action = $_GET["action"];
@@ -39,9 +41,6 @@ function getIndicatorsJson($functionName, $symbol){
         $initJson = json_decode($contents,true);
         return $initJson;
     } else return getIndicatorsJson($functionName, $symbol);
-
-
-
 }
 
 // use function get 1 variable indicator data
@@ -125,7 +124,7 @@ function getTwoVariableIndicatorData($functionName,$term1,$term2){
 }
 
 
-
+// get stock details data for detail table and price charts
 function getStockData(){
     $return = $_GET; // $return is an object
     $symbol = $return["symbol"];
@@ -243,7 +242,7 @@ function getStockData(){
     echo json_encode($dataJson);
 }
 
-// data for draw history charts
+// get data for draw history charts
     if(isset($_GET["input"]) && !empty($_GET["input"])) {
            $input = $_GET["input"];
            $input = strtoupper($input);
@@ -291,9 +290,45 @@ function getStockData(){
 
 
 
-
-        // use: print string of return json
-        // $dataJson["json"] = json_encode($dataJson); //return the string of json, saved as a string value in $return object
         echo json_encode($dataJson);
+    }
+
+// get data for auto-complete
+    if(isset($_GET["name"]) && !empty($_GET["name"])) {
+        $input = $_GET["name"];
+        $input = strtoupper($input);
+        returnStockNameJson($input);
+    }
+
+    // returnStockNameJson("A");
+
+    // function check string begin with
+    function begins_with($haystack, $needle) {
+    return strpos($haystack, $needle) === 0;
+    }
+
+    // return the stock name json
+    function returnStockNameJson($input){
+        $url = "http://dev.markitondemand.com/MODApis/Api/v2/Lookup/json?input=".$input;
+        $resultJson = array();
+        $resultJson["records"] = array(); 
+        $formatResultJson = array();
+        $index = 0;
+        $contents = file_get_contents($url);
+        $initJson = json_decode($contents,true);
+        // echo json_encode($initJson)."<br>";
+        foreach ($initJson as $key => $value) {
+            foreach ($value as $key2 => $value2) {
+                if($key2 == "Symbol" && begins_with($value["Symbol"],$input)) {
+                    $resultJson["records"][$index]["value"] = $value["Symbol"];
+                    $resultJson["records"][$index]["display"]=$value["Symbol"]." - ".$value["Name"]."(".$value["Exchange"].")";
+                    $index++;
+
+                }           
+            }
+        }
+
+        echo json_encode($resultJson);
+
     }
 ?>

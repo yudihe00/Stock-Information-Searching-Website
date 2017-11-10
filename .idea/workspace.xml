@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b6392831-faf1-49bc-8e79-1a0f72d53c38" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/hw8.js" afterPath="$PROJECT_DIR$/js/hw8.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hw8-09-3tabs.html" afterPath="$PROJECT_DIR$/hw8-09-3tabs.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/php/multiajax.php" afterPath="$PROJECT_DIR$/php/multiajax.php" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -17,11 +18,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="hw8.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="hw8.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/hw8.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="260">
-              <caret line="1111" column="0" lean-forward="false" selection-start-line="1111" selection-start-column="0" selection-end-line="1112" selection-end-column="0" />
+            <state relative-caret-position="45">
+              <caret line="3" column="54" lean-forward="false" selection-start-line="3" selection-start-column="14" selection-end-line="3" selection-end-column="54" />
               <folding>
                 <element signature="n#!!block;n#priceAndVolume#0" expanded="false" />
                 <element signature="n#!!block;n#RSIcharts#0" expanded="false" />
@@ -30,16 +31,17 @@
                 <element signature="n#!!block;n#STOCHcharts#0" expanded="false" />
                 <element signature="n#!!block;n#BBANDScharts#0" expanded="false" />
                 <element signature="n#!!block;n#MACDcharts#0" expanded="false" />
+                <element signature="n#!!block;n#drawHisCharts#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="hw8-09-3tabs.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="hw8-09-3tabs.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/hw8-09-3tabs.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2265">
-              <caret line="176" column="17" lean-forward="false" selection-start-line="176" selection-start-column="17" selection-end-line="176" selection-end-column="17" />
+            <state relative-caret-position="290">
+              <caret line="334" column="66" lean-forward="false" selection-start-line="334" selection-start-column="66" selection-end-line="334" selection-end-column="66" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#form#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -65,7 +67,6 @@
                 <element signature="n#style#0;n#div#0;n#div#6;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#3;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#div#7;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#3;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#div#8;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#3;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#script#0;n#body#0;n#html#0;n#!!top" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -127,6 +128,7 @@
       <find>for</find>
       <find>map</find>
       <find>tooltip</find>
+      <find>histo</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -156,8 +158,8 @@
         <option value="$PROJECT_DIR$/js/highStock.js" />
         <option value="$PROJECT_DIR$/php/historyData.php" />
         <option value="$PROJECT_DIR$/09-hisCharts.html" />
-        <option value="$PROJECT_DIR$/hw8-09-3tabs.html" />
         <option value="$PROJECT_DIR$/js/hw8.js" />
+        <option value="$PROJECT_DIR$/hw8-09-3tabs.html" />
       </list>
     </option>
   </component>
@@ -344,12 +346,12 @@
       <workItem from="1509684246727" duration="8135000" />
       <workItem from="1510165989440" duration="214000" />
       <workItem from="1510252478895" duration="2949000" />
-      <workItem from="1510331831644" duration="4111000" />
+      <workItem from="1510331831644" duration="4655000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="74537000" />
+    <option name="totallyTimeSpent" value="75081000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1057" height="728" extended-state="0" />
@@ -419,7 +421,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="3" />
+      <option name="time" value="4" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -464,6 +466,7 @@
             <element signature="n#!!block;n#STOCHcharts#0" expanded="false" />
             <element signature="n#!!block;n#BBANDScharts#0" expanded="false" />
             <element signature="n#!!block;n#MACDcharts#0" expanded="false" />
+            <element signature="n#!!block;n#drawHisCharts#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -501,6 +504,7 @@
             <element signature="n#!!block;n#STOCHcharts#0" expanded="false" />
             <element signature="n#!!block;n#BBANDScharts#0" expanded="false" />
             <element signature="n#!!block;n#MACDcharts#0" expanded="false" />
+            <element signature="n#!!block;n#drawHisCharts#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -545,6 +549,7 @@
             <element signature="n#!!block;n#STOCHcharts#0" expanded="false" />
             <element signature="n#!!block;n#BBANDScharts#0" expanded="false" />
             <element signature="n#!!block;n#MACDcharts#0" expanded="false" />
+            <element signature="n#!!block;n#drawHisCharts#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -822,7 +827,7 @@
         <state relative-caret-position="75">
           <caret line="5" column="35" lean-forward="true" selection-start-line="5" selection-start-column="35" selection-end-line="5" selection-end-column="35" />
           <folding>
-            <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -837,10 +842,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/js/hw8.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="54" lean-forward="false" selection-start-line="3" selection-start-column="14" selection-end-line="3" selection-end-column="54" />
+          <folding>
+            <element signature="n#!!block;n#priceAndVolume#0" expanded="false" />
+            <element signature="n#!!block;n#RSIcharts#0" expanded="false" />
+            <element signature="n#!!block;n#ADXcharts#0" expanded="false" />
+            <element signature="n#!!block;n#CCIcharts#0" expanded="false" />
+            <element signature="n#!!block;n#STOCHcharts#0" expanded="false" />
+            <element signature="n#!!block;n#BBANDScharts#0" expanded="false" />
+            <element signature="n#!!block;n#MACDcharts#0" expanded="false" />
+            <element signature="n#!!block;n#drawHisCharts#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/hw8-09-3tabs.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2265">
-          <caret line="176" column="17" lean-forward="false" selection-start-line="176" selection-start-column="17" selection-end-line="176" selection-end-column="17" />
+        <state relative-caret-position="290">
+          <caret line="334" column="66" lean-forward="false" selection-start-line="334" selection-start-column="66" selection-end-line="334" selection-end-column="66" />
           <folding>
             <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#form#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -866,23 +888,6 @@
             <element signature="n#style#0;n#div#0;n#div#6;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#3;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#7;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#3;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#8;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#3;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#script#0;n#body#0;n#html#0;n#!!top" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/hw8.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="1111" column="0" lean-forward="false" selection-start-line="1111" selection-start-column="0" selection-end-line="1112" selection-end-column="0" />
-          <folding>
-            <element signature="n#!!block;n#priceAndVolume#0" expanded="false" />
-            <element signature="n#!!block;n#RSIcharts#0" expanded="false" />
-            <element signature="n#!!block;n#ADXcharts#0" expanded="false" />
-            <element signature="n#!!block;n#CCIcharts#0" expanded="false" />
-            <element signature="n#!!block;n#STOCHcharts#0" expanded="false" />
-            <element signature="n#!!block;n#BBANDScharts#0" expanded="false" />
-            <element signature="n#!!block;n#MACDcharts#0" expanded="false" />
           </folding>
         </state>
       </provider>

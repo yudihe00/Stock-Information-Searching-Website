@@ -332,7 +332,7 @@
                 // the $http API is based on the deferred/promise APIs exposed by the $q service
                 // so it returns a promise for us by default
                 //                var url = "https://www.bbminfo.com/sample.php?token="+str;
-                var url ="http://localhost/getStockName.php?input="+str;
+                var url ="http://localhost/hw8-2/php/multiAjax.php?name="+str;
                 return $http.get(url)
                     .then(function(response) {
                         if (typeof response.data.records === 'object') {
