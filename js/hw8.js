@@ -2,6 +2,8 @@ var jsonObj = {};
 var ajaxCallNum = 0;
 var error = {};
 var phpUrl = "http://localhost/hw8-2/php/multiAjax.php";
+var symbol;
+var arrayIndicatorName=["PRICE","SMA","EMA","STOCH","RSI","ADX","CCI","BBANDS","MACD"];
 // var phpUrl = "http://localhost/hw8-2/php/multiAjax.php";
 // var phpUrl = "php/multiAjax.php";
 // set initial value to 0
@@ -9,6 +11,7 @@ function initStat() {
     jsonObj = {};
     ajaxCallNum = 0;
     error = {};
+    phpUrl = "http://localhost/hw8-2/php/multiAjax.php";
     return true;
 
 }
@@ -33,26 +36,73 @@ function isEmpty(obj) {
     return true;
 }
 
+function drawCharts(functionName){
+    switch (functionName) {
+        case 'PRICE': priceAndVolume(); break;
+        case 'SMA': SMAcharts();break;
+        case 'EMA': EMAcharts();break;
+        case 'RSI': RSIcharts();break;
+        case 'ADX': ADXcharts();break;
+        case 'CCI': CCIcharts();break;
+        case 'STOCH': STOCHcharts();break;
+        case 'BBANDS': BBANDScharts();break;
+        case 'MACD': MACDcharts(); break;
+    }
+}
+
+function showErrors(functionName){
+    if (functionName=='PRICE') {
+        $("#price-chart").html(
+            "<div><p>Error!Failed to get price data</p></div>"
+        );
+        $("#stock-detail-table").html(
+            "<div><p>Error!Failed to get current stock data</p></div>"
+        );
+    } else {
+        functionName=functionName.toLowerCase();
+        $("#"+functionName+"-chart").html(
+            "<div style='height:40px; background-color: #ffb7a3;margin-top:20px'>" +
+            "<p style='padding-top: 10px;padding-left: 10px'>Error!Failed to get "+functionName+ " data</p></div>"
+        );
+        $("#"+functionName+"-chart").css({
+
+            // 'background-color':'#ff8c84','border-color':'#ff2718', 'folor':'#b13c27',
+            // 'hight':'20px'
+
+
+        });
+    }
+}
+
 
 // check if all jquery is done
 function checkAllJqueryDone() {
     if (ajaxCallNum == 9) {
         // var errorLength=error.toString()[length];
-        if(isEmpty(error)) {
-            //draw price chart
-            priceAndVolume();
-            SMAcharts();
-            EMAcharts();
-            RSIcharts();
-            ADXcharts();
-            CCIcharts();
-            STOCHcharts();
-            BBANDScharts();
-            MACDcharts();
-
-        } else {
-            //show warning
+        // if(isEmpty(error)) {
+        //     //draw price chart
+        //     priceAndVolume();
+        //     SMAcharts();
+        //     EMAcharts();
+        //     RSIcharts();
+        //     ADXcharts();
+        //     CCIcharts();
+        //     STOCHcharts();
+        //     BBANDScharts();
+        //     MACDcharts();
+        //
+        // } else {
+        //     //show warning
+        // }
+        for (var num in arrayIndicatorName) {
+            var name=arrayIndicatorName[num];
+            if(error.hasOwnProperty(name)){
+                showErrors(name);
+            } else {
+                drawCharts(name);
+            }
         }
+
     }
 
 }
@@ -76,11 +126,15 @@ function jqueryGetData(functionName, initData) {
                 "<br />JSON: " + jsonObj[functionName]["json"] //data is a json object
             );
             ajaxCallNum++;
+            //drawCharts(functionName);
             checkAllJqueryDone();
 
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
             alert(functionName + " data " + XMLHttpRequest.readyState + "\n" + XMLHttpRequest.status + "\n" + errorThrown);
+
+            //showErrors(functionName);
+
             saveError(functionName);
             ajaxCallNum++;
             checkAllJqueryDone();
@@ -141,13 +195,16 @@ $("document").ready(function () {
                 // draw histrory charts
                 drawHisCharts(jsonObj["basic info"]["symbol"]);
 
+                // show news
+                showNews(jsonObj["basic info"]["symbol"]);
+
                 checkAllJqueryDone();
 
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
                 alert("detail data " + XMLHttpRequest.readyState + XMLHttpRequest.status + XMLHttpRequest.responseText);
-                saveError("Current stock");
-                saveError("Price");
+                //saveError("Current stock");
+                saveError("PRICE");
                 ajaxCallNum++;
                 checkAllJqueryDone();
             }
@@ -1111,7 +1168,7 @@ function drawHisCharts(symbol) {
             temp.push(price);
             hisData[num] = temp;
         }
-
+        //var width= $("#historical-charts-container").width();
         // Create the chart
         Highcharts.stockChart('historical-charts-container', { //change
 
@@ -1146,7 +1203,7 @@ function drawHisCharts(symbol) {
                         text: 'All'
                     }],
                 buttonTheme: {
-                    width: 60
+                    width: 30
                 },
                 selected: 0
             },
@@ -1171,12 +1228,82 @@ function drawHisCharts(symbol) {
                 tooltip: {
                     valueDecimals: 2
                 }
-            }]
+            }],
+            responsive:{
+                rules:[{
+                    condition:{
+                        maxWidth:410
+                    },
+                    chartOptions:{
+                        rangeSelector: {
+                            allButtonsEnabled: true,
+                            buttons: [
+                                 {
+                                    type: 'month',
+                                    count: 1,
+                                    text: '1m'
+                                }, {
+                                    type: 'month',
+                                    count: 3,
+                                    text: '3m'
+                                }, {
+                                    type: 'month',
+                                    count: 6,
+                                    text: '6m'
+                                }, {
+                                    type: 'year',
+                                    count: 1,
+                                    text: '1y'
+                                }, {
+                                    type: 'all',
+                                    text: 'All'
+                                }],
+                            buttonTheme: {
+                                width: 30
+                            },
+                            selected: 0
+                        },
+
+                    }
+                }]
+            }
         });
     });
 
 }
 
+// show news
+function showNews(symbol) {
+    phpUrl="http://localhost/getNewsXML.php";
+    phpUrl = phpUrl+"?newssymbol=";
+    phpUrl = phpUrl + symbol;
+    $.getJSON(phpUrl, function (data) {
+        // data format
+        for (var i in data) {
+            var number=Number(i)+1;
+            var newsDivId="#news"+number.toString();
+            $(newsDivId).html(
+//                "<a href=\""+arrayNews[i]["link"]+"\">"+arrayNews[i]['title']+
+//                "</a>&nbsp&nbsp&nbsp&nbsp&nbsp " +
+//                "Publicated&nbspTime:&nbsp"+arrayNews[i]['pubDate']+"</td></tr>"
+                "<h4 style='font-weight: bold'><a href="+data[i]['link']+" target='_blank' style='text-decoration: none'>"+data[i]['title']+"</a></h4><span>Author: "
+                +data[i]['author_name']+"</br>Date: "+data[i]['pubDate']+"</br></span>"
+
+            );
+            $(newsDivId).css(
+                {
+                    //width
+                    'border-radius': '5px',
+                    'height':'120px',
+                    'background-color':'#efefef',
+                    'padding':'10px',
+                    'margin-top':'10px',
+                    'margin-down':'10px'
+                }
+            )
+        }
+    });
+}
 
 
 
