@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<br lang="en">
+<head>
+  <meta charset="UTF-8">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <title>Title</title>
+</head>
+<br>
+<div id="news1"></div>
+<div id="news2"></div>
+<div id="news3"></div>
+<div id="news4"></div>
+<div id="news5"></div>
+
+
+
+<script type="text/javascript">
+    var symbol="AAPL";
+    phpUrl="http://localhost/getNewsXML.php";
+    phpUrl = phpUrl+"?newssymbol=";
+    phpUrl = phpUrl + symbol;
+    $.getJSON(phpUrl, function (data) {
+        // data format
+        for (var i in data) {
+            var number=Number(i)+1;
+            var newsDivId="#news"+number.toString();
+            $(newsDivId).html(
+//                "<a href=\""+arrayNews[i]["link"]+"\">"+arrayNews[i]['title']+
+//                "</a>&nbsp&nbsp&nbsp&nbsp&nbsp " +
+//                "Publicated&nbspTime:&nbsp"+arrayNews[i]['pubDate']+"</td></tr>"
+            "<h4><a href="+data[i]['link']+" target='_blank' style='text-decoration: none'>"+data[i]['title']+"</a></h4><span>Author: "
+                +data[i]['author_name']+"</br>Date: "+data[i]['pubDate']+"</br></span>"
+
+            );
+            $(newsDivId).css(
+                {
+                    //width
+                    'height':'100px',
+                    'background-color':'#efefef',
+                    'padding':'10px',
+                    'margin':'10px'
+                }
+            )
+        }
+    });
+
+
+
+</script>
+
+</body>
+</html>

@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b6392831-faf1-49bc-8e79-1a0f72d53c38" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/09-hisCharts.html" afterPath="$PROJECT_DIR$/09-hisCharts.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/newsTest.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hw8-09-3tabs.html" afterPath="$PROJECT_DIR$/hw8-09-3tabs.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/hw8.js" afterPath="$PROJECT_DIR$/js/hw8.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -18,13 +18,15 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="hw8.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="hw8.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/hw8.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="6660">
-              <caret line="1163" column="37" lean-forward="false" selection-start-line="1163" selection-start-column="37" selection-end-line="1163" selection-end-column="37" />
+            <state relative-caret-position="176">
+              <caret line="124" column="48" lean-forward="false" selection-start-line="124" selection-start-column="44" selection-end-line="124" selection-end-column="48" />
               <folding>
                 <element signature="n#!!block;n#priceAndVolume#0" expanded="false" />
+                <element signature="n#!!block;n#SMAcharts#0" expanded="false" />
+                <element signature="n#!!block;n#EMAcharts#0" expanded="false" />
                 <element signature="n#!!block;n#RSIcharts#0" expanded="false" />
                 <element signature="n#!!block;n#ADXcharts#0" expanded="false" />
                 <element signature="n#!!block;n#CCIcharts#0" expanded="false" />
@@ -39,8 +41,8 @@
       <file leaf-file-name="hw8-09-3tabs.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/hw8-09-3tabs.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1194">
-              <caret line="65" column="24" lean-forward="true" selection-start-line="65" selection-start-column="24" selection-end-line="65" selection-end-column="24" />
+            <state relative-caret-position="60">
+              <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="90" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#form#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -72,6 +74,18 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="newsTest.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/newsTest.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="218">
+              <caret line="30" column="120" lean-forward="false" selection-start-line="30" selection-start-column="120" selection-end-line="30" selection-end-column="120" />
+              <folding>
+                <marker date="1510365388010" expanded="true" signature="973:994" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="hw8.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/css/hw8.css">
           <provider selected="true" editor-type-id="text-editor">
@@ -87,8 +101,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
         <option value="JavaScript File" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -118,6 +132,7 @@
       <find>tooltip</find>
       <find>histo</find>
       <find>serie</find>
+      <find>.css</find>
       <find>hw8.js</find>
     </findStrings>
   </component>
@@ -147,9 +162,10 @@
         <option value="$PROJECT_DIR$/historical-demo.html" />
         <option value="$PROJECT_DIR$/js/highStock.js" />
         <option value="$PROJECT_DIR$/php/historyData.php" />
-        <option value="$PROJECT_DIR$/hw8-09-3tabs.html" />
         <option value="$PROJECT_DIR$/09-hisCharts.html" />
         <option value="$PROJECT_DIR$/js/hw8.js" />
+        <option value="$PROJECT_DIR$/hw8-09-3tabs.html" />
+        <option value="$PROJECT_DIR$/newsTest.html" />
       </list>
     </option>
   </component>
@@ -162,8 +178,8 @@
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" interpreter_name="PHP 5.6" />
   <component name="ProjectFrameBounds">
     <option name="y" value="22" />
-    <option name="width" value="1057" />
-    <option name="height" value="728" />
+    <option name="width" value="1043" />
+    <option name="height" value="725" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -336,31 +352,41 @@
       <workItem from="1509684246727" duration="8135000" />
       <workItem from="1510165989440" duration="214000" />
       <workItem from="1510252478895" duration="2949000" />
-      <workItem from="1510331831644" duration="6276000" />
+      <workItem from="1510331831644" duration="10259000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="76702000" />
+    <option name="totallyTimeSpent" value="80685000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="22" width="1057" height="728" extended-state="0" />
+    <frame x="0" y="22" width="1043" height="725" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2936508" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.012698413" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32952693" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32857144" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18226601" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18481518" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.328594" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -372,7 +398,6 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.328594" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -406,23 +431,42 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+              <option name="COLUMN_ORDER">
+                <list>
+                  <option value="0" />
+                  <option value="1" />
+                  <option value="2" />
+                  <option value="3" />
+                </list>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="4" />
+      <option name="time" value="5" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/css/hw8.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="9" lean-forward="false" selection-start-line="9" selection-start-column="9" selection-end-line="9" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/multiajax.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3090">
@@ -450,6 +494,8 @@
           <caret line="5" column="25" lean-forward="false" selection-start-line="5" selection-start-column="25" selection-end-line="5" selection-end-column="25" />
           <folding>
             <element signature="n#!!block;n#priceAndVolume#0" expanded="false" />
+            <element signature="n#!!block;n#SMAcharts#0" expanded="false" />
+            <element signature="n#!!block;n#EMAcharts#0" expanded="false" />
             <element signature="n#!!block;n#RSIcharts#0" expanded="false" />
             <element signature="n#!!block;n#ADXcharts#0" expanded="false" />
             <element signature="n#!!block;n#CCIcharts#0" expanded="false" />
@@ -487,6 +533,8 @@
           <caret line="5" column="25" lean-forward="true" selection-start-line="5" selection-start-column="25" selection-end-line="5" selection-end-column="25" />
           <folding>
             <element signature="n#!!block;n#priceAndVolume#0" expanded="false" />
+            <element signature="n#!!block;n#SMAcharts#0" expanded="false" />
+            <element signature="n#!!block;n#EMAcharts#0" expanded="false" />
             <element signature="n#!!block;n#RSIcharts#0" expanded="false" />
             <element signature="n#!!block;n#ADXcharts#0" expanded="false" />
             <element signature="n#!!block;n#CCIcharts#0" expanded="false" />
@@ -531,6 +579,8 @@
           <caret line="6" column="17" lean-forward="true" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
           <folding>
             <element signature="n#!!block;n#priceAndVolume#0" expanded="false" />
+            <element signature="n#!!block;n#SMAcharts#0" expanded="false" />
+            <element signature="n#!!block;n#EMAcharts#0" expanded="false" />
             <element signature="n#!!block;n#RSIcharts#0" expanded="false" />
             <element signature="n#!!block;n#ADXcharts#0" expanded="false" />
             <element signature="n#!!block;n#CCIcharts#0" expanded="false" />
@@ -784,14 +834,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/css/hw8.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="6" lean-forward="false" selection-start-line="0" selection-start-column="6" selection-end-line="0" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/js/highStock.js" />
     <entry file="file://$PROJECT_DIR$/php/historyData.php">
       <provider selected="true" editor-type-id="text-editor">
@@ -829,10 +871,36 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/css/hw8.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="6" lean-forward="false" selection-start-line="0" selection-start-column="6" selection-end-line="0" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/hw8.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="124" column="48" lean-forward="false" selection-start-line="124" selection-start-column="44" selection-end-line="124" selection-end-column="48" />
+          <folding>
+            <element signature="n#!!block;n#priceAndVolume#0" expanded="false" />
+            <element signature="n#!!block;n#SMAcharts#0" expanded="false" />
+            <element signature="n#!!block;n#EMAcharts#0" expanded="false" />
+            <element signature="n#!!block;n#RSIcharts#0" expanded="false" />
+            <element signature="n#!!block;n#ADXcharts#0" expanded="false" />
+            <element signature="n#!!block;n#CCIcharts#0" expanded="false" />
+            <element signature="n#!!block;n#STOCHcharts#0" expanded="false" />
+            <element signature="n#!!block;n#BBANDScharts#0" expanded="false" />
+            <element signature="n#!!block;n#MACDcharts#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/hw8-09-3tabs.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1194">
-          <caret line="65" column="24" lean-forward="true" selection-start-line="65" selection-start-column="24" selection-end-line="65" selection-end-column="24" />
+        <state relative-caret-position="60">
+          <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="90" />
           <folding>
             <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#form#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -863,18 +931,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/hw8.js">
+    <entry file="file://$PROJECT_DIR$/newsTest.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6660">
-          <caret line="1163" column="37" lean-forward="false" selection-start-line="1163" selection-start-column="37" selection-end-line="1163" selection-end-column="37" />
+        <state relative-caret-position="218">
+          <caret line="30" column="120" lean-forward="false" selection-start-line="30" selection-start-column="120" selection-end-line="30" selection-end-column="120" />
           <folding>
-            <element signature="n#!!block;n#priceAndVolume#0" expanded="false" />
-            <element signature="n#!!block;n#RSIcharts#0" expanded="false" />
-            <element signature="n#!!block;n#ADXcharts#0" expanded="false" />
-            <element signature="n#!!block;n#CCIcharts#0" expanded="false" />
-            <element signature="n#!!block;n#STOCHcharts#0" expanded="false" />
-            <element signature="n#!!block;n#BBANDScharts#0" expanded="false" />
-            <element signature="n#!!block;n#MACDcharts#0" expanded="false" />
+            <marker date="1510365388010" expanded="true" signature="973:994" ph="..." />
           </folding>
         </state>
       </provider>
