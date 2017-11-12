@@ -331,4 +331,63 @@ function getStockData(){
         echo json_encode($resultJson);
 
     }
+
+// get data for news
+    if(isset($_GET["newssymbol"]) && !empty($_GET["newssymbol"])) {
+        $input = $_GET["newssymbol"];
+        $input = strtoupper($input);
+        return getNewsData($input);
+    }
+
+    function getNewsData($symbol){
+        //$symbol="AAPL";
+        // getNewsData($symbol);
+
+        $xmlURL = "https://seekingalpha.com/api/sa/combined/".$symbol.".xml";
+
+        $xml = simplexml_load_file($xmlURL);
+        $jsonObj=json_encode($xml);
+        $array=json_decode($jsonObj,true);
+        //print_r($jsonObj).'</br>';
+        $number=0;
+        foreach ($xml->channel->item as $item) {
+          $ns_sa = $item->children('https://seekingalpha.com/api/1.0');
+          $ns_sa = $ns_sa->author_name;
+          $array["channel"]["item"][$number]["author_name"]=(string)$ns_sa;
+          $number=$number+1;
+          //echo $ns_sa.'</br>';
+        }
+        //echo json_encode($array) .'</br>';
+        $keyNum = 0;
+        function endswith($string, $test) {
+            $strlen = strlen($string);
+            $testlen = strlen($test);
+            if ($testlen > $strlen) return false;
+            return substr_compare($string, $test, $strlen - $testlen, $testlen) === 0;
+        }
+        foreach ($array["channel"]["item"] as $key => $value) {
+            $valueBackUp = $value;
+            foreach ($value as $key2 => $value2) {
+                if($key2 == "link" && !endswith($value2,'news?source=feed_symbol_'.strtoupper($symbol))) {
+                    foreach ($valueBackUp as $key3 => $value3) {
+                        if($key3 == "title" || $key3 == "link" || $key3 == "pubDate"|| $key3=="author_name") {
+                            if($key3 == "pubDate") {
+                                $value3 = substr($value3, 0, -5);
+                            }
+                            $arrayNews[$keyNum][$key3]=$value3;
+                            
+
+                        }
+                    }
+                    $keyNum++;
+                    
+                }
+            }
+            if($keyNum == 5) {  // need to change if not 5, test branch
+                break;
+            }
+        }
+
+        echo json_encode($arrayNews);
+    }
 ?>

@@ -1,7 +1,8 @@
 var jsonObj = {};
 var ajaxCallNum = 0;
 var error = {};
-var phpUrl = "http://localhost/hw8-2/php/multiAjax.php";
+var phpUrlOrig = "http://localhost/hw8-2/php/multiAjax.php";
+var phpUrl = phpUrlOrig;
 var symbol;
 var arrayIndicatorName=["PRICE","SMA","EMA","STOCH","RSI","ADX","CCI","BBANDS","MACD"];
 // var phpUrl = "http://localhost/hw8-2/php/multiAjax.php";
@@ -11,7 +12,7 @@ function initStat() {
     jsonObj = {};
     ajaxCallNum = 0;
     error = {};
-    phpUrl = "http://localhost/hw8-2/php/multiAjax.php";
+    phpUrl = phpUrlOrig;
     return true;
 
 }
@@ -1274,7 +1275,7 @@ function drawHisCharts(symbol) {
 
 // show news
 function showNews(symbol) {
-    phpUrl="http://localhost/getNewsXML.php";
+    phpUrl=phpUrlOrig;
     phpUrl = phpUrl+"?newssymbol=";
     phpUrl = phpUrl + symbol;
     $.getJSON(phpUrl, function (data) {
