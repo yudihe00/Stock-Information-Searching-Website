@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b6392831-faf1-49bc-8e79-1a0f72d53c38" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/hw8.css" afterPath="$PROJECT_DIR$/css/hw8.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hw8-09-3tabs.html" afterPath="$PROJECT_DIR$/hw8-09-3tabs.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/hw8.js" afterPath="$PROJECT_DIR$/js/hw8.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/newsTest.html" afterPath="$PROJECT_DIR$/newsTest.html" />
-    </list>
+    <list default="true" id="b6392831-faf1-49bc-8e79-1a0f72d53c38" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -361,12 +356,12 @@
       <workItem from="1509684246727" duration="8135000" />
       <workItem from="1510165989440" duration="214000" />
       <workItem from="1510252478895" duration="2949000" />
-      <workItem from="1510331831644" duration="20245000" />
+      <workItem from="1510331831644" duration="20462000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="90671000" />
+    <option name="totallyTimeSpent" value="90888000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
