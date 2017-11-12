@@ -54,10 +54,12 @@ function drawCharts(functionName){
 function showErrors(functionName){
     if (functionName=='PRICE') {
         $("#price-chart").html(
-            "<div><p>Error!Failed to get price data</p></div>"
+            "<div style='height:40px; background-color: #ffb7a3;margin-top:20px'>" +
+            "<p style='padding-top: 10px;padding-left: 10px'>Error!Failed to get price data</p></div>"
         );
         $("#stock-detail-table").html(
-            "<div><p>Error!Failed to get current stock data</p></div>"
+            "<div style='height:40px; background-color: #ffb7a3;margin-top:20px'>" +
+            "<p style='padding-top: 10px;padding-left: 10px'>Error!Failed to get current stock data</p></div>"
         );
     } else {
         functionName=functionName.toLowerCase();
@@ -65,13 +67,7 @@ function showErrors(functionName){
             "<div style='height:40px; background-color: #ffb7a3;margin-top:20px'>" +
             "<p style='padding-top: 10px;padding-left: 10px'>Error!Failed to get "+functionName+ " data</p></div>"
         );
-        $("#"+functionName+"-chart").css({
 
-            // 'background-color':'#ff8c84','border-color':'#ff2718', 'folor':'#b13c27',
-            // 'hight':'20px'
-
-
-        });
     }
 }
 
@@ -156,6 +152,7 @@ $("document").ready(function () {
             "action": "getStockData" // set "action" which will be tranfer to php
         };
         data = $(this).serialize() + "&" + $.param(data);
+        var dataSave = data;
         //serialize every data with & eg: Favorite beverage=coke&favorite_restaurant=df&...&action=test
         $.ajax({
             type: "GET",
@@ -193,6 +190,30 @@ $("document").ready(function () {
                 $("#range").html(jsonObj["basic info"]["day's range"]);
 
 
+                // use get SMA data
+                jqueryGetData("SMA", dataSave);
+
+                // use get EMA data
+                jqueryGetData("EMA", dataSave);
+
+                // use get RSI data
+                jqueryGetData("RSI", dataSave);
+
+                // use get ADX data
+                jqueryGetData("ADX", dataSave);
+
+                // use get CCI data
+                jqueryGetData("CCI", dataSave);
+
+                // use get BBANDS data
+                jqueryGetData("BBANDS", dataSave);
+
+                // use get MCAD data
+                jqueryGetData("MACD", dataSave);
+
+                // use get STOCH data
+                jqueryGetData("STOCH", dataSave);
+
                 // draw histrory charts
                 drawHisCharts(jsonObj["basic info"]["symbol"]);
 
@@ -201,39 +222,21 @@ $("document").ready(function () {
 
                 checkAllJqueryDone();
 
+
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
                 alert("detail data " + XMLHttpRequest.readyState + XMLHttpRequest.status + XMLHttpRequest.responseText);
                 //saveError("Current stock");
                 saveError("PRICE");
                 ajaxCallNum++;
-                checkAllJqueryDone();
+                showErrors("PRICE");
+                showErrors("SMA");
+                for (i=0; i<arrayIndicatorName.length; i++) {
+                    showErrors(arrayIndicatorName[i]);
+                }
             }
         });
 
-        // use get SMA data
-        jqueryGetData("SMA", $(this).serialize());
-
-        // use get EMA data
-        jqueryGetData("EMA", $(this).serialize());
-
-        // use get RSI data
-        jqueryGetData("RSI", $(this).serialize());
-
-        // use get ADX data
-        jqueryGetData("ADX", $(this).serialize());
-
-        // use get CCI data
-        jqueryGetData("CCI", $(this).serialize());
-
-        // use get BBANDS data
-        jqueryGetData("BBANDS", $(this).serialize());
-
-        // use get MCAD data
-        jqueryGetData("MACD", $(this).serialize());
-
-        // use get STOCH data
-        jqueryGetData("STOCH", $(this).serialize());
 
 
 
