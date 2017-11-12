@@ -274,9 +274,9 @@ function priceAndVolume() {
 
     var chart= new Highcharts.chart('price-chart', {
         chart: {
-            zoomType: 'xy',
-            borderWidth: 1,
             zoomType: 'x',
+            borderWidth: 1,
+            
             borderColor: '#D6D6D6',
             marginBottom: 100 //put legend at bottom
             // alignTicks: false
@@ -380,7 +380,7 @@ function SMAcharts() {
 
     var chart= new Highcharts.chart('sma-chart', {
         chart: {
-            zoomType: 'xy',
+            zoomType: 'x',
             borderWidth: 1,
             borderColor: '#D6D6D6',
             marginBottom: 100 //put legend at bottom
@@ -466,7 +466,7 @@ function EMAcharts() {
 
     var chart= new Highcharts.chart('ema-chart', {
         chart: {
-            zoomType: 'xy',
+            zoomType: 'x',
             borderWidth: 1,
             borderColor: '#D6D6D6',
             marginBottom: 100 //put legend at bottom
@@ -551,7 +551,7 @@ function RSIcharts() {  //change
 
     var chart= new Highcharts.chart('rsi-chart', { //change
         chart: {
-            zoomType: 'xy',
+            zoomType: 'x',
             borderWidth: 1,
             borderColor: '#D6D6D6',
             marginBottom: 100 //put legend at bottom
@@ -636,7 +636,7 @@ function ADXcharts() {  //change
 
     var chart= new Highcharts.chart('adx-chart', { //change
         chart: {
-            zoomType: 'xy',
+            zoomType: 'x',
             borderWidth: 1,
             borderColor: '#D6D6D6',
             marginBottom: 100 //put legend at bottom
@@ -721,7 +721,7 @@ function CCIcharts() {  //change
 
     var chart= new Highcharts.chart('cci-chart', { //change
         chart: {
-            zoomType: 'xy',
+            zoomType: 'x',
             borderWidth: 1,
             borderColor: '#D6D6D6',
             marginBottom: 100 //put legend at bottom
@@ -819,7 +819,7 @@ function STOCHcharts() {
 
     var chart= new Highcharts.chart('stoch-chart', { //change
         chart: {
-            zoomType: 'xy',
+            zoomType: 'x',
             borderWidth: 1,
             borderColor: '#D6D6D6',
             marginBottom: 100 //put legend at bottom
@@ -935,7 +935,7 @@ function BBANDScharts() {
 
     var chart= new Highcharts.chart('bbands-chart', { //change
         chart: {
-            zoomType: 'xy',
+            zoomType: 'x',
             borderWidth: 1,
             borderColor: '#D6D6D6',
             marginBottom: 100 //put legend at bottom
@@ -1066,7 +1066,7 @@ function MACDcharts() {
 
     var chart= new Highcharts.chart('macd-chart', { //change
         chart: {
-            zoomType: 'xy',
+            zoomType: 'x',
             borderWidth: 1,
             borderColor: '#D6D6D6',
             marginBottom: 100 //put legend at bottom
