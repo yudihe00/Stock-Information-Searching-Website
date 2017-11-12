@@ -75,22 +75,7 @@ function showErrors(functionName){
 // check if all jquery is done
 function checkAllJqueryDone() {
     if (ajaxCallNum == 9) {
-        // var errorLength=error.toString()[length];
-        // if(isEmpty(error)) {
-        //     //draw price chart
-        //     priceAndVolume();
-        //     SMAcharts();
-        //     EMAcharts();
-        //     RSIcharts();
-        //     ADXcharts();
-        //     CCIcharts();
-        //     STOCHcharts();
-        //     BBANDScharts();
-        //     MACDcharts();
-        //
-        // } else {
-        //     //show warning
-        // }
+
         for (var num in arrayIndicatorName) {
             var name=arrayIndicatorName[num];
             if(error.hasOwnProperty(name)){
@@ -102,6 +87,95 @@ function checkAllJqueryDone() {
 
     }
 
+}
+
+// function draw progress bar
+function drawProgress(){
+
+    // draw all indivator progress bar, including price
+    for (var i=0; i<arrayIndicatorName.length; i++) {
+        $("#"+arrayIndicatorName[i].toLowerCase()+"-chart").html(
+            "<div class=\"progress\">\n" +
+            "    <div class=\"progress-bar progress-bar-striped active\" role=\"progressbar\" aria-valuenow=\"60\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width:60%\"></div>\n" +
+            "  </div>"
+        );
+    }
+
+    // draw detail table progress bar, need to redraw table later
+    $("#stock-detail-table-div").html(
+        "<div class=\"progress\">\n" +
+        "    <div class=\"progress-bar progress-bar-striped active\" role=\"progressbar\" aria-valuenow=\"60\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width:60%\"></div>\n" +
+        "  </div>"
+    );
+
+    // draw progress bar for histrorical and news sections
+    $("#historical-charts-container").html(
+        "<div class=\"progress\">\n" +
+        "    <div class=\"progress-bar progress-bar-striped active\" role=\"progressbar\" aria-valuenow=\"60\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width:60%\"></div>\n" +
+        "  </div>"
+    );
+
+    $("#news-item-div").html(
+        "<div class=\"progress\">\n" +
+        "    <div class=\"progress-bar progress-bar-striped active\" role=\"progressbar\" aria-valuenow=\"60\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width:60%\"></div>\n" +
+        "  </div>"
+    );
+
+
+}
+
+
+// redraw news item div
+function redrawNewsItemDiv() {
+    $("#news-item-div").html(
+        "<div id=\"news1\"class=\"col-md-12 col-xs-12 col-sm-12\"></div>\n" +
+        "            <div id=\"news2\"class=\"col-md-12 col-xs-12 col-sm-12\"></div>\n" +
+        "            <div id=\"news3\"class=\"col-md-12 col-xs-12 col-sm-12\"></div>\n" +
+        "            <div id=\"news4\"class=\"col-md-12 col-xs-12 col-sm-12\"></div>\n" +
+        "            <div id=\"news5\"class=\"col-md-12 col-xs-12 col-sm-12\"></div>"
+    );
+}
+
+// redrawDetailTable after ajax call for derail info
+// because progress bar has change the html for #stock-detail-table
+function redrawDetailTable(){
+    $("#stock-detail-table-div").html(
+        "<table class=\"table table-striped\" id=\"stock-detail-table\" style=\"margin-top: 10px\">\n" +
+        "                <tr>\n" +
+        "                  <th class=\"col-md-6\">Stock Ticker Symbol</th>\n" +
+        "                  <td id=\"symbol\"></td>\n" +
+        "                </tr>\n" +
+        "                <tr>\n" +
+        "                  <th class=\"col-md-6\">Last Price</th>\n" +
+        "                  <td id=\"last-price\"></td>\n" +
+        "                </tr>\n" +
+        "                <tr>\n" +
+        "                  <th class=\"col-md-6\">Change(Change Percent)</th>\n" +
+        "                  <td id=\"change-and-percent\"></td>\n" +
+        "                </tr>\n" +
+        "                <tr>\n" +
+        "                  <th class=\"col-md-6\">Timestamp</th>\n" +
+        "                  <td id=\"timestamp\"></td>\n" +
+        "                </tr>\n" +
+        "                <tr>\n" +
+        "                  <th class=\"col-md-6\">Open</th>\n" +
+        "                  <td id=\"open\"></td>\n" +
+        "                </tr>\n" +
+        "                <tr>\n" +
+        "                  <th class=\"col-md-6\">Close</th>\n" +
+        "                  <td id=\"close\"></td>\n" +
+        "                </tr>\n" +
+        "                <tr>\n" +
+        "                  <th class=\"col-md-6\">Day's Range</th>\n" +
+        "                  <td id=\"range\"></td>\n" +
+        "                </tr>\n" +
+        "                <tr>\n" +
+        "                  <th class=\"col-md-6\">Volume</th>\n" +
+        "                  <td id=\"volume\"></td>\n" +
+        "                </tr>\n" +
+        "\n" +
+        "              </table>"
+    );
 }
 
 //use use jquery get data, functionName: "SMA"
@@ -123,7 +197,7 @@ function jqueryGetData(functionName, initData) {
                 "<br />JSON: " + jsonObj[functionName]["json"] //data is a json object
             );
             ajaxCallNum++;
-            //drawCharts(functionName);
+            drawCharts(functionName);
             checkAllJqueryDone();
 
         },
@@ -147,12 +221,16 @@ $("document").ready(function () {
         // set initial value to 0
         initStat();
 
+
+        // draw progress bar before ajax complete
+        drawProgress();
+
         // use get basic data and daily data
         var data = {
             "action": "getStockData" // set "action" which will be tranfer to php
         };
         data = $(this).serialize() + "&" + $.param(data);
-        var dataSave = data;
+        var dataSave = data; // save for later use
         //serialize every data with & eg: Favorite beverage=coke&favorite_restaurant=df&...&action=test
         $.ajax({
             type: "GET",
@@ -160,6 +238,7 @@ $("document").ready(function () {
             url: phpUrl,
             data: data,  // data send to server
             success: function (data) {
+                redrawDetailTable();
                 saveJson("basic info", data);
                 $(".the-return").html(
                     "<br />JSON: " + data["json"] //data is a json object
@@ -189,6 +268,7 @@ $("document").ready(function () {
                 $("#volume").html(jsonObj["basic info"]["volume"]);
                 $("#range").html(jsonObj["basic info"]["day's range"]);
 
+                drawCharts("PRICE");
 
                 // use get SMA data
                 jqueryGetData("SMA", dataSave);
@@ -1282,6 +1362,8 @@ function showNews(symbol) {
     phpUrl = phpUrl+"?newssymbol=";
     phpUrl = phpUrl + symbol;
     $.getJSON(phpUrl, function (data) {
+
+        redrawNewsItemDiv();
         // data format
         for (var i in data) {
             var number=Number(i)+1;
