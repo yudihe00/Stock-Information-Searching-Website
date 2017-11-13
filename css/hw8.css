@@ -32,6 +32,85 @@ html, body {
     /*height:100% !important;*/
 }
 
+/******for slide*****/
+/* ngSwitch animation */
+.switchItemRelative {
+    position: relative;
+    height: auto;
+    width: auto;
+    overflow: hidden;
+}
+
+.switchItem {
+    position: absolute;
+    width: auto;
+
+    display: block;
+}
+.switchItem2 {
+    position: absolute;
+    width: auto;
+    display: block;
+}
+
+
+/*The transition is added when the switch item is about to enter or about to leave DOM*/
+.switchItem.ng-enter,
+.switchItem.ng-leave {
+    /*-webkit-transition: 2000ms linear all !important;*/
+    /*-moz-transition: 2000ms linear all !important;*/
+    /*-ms-transition: 2000ms linear all !important;*/
+    /*-o-transition: 2000ms linear all !important;*/
+    transition: 2000ms linear all !important;
+}
+
+/* When the element is about to enter DOM*/
+.switchItem.ng-enter {
+    right: 100%;
+}
+
+/* When the element completes the enter transition */
+.switchItem.ng-enter-active {
+    right: 0;
+}
+/* When the element is about to leave DOM*/
+.switchItem.ng-leave {
+    right: 0;
+}
+/*When the element end the leave transition*/
+.switchItem.ng-leave-active {
+    right: 100%;
+}
+
+
+/*The transition is added when the switch item is about to enter or about to leave DOM*/
+.switchItem2.ng-enter,
+.switchItem2.ng-leave {
+    -webkit-transition: 1000ms linear all;
+    -moz-transition: 1000ms linear all;
+    -ms-transition: 1000ms linear all;
+    -o-transition: 1000ms linear all;
+    transition: 1000ms linear all;
+}
+
+/* When the element is about to enter DOM*/
+.switchItem2.ng-enter {
+    right: -100%;
+}
+
+/* When the element completes the enter transition */
+.switchItem2.ng-enter-active {
+    right: 0;
+}
+/* When the element is about to leave DOM*/
+.switchItem2.ng-leave {
+    right: 0;
+}
+/*When the element end the leave transition*/
+.switchItem2.ng-leave-active {
+    right: -100%;
+}
+/*end of slide*/
 
 
 
