@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b6392831-faf1-49bc-8e79-1a0f72d53c38" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/hw8.css" afterPath="$PROJECT_DIR$/css/hw8.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hw8-13-slide.html" afterPath="$PROJECT_DIR$/hw8-13-slide.html" />
-    </list>
+    <list default="true" id="b6392831-faf1-49bc-8e79-1a0f72d53c38" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -357,7 +353,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="98361000" />
+    <option name="totallyTimeSpent" value="98601000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
