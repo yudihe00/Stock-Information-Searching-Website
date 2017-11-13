@@ -125,180 +125,183 @@
     <hr align="center" class="col-md-12 col-xs-12 col-sm-12"/>
   </div>
 
-  <div class="switchItemRelative col-md-12 col-xs-12 col-sm-12">
+  <div class="switchItemRelative col-md-12 col-xs-12 col-sm-12" style="padding: 0;" id="switchRelative-div">
     <!--favorite-list !!need to work!!-->
-    <div class="col-md-12 col-xs-12 col-sm-12 switchItem" id="favorite-list" ng-if="checked" style="margin-bottom: 10px;">
-      <div class="panel panel-default" style="margin-top: 10px; ">
-        <!-- Default panel contents -->
-        <div class="panel-heading" >Favorite List
-          <input type="button" ng-click="$parent.checked=false" >show 2</input>
-        </div>
-        <div class="panel-body">
-          Sort by
-        </div>
+    <div class="switchItem" ng-if="checked" >
+      <div class="col-md-12 col-xs-12 col-sm-12 " id="favorite-list" style="margin-bottom: 10px;">
+        <div class="panel panel-default" style="margin-top: 10px; ">
+          <!-- Default panel contents -->
+          <div class="panel-heading" >Favorite List
+            <input type="button" ng-click="$parent.checked=false" >show 2</input>
+          </div>
+          <div class="panel-body">
+            Sort by
+          </div>
 
-        <!-- Table -->
-        <table class="table table-striped" id="favorite-table">
-          <thead>
-          <tr>
-            <th>Symbol</th>
-            <th>Stock Price</th>
-            <th>Change(Change Percent)</th>
-            <th>Volume</th>
-          </tr>
-          </thead>
-          <tbody>
+          <!-- Table -->
+          <table class="table table-striped" id="favorite-table">
+            <thead>
+            <tr>
+              <th>Symbol</th>
+              <th>Stock Price</th>
+              <th>Change(Change Percent)</th>
+              <th>Volume</th>
+            </tr>
+            </thead>
+            <tbody>
 
-          </tbody>
-        </table>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
-
     <!--stock-info-->
-    <div class="col-md-12 col-xs-12 col-sm-12 switchItem2" id="detail-info" ng-if="!checked">
-      <div class="panel panel-default" style="margin-top: 10px">
+    <div class="switchItem2" ng-if="!checked" >
+      <div class="col-md-12 col-xs-12 col-sm-12 " id="detail-info" >
+        <div class="panel panel-default" style="margin-top: 10px">
 
-        <div class="panel-heading" >Stock Details
-          <input type="button" ng-click="$parent.checked=true">show 1</input>
-        </div>
+          <div class="panel-heading" >Stock Details
+            <input type="button" ng-click="$parent.checked=true">show 1</input>
+          </div>
 
 
-        <!--3 tabs for stock detail choice-->
-        <ul class="nav nav-pills">
-          <li class="active"><a data-toggle="pill" href="#current-stock">
-            <span class="glyphicon glyphicon-dashboard" aria-hidden="true"></span>
-            Current Stock</a></li>
-          <li><a data-toggle="pill" href="#historical-charts">
-            <span class="glyphicon glyphicon-stats" aria-hidden="true"></span>
-            Historical Charts</a></li>
-          <li><a data-toggle="pill" href="#news-feed">
-            <span class="glyphicon glyphicon-link" aria-hidden="true"></span>
-            News Feed</a></li>
-        </ul>
-        <!--the 3 tabs content-->
-        <div class="tab-content">
+          <!--3 tabs for stock detail choice-->
+          <ul class="nav nav-pills">
+            <li class="active"><a data-toggle="pill" href="#current-stock">
+              <span class="glyphicon glyphicon-dashboard" aria-hidden="true"></span>
+              Current Stock</a></li>
+            <li><a data-toggle="pill" href="#historical-charts">
+              <span class="glyphicon glyphicon-stats" aria-hidden="true"></span>
+              Historical Charts</a></li>
+            <li><a data-toggle="pill" href="#news-feed">
+              <span class="glyphicon glyphicon-link" aria-hidden="true"></span>
+              News Feed</a></li>
+          </ul>
+          <!--the 3 tabs content-->
+          <div class="tab-content">
 
-          <!--current stock-->
-          <div id="current-stock" class="tab-pane fade in active">
-            <!--stock detail table-->
-            <div class="col-md-6 col-xs-12 col-sm-12" id="detail-table-div" style="margin-top: 10px">
-              <div class="panel-body">
-                <div class="col-md-8 col-xs-8 col-sm-8" >Stock Details</div>
-                <div class="col-md-4 col-xs-4 col-sm-4" >buttons</div>
-              </div>
-
-              <div id="stock-detail-table-div">
-                <!--&lt;!&ndash; Stock Detail Table &ndash;&gt;-->
-                <!--<table class="table table-striped" id="stock-detail-table" style="margin-top: 10px">-->
-                <!--<tr>-->
-                <!--<th class="col-md-6">Stock Ticker Symbol</th>-->
-                <!--<td id="symbol"></td>-->
-                <!--</tr>-->
-                <!--<tr>-->
-                <!--<th class="col-md-6">Last Price</th>-->
-                <!--<td id="last-price"></td>-->
-                <!--</tr>-->
-                <!--<tr>-->
-                <!--<th class="col-md-6">Change(Change Percent)</th>-->
-                <!--<td id="change-and-percent"></td>-->
-                <!--</tr>-->
-                <!--<tr>-->
-                <!--<th class="col-md-6">Timestamp</th>-->
-                <!--<td id="timestamp"></td>-->
-                <!--</tr>-->
-                <!--<tr>-->
-                <!--<th class="col-md-6">Open</th>-->
-                <!--<td id="open"></td>-->
-                <!--</tr>-->
-                <!--<tr>-->
-                <!--<th class="col-md-6">Close</th>-->
-                <!--<td id="close"></td>-->
-                <!--</tr>-->
-                <!--<tr>-->
-                <!--<th class="col-md-6">Day's Range</th>-->
-                <!--<td id="range"></td>-->
-                <!--</tr>-->
-                <!--<tr>-->
-                <!--<th class="col-md-6">Volume</th>-->
-                <!--<td id="volume"></td>-->
-                <!--</tr>-->
-
-                <!--</table>-->
-              </div>
-            </div>
-            <!--chart div-->
-            <div class="col-md-6 col-xs-12 col-sm-12" id="detail-chart-div" >
-              <div class="panel-body">
-
-                <!--define tab-->
-                <ul class="nav nav-tabs">
-                  <li class="active"><a data-toggle="tab" href="#price">Price</a></li>
-                  <li><a data-toggle="tab" href="#sma">SMA</a></li>
-                  <li><a data-toggle="tab" href="#ema">EMA</a></li>
-                  <li><a data-toggle="tab" href="#stoch">STOCH</a></li>
-                  <li><a data-toggle="tab" href="#rsi">RSI</a></li>
-                  <li><a data-toggle="tab" href="#adx">ADX</a></li>
-                  <li><a data-toggle="tab" href="#cci">CCI</a></li>
-                  <li><a data-toggle="tab" href="#bbands">BBANDS</a></li>
-                  <li><a data-toggle="tab" href="#macd">MACD</a></li>
-                </ul>
-
-                <!--tab content-->
-                <div class="tab-content">
-                  <div id="price" class="tab-pane fade in active">
-                    <div id="price-chart" style="height:360px;padding-bottom: 10px;"></div>
-                  </div>
-                  <div id="sma" class="tab-pane fade">
-                    <div id="sma-chart" style="height:360px;padding-bottom: 10px;"></div>
-                  </div>
-                  <div id="ema" class="tab-pane fade">
-                    <div id="ema-chart" style="height:360px;padding-bottom: 10px;"></div>
-                  </div>
-                  <div id="stoch" class="tab-pane fade">
-                    <div id="stoch-chart" style="height:360px;padding-bottom: 10px;"></div>
-                  </div>
-                  <div id="rsi" class="tab-pane fade">
-                    <div id="rsi-chart" style="height:360px;padding-bottom: 10px;"></div>
-                  </div>
-                  <div id="adx" class="tab-pane fade">
-                    <div id="adx-chart" style="height:360px;padding-bottom: 10px;"></div>
-                  </div>
-                  <div id="cci" class="tab-pane fade">
-                    <div id="cci-chart" style="height:360px;padding-bottom: 10px;"></div>
-                  </div>
-                  <div id="bbands" class="tab-pane fade">
-                    <div id="bbands-chart" style="height:360px;padding-bottom: 10px;"></div>
-                  </div>
-                  <div id="macd" class="tab-pane fade">
-                    <div id="macd-chart" style="height:360px;padding-bottom: 10px;"></div>
-                  </div>
+            <!--current stock-->
+            <div id="current-stock" class="tab-pane fade in active">
+              <!--stock detail table-->
+              <div class="col-md-6 col-xs-12 col-sm-12" id="detail-table-div" style="margin-top: 10px">
+                <div class="panel-body">
+                  <div class="col-md-8 col-xs-8 col-sm-8" >Stock Details</div>
+                  <div class="col-md-4 col-xs-4 col-sm-4" >buttons</div>
                 </div>
 
+                <div id="stock-detail-table-div">
+                  <!--&lt;!&ndash; Stock Detail Table &ndash;&gt;-->
+                  <!--<table class="table table-striped" id="stock-detail-table" style="margin-top: 10px">-->
+                  <!--<tr>-->
+                  <!--<th class="col-md-6">Stock Ticker Symbol</th>-->
+                  <!--<td id="symbol"></td>-->
+                  <!--</tr>-->
+                  <!--<tr>-->
+                  <!--<th class="col-md-6">Last Price</th>-->
+                  <!--<td id="last-price"></td>-->
+                  <!--</tr>-->
+                  <!--<tr>-->
+                  <!--<th class="col-md-6">Change(Change Percent)</th>-->
+                  <!--<td id="change-and-percent"></td>-->
+                  <!--</tr>-->
+                  <!--<tr>-->
+                  <!--<th class="col-md-6">Timestamp</th>-->
+                  <!--<td id="timestamp"></td>-->
+                  <!--</tr>-->
+                  <!--<tr>-->
+                  <!--<th class="col-md-6">Open</th>-->
+                  <!--<td id="open"></td>-->
+                  <!--</tr>-->
+                  <!--<tr>-->
+                  <!--<th class="col-md-6">Close</th>-->
+                  <!--<td id="close"></td>-->
+                  <!--</tr>-->
+                  <!--<tr>-->
+                  <!--<th class="col-md-6">Day's Range</th>-->
+                  <!--<td id="range"></td>-->
+                  <!--</tr>-->
+                  <!--<tr>-->
+                  <!--<th class="col-md-6">Volume</th>-->
+                  <!--<td id="volume"></td>-->
+                  <!--</tr>-->
+
+                  <!--</table>-->
+                </div>
               </div>
-              <!--<div id="indicator-chart" style="height:370px;padding-bottom: 10px;"></div>-->
+              <!--chart div-->
+              <div class="col-md-6 col-xs-12 col-sm-12" id="detail-chart-div" >
+                <div class="panel-body">
+
+                  <!--define tab-->
+                  <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" href="#price">Price</a></li>
+                    <li><a data-toggle="tab" href="#sma">SMA</a></li>
+                    <li><a data-toggle="tab" href="#ema">EMA</a></li>
+                    <li><a data-toggle="tab" href="#stoch">STOCH</a></li>
+                    <li><a data-toggle="tab" href="#rsi">RSI</a></li>
+                    <li><a data-toggle="tab" href="#adx">ADX</a></li>
+                    <li><a data-toggle="tab" href="#cci">CCI</a></li>
+                    <li><a data-toggle="tab" href="#bbands">BBANDS</a></li>
+                    <li><a data-toggle="tab" href="#macd">MACD</a></li>
+                  </ul>
+
+                  <!--tab content-->
+                  <div class="tab-content">
+                    <div id="price" class="tab-pane fade in active">
+                      <div id="price-chart" style="height:360px;padding-bottom: 10px;"></div>
+                    </div>
+                    <div id="sma" class="tab-pane fade">
+                      <div id="sma-chart" style="height:360px;padding-bottom: 10px;"></div>
+                    </div>
+                    <div id="ema" class="tab-pane fade">
+                      <div id="ema-chart" style="height:360px;padding-bottom: 10px;"></div>
+                    </div>
+                    <div id="stoch" class="tab-pane fade">
+                      <div id="stoch-chart" style="height:360px;padding-bottom: 10px;"></div>
+                    </div>
+                    <div id="rsi" class="tab-pane fade">
+                      <div id="rsi-chart" style="height:360px;padding-bottom: 10px;"></div>
+                    </div>
+                    <div id="adx" class="tab-pane fade">
+                      <div id="adx-chart" style="height:360px;padding-bottom: 10px;"></div>
+                    </div>
+                    <div id="cci" class="tab-pane fade">
+                      <div id="cci-chart" style="height:360px;padding-bottom: 10px;"></div>
+                    </div>
+                    <div id="bbands" class="tab-pane fade">
+                      <div id="bbands-chart" style="height:360px;padding-bottom: 10px;"></div>
+                    </div>
+                    <div id="macd" class="tab-pane fade">
+                      <div id="macd-chart" style="height:360px;padding-bottom: 10px;"></div>
+                    </div>
+                  </div>
+
+                </div>
+                <!--<div id="indicator-chart" style="height:370px;padding-bottom: 10px;"></div>-->
+              </div>
+            </div>
+            <!--historical charts-->
+            <div id="historical-charts" class="tab-pane fade col-md-12 col-xs-12 col-sm-12">
+              <div id="historical-charts-container"  style="margin: 5px;width:100%"></div>
+            </div>
+            <div id="news-feed" class="tab-pane fade" style="margin-top: 10px;">
+              <div id="news-item-div">
+                <div id="news1"class="col-md-12 col-xs-12 col-sm-12"></div>
+                <div id="news2"class="col-md-12 col-xs-12 col-sm-12"></div>
+                <div id="news3"class="col-md-12 col-xs-12 col-sm-12"></div>
+                <div id="news4"class="col-md-12 col-xs-12 col-sm-12"></div>
+                <div id="news5"class="col-md-12 col-xs-12 col-sm-12"></div>
+              </div>
             </div>
           </div>
-          <!--historical charts-->
-          <div id="historical-charts" class="tab-pane fade col-md-12 col-xs-12 col-sm-12">
-            <div id="historical-charts-container"  style="margin: 5px;width:100%"></div>
-          </div>
-          <div id="news-feed" class="tab-pane fade" style="margin-top: 10px;">
-            <div id="news-item-div">
-              <div id="news1"class="col-md-12 col-xs-12 col-sm-12"></div>
-              <div id="news2"class="col-md-12 col-xs-12 col-sm-12"></div>
-              <div id="news3"class="col-md-12 col-xs-12 col-sm-12"></div>
-              <div id="news4"class="col-md-12 col-xs-12 col-sm-12"></div>
-              <div id="news5"class="col-md-12 col-xs-12 col-sm-12"></div>
-            </div>
-          </div>
+
+
+
+
+
         </div>
 
-
-
-
-
       </div>
-
     </div>
   </div>
 
@@ -311,6 +314,7 @@
 
     app.controller('myCtrl', function ($scope, $http, $q, GetCountryService) {
 
+//        $scope.checked=false;
         $scope.searchText = "";
         $scope.Person = [];
         $scope.selectedItem = [];
