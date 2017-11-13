@@ -86,10 +86,10 @@ html, body {
 /*The transition is added when the switch item is about to enter or about to leave DOM*/
 .switchItem2.ng-enter,
 .switchItem2.ng-leave {
-    /*-webkit-transition: 1000ms linear all;*/
-    /*-moz-transition: 1000ms linear all;*/
-    /*-ms-transition: 1000ms linear all;*/
-    /*-o-transition: 1000ms linear all;*/
+    -webkit-transition: 1000ms linear all;
+    -moz-transition: 1000ms linear all;
+    -ms-transition: 1000ms linear all;
+    -o-transition: 1000ms linear all;
     transition: 1000ms linear all;
 }
 
