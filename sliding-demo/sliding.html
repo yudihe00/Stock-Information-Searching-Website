@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html ng-app="MyApp">
+
+<head>
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" />
+  <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
+  <link rel="stylesheet" href="style.css" />
+  <script src="script.js"></script>
+</head>
+
+
+<body class="container" ng-init="myExp='one'">
+
+<br/>
+
+<div class="row">
+  <div class="col-xs-3"></div>
+
+  <div class="col-xs-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <button class="btn btn-info" ng-click="myExp='one'">One</button>
+        <button class="btn btn-info" ng-click="myExp='two'">Two</button>
+        <button class="btn btn-info" ng-click="myExp='three'">Three</button>
+      </div>
+      <div class="panel-body" ng-switch="myExp" >
+
+        <div ng-switch-when="one" class="my-switch-animation">
+          one
+        </div>
+        <div ng-switch-when="two" class="my-switch-animation">
+          two
+        </div>
+        <div ng-switch-when="three" class="my-switch-animation">
+          three
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="col-xs-3"></div>
+</div>
+
+</body>
+
+</html>
