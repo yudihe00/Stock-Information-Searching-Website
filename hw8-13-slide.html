@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" href="../../favicon.ico">
+
+
+
+  <title>HW8</title>
+
+  <!--jquery-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+  <!-- angular JS Material-->
+  <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css">
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
+
+  <!-- Angular Material Library -->
+  <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.4/angular-material.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <!--<link href="css/bootstrap.min.css" rel="stylesheet">//-->
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+  <!-- Custom styles for this template -->
+  <link href="css/hw8.css" rel="stylesheet">
+
+  <!--for highStock-->
+  <script src="https://code.highcharts.com/stock/highstock.js"></script>
+  <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+
+
+  <!-- Bootstrap core JavaScript
+================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+
+
+  <script type="text/javascript" src="js/hw8.js"></script>
+  <script type="text/javascript" src="js/moment.js"></script>
+  <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+  <!--<script src="js/bootstrap.min.js"></script>-->
+
+
+</head>
+
+<body class="bodyClass" >
+
+
+<div class="container" ng-app="myApp" ng-controller="myCtrl">
+
+  <!--input-div-->
+  <div class="col-md-12 col-xs-12 col-sm-12" id="input-div" style="margin-top: 10px;">
+    <form class="stockForm" method="GET" accept-charset="utf-8">
+      <h1 style="text-align: center">Stock Market Search </h1>
+
+      <div class="col-md-3 col-xs-12 col-sm-12" id="prompt" style="margin-top:10px; vertical-align: middle;">
+        <p style="font-size: medium">Enter Stock Ticket Symbol:<span style="color: red;">*</span> </p>
+      </div>
+
+
+      <div class="col-md-6 col-xs-12 col-sm-12" id="stock-input" style="margin-top:10px;">
+        <!-- <input type="text" name="symbol" value="" style="width: 100%"/> -->
+        <md-content>
+          <md-autocomplete
+              id="md-auto"
+              required
+              ng-disabled="isDisabled"
+              md-no-cache="noCache"
+              md-selected-item="selectedItem"
+              md-input-name="symbol"
+              md-search-text="searchText"
+              md-items="item in searchTextChange(searchText)"
+              md-item-text="item.value"
+              md-min-length="0"
+              placeholder="e.g. AAPL">
+            <md-item-template>
+              <span md-highlight-text="searchText" md-highlight-flags="^i">{{item.display}}</span>
+            </md-item-template>
+            <md-not-found>
+              No Stock matching "{{searchText}}" were found.
+            </md-not-found>
+            <div ng-messages="input-stock.autocompleteField.$error" role="alert">
+              <div ng-message="required">Please enter a stock symbol</div>
+            </div>
+          </md-autocomplete>
+        </md-content>
+      </div> <!--end input console-->
+
+
+
+      <div class="col-md-3 col-xs-12 col-sm-12" id="input-buttons" style="margin-top:10px;">
+        <p>
+          <button type="submit" class="btn btn-sm btn-primary" name="submit" ng-click="checked=false" ng-init="checked=true">
+            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>&nbsp; Get Quote</button>
+          <!--<input type="submit" class="btn btn-sm btn-primary" name="submit" value="Get Quote"/>-->
+          <button class="btn btn-sm btn-default" name = "clear" onclick="clearData();">
+            <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>&nbsp; clear</button>
+        </p>
+      </div>
+    </form>
+  </div>
+
+  <!--draw a line-->
+  <div class="row col-md-12 col-xs-12 col-sm-12" name="draw-a-line">
+    <hr align="center" class="col-md-12 col-xs-12 col-sm-12"/>
+  </div>
+
+  <div class="col-md-12 col-xs-12 col-sm-12 switchItemRelative ">
+
+    <!--favorite-list !!need to work!!-->
+    <div class="col-md-12 col-xs-12 col-sm-12 switchItem" ng-if="checked" id="favorite-list" style="margin-bottom: 10px;">
+      <div class="panel panel-default" style="margin-top: 10px; ">
+        <!-- Default panel contents -->
+        <div class="panel-heading" >Favorite List
+          <input type="button" ng-click="$parent.checked=false" >show 2</input>
+        </div>
+        <div class="panel-body">
+          Sort by
+        </div>
+
+        <!-- Table -->
+        <table class="table table-striped" id="favorite-table">
+          <thead>
+          <tr>
+            <th>Symbol</th>
+            <th>Stock Price</th>
+            <th>Change(Change Percent)</th>
+            <th>Volume</th>
+          </tr>
+          </thead>
+          <tbody>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!--stock-info-->
+    <div class="col-md-12 col-xs-12 col-sm-12 switchItem2" ng-if="!checked" id="detail-info">
+      <div class="panel panel-default" style="margin-top: 10px">
+
+        <div class="panel-heading" >Stock Details
+          <input type="button" ng-click="$parent.checked=true">show 1</input>
+        </div>
+
+
+        <!--3 tabs for stock detail choice-->
+        <ul class="nav nav-pills">
+          <li class="active"><a data-toggle="pill" href="#current-stock">
+            <span class="glyphicon glyphicon-dashboard" aria-hidden="true"></span>
+            Current Stock</a></li>
+          <li><a data-toggle="pill" href="#historical-charts">
+            <span class="glyphicon glyphicon-stats" aria-hidden="true"></span>
+            Historical Charts</a></li>
+          <li><a data-toggle="pill" href="#news-feed">
+            <span class="glyphicon glyphicon-link" aria-hidden="true"></span>
+            News Feed</a></li>
+        </ul>
+        <!--the 3 tabs content-->
+        <div class="tab-content">
+
+          <!--current stock-->
+          <div id="current-stock" class="tab-pane fade in active">
+            <!--stock detail table-->
+            <div class="col-md-6 col-xs-12 col-sm-12" id="detail-table-div" style="margin-top: 10px">
+              <div class="panel-body">
+                <div class="col-md-8 col-xs-8 col-sm-8" >Stock Details</div>
+                <div class="col-md-4 col-xs-4 col-sm-4" >buttons</div>
+              </div>
+
+              <div id="stock-detail-table-div">
+                <!--&lt;!&ndash; Stock Detail Table &ndash;&gt;-->
+                <!--<table class="table table-striped" id="stock-detail-table" style="margin-top: 10px">-->
+                <!--<tr>-->
+                <!--<th class="col-md-6">Stock Ticker Symbol</th>-->
+                <!--<td id="symbol"></td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                <!--<th class="col-md-6">Last Price</th>-->
+                <!--<td id="last-price"></td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                <!--<th class="col-md-6">Change(Change Percent)</th>-->
+                <!--<td id="change-and-percent"></td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                <!--<th class="col-md-6">Timestamp</th>-->
+                <!--<td id="timestamp"></td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                <!--<th class="col-md-6">Open</th>-->
+                <!--<td id="open"></td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                <!--<th class="col-md-6">Close</th>-->
+                <!--<td id="close"></td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                <!--<th class="col-md-6">Day's Range</th>-->
+                <!--<td id="range"></td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                <!--<th class="col-md-6">Volume</th>-->
+                <!--<td id="volume"></td>-->
+                <!--</tr>-->
+
+                <!--</table>-->
+              </div>
+            </div>
+            <!--chart div-->
+            <div class="col-md-6 col-xs-12 col-sm-12" id="detail-chart-div" >
+              <div class="panel-body">
+
+                <!--define tab-->
+                <ul class="nav nav-tabs">
+                  <li class="active"><a data-toggle="tab" href="#price">Price</a></li>
+                  <li><a data-toggle="tab" href="#sma">SMA</a></li>
+                  <li><a data-toggle="tab" href="#ema">EMA</a></li>
+                  <li><a data-toggle="tab" href="#stoch">STOCH</a></li>
+                  <li><a data-toggle="tab" href="#rsi">RSI</a></li>
+                  <li><a data-toggle="tab" href="#adx">ADX</a></li>
+                  <li><a data-toggle="tab" href="#cci">CCI</a></li>
+                  <li><a data-toggle="tab" href="#bbands">BBANDS</a></li>
+                  <li><a data-toggle="tab" href="#macd">MACD</a></li>
+                </ul>
+
+                <!--tab content-->
+                <div class="tab-content">
+                  <div id="price" class="tab-pane fade in active">
+                    <div id="price-chart" style="height:360px;padding-bottom: 10px;"></div>
+                  </div>
+                  <div id="sma" class="tab-pane fade">
+                    <div id="sma-chart" style="height:360px;padding-bottom: 10px;"></div>
+                  </div>
+                  <div id="ema" class="tab-pane fade">
+                    <div id="ema-chart" style="height:360px;padding-bottom: 10px;"></div>
+                  </div>
+                  <div id="stoch" class="tab-pane fade">
+                    <div id="stoch-chart" style="height:360px;padding-bottom: 10px;"></div>
+                  </div>
+                  <div id="rsi" class="tab-pane fade">
+                    <div id="rsi-chart" style="height:360px;padding-bottom: 10px;"></div>
+                  </div>
+                  <div id="adx" class="tab-pane fade">
+                    <div id="adx-chart" style="height:360px;padding-bottom: 10px;"></div>
+                  </div>
+                  <div id="cci" class="tab-pane fade">
+                    <div id="cci-chart" style="height:360px;padding-bottom: 10px;"></div>
+                  </div>
+                  <div id="bbands" class="tab-pane fade">
+                    <div id="bbands-chart" style="height:360px;padding-bottom: 10px;"></div>
+                  </div>
+                  <div id="macd" class="tab-pane fade">
+                    <div id="macd-chart" style="height:360px;padding-bottom: 10px;"></div>
+                  </div>
+                </div>
+
+              </div>
+              <!--<div id="indicator-chart" style="height:370px;padding-bottom: 10px;"></div>-->
+            </div>
+          </div>
+          <!--historical charts-->
+          <div id="historical-charts" class="tab-pane fade col-md-12 col-xs-12 col-sm-12">
+            <div id="historical-charts-container"  style="margin: 5px;width:100%"></div>
+          </div>
+          <div id="news-feed" class="tab-pane fade" style="margin-top: 10px;">
+            <div id="news-item-div">
+              <div id="news1"class="col-md-12 col-xs-12 col-sm-12"></div>
+              <div id="news2"class="col-md-12 col-xs-12 col-sm-12"></div>
+              <div id="news3"class="col-md-12 col-xs-12 col-sm-12"></div>
+              <div id="news4"class="col-md-12 col-xs-12 col-sm-12"></div>
+              <div id="news5"class="col-md-12 col-xs-12 col-sm-12"></div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- js for auto complete -->
+<script>
+    var app = angular.module('myApp', ['ngMaterial','ngAnimate']);
+
+    app.controller('myCtrl', function ($scope, $http, $q, GetCountryService) {
+
+        $scope.searchText = "";
+        $scope.Person = [];
+        $scope.selectedItem = [];
+        $scope.isDisabled = false;
+        $scope.noCache = false;
+
+        $scope.selectedItemChange = function (item) {
+            //alert("Item Changed");
+        }
+        $scope.searchTextChange = function (str) {
+            return GetCountryService.getCountry(str);
+        }
+
+    });
+
+    app.factory('GetCountryService', function ($http, $q) {
+        return {
+            getCountry: function(str) {
+                // the $http API is based on the deferred/promise APIs exposed by the $q service
+                // so it returns a promise for us by default
+                //                var url = "https://www.bbminfo.com/sample.php?token="+str;
+                var url ="http://localhost/hw8-2/php/multiAjax.php?name="+str;
+                return $http.get(url)
+                    .then(function(response) {
+                        if (typeof response.data.records === 'object') {
+                            return response.data.records;
+                        } else {
+                            // invalid response
+                            return $q.reject(response.data.records);
+                        }
+
+                    }, function(response) {
+                        // something went wrong
+                        return $q.reject(response.data.records);
+                    });
+            }
+        };
+    });
+</script>
+
+
+</body>
+</html>
