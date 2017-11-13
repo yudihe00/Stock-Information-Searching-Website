@@ -57,10 +57,10 @@ html, body {
 /*The transition is added when the switch item is about to enter or about to leave DOM*/
 .switchItem.ng-enter,
 .switchItem.ng-leave {
-    -webkit-transition: 2000ms linear all !important;
-    -moz-transition: 2000ms linear all !important;
-    -ms-transition: 2000ms linear all !important;
-    -o-transition: 2000ms linear all !important;
+    /*-webkit-transition: 2000ms linear all !important;*/
+    /*-moz-transition: 2000ms linear all !important;*/
+    /*-ms-transition: 2000ms linear all !important;*/
+    /*-o-transition: 2000ms linear all !important;*/
     transition: 2000ms linear all !important;
 }
 
