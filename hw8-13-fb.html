@@ -131,11 +131,8 @@
       <div class="col-md-12 col-xs-12 col-sm-12 switchItem" ng-if="checked" id="favorite-list" style="margin-bottom: 10px;">
         <div class="panel panel-default" style="margin-top: 10px; ">
           <!-- Default panel contents -->
-          <div class="panel-heading" style="overflow: hidden;font-size: 130%;" >Favorite List
-
-              <button ng-click="$parent.checked=false" class="btn grey-button" style="float: right; height: 30px;"  >
-                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></button>
-
+          <div class="panel-heading" >Favorite List
+            <input type="button" ng-click="$parent.checked=false" >show 2</input>
           </div>
           <div class="panel-body">
             Sort by
@@ -162,10 +159,8 @@
       <div class="col-md-12 col-xs-12 col-sm-12 switchItem2" ng-if="!checked" id="detail-info">
         <div class="panel panel-default" style="margin-top: 10px">
 
-          <div class="panel-heading" style="overflow: hidden;text-align: center; font-size: 130%;" >
-            <button ng-click="$parent.checked=true"class="btn grey-button" style="float: left; height: 30px;"  >
-            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></button>
-            <span style="margin: auto; text-align: center">Stock Details</span>
+          <div class="panel-heading" >Stock Details
+            <input type="button" ng-click="$parent.checked=true">show 1</input>
           </div>
 
 
