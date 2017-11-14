@@ -77,11 +77,11 @@ html, body {
 /*The transition is added when the switch item is about to enter or about to leave DOM*/
 .switchItem.ng-enter,
 .switchItem.ng-leave {
-    -webkit-transition: 500ms linear all;
-    -moz-transition: 500ms linear all;
-    -ms-transition: 500ms linear all;
-    -o-transition: 500ms linear all;
-    transition: 500ms linear all;
+    -webkit-transition: 300ms linear all;
+    -moz-transition: 300ms linear all;
+    -ms-transition: 300ms linear all;
+    -o-transition: 300ms linear all;
+    transition: 300ms linear all;
 }
 
 /* When the element is about to enter DOM*/
@@ -106,11 +106,11 @@ html, body {
 /*The transition is added when the switch item is about to enter or about to leave DOM*/
 .switchItem2.ng-enter,
 .switchItem2.ng-leave {
-    -webkit-transition: 500ms linear all;
-    -moz-transition: 500ms linear all;
-    -ms-transition: 500ms linear all;
-    -o-transition: 500ms linear all;
-    transition: 500ms linear all;
+    -webkit-transition: 300ms linear all;
+    -moz-transition: 300ms linear all;
+    -ms-transition: 300ms linear all;
+    -o-transition: 300ms linear all;
+    transition: 300ms linear all;
 }
 
 /* When the element is about to enter DOM*/
@@ -131,4 +131,11 @@ html, body {
     right: -100%;
 }
 /***end of slide***/
+
+select #favorite-table-body {
+    font-weight: normal;
+}
+/*select[disabled]{*/
+    /*background-color: #d1d1d1;*/
+/*}*/
 

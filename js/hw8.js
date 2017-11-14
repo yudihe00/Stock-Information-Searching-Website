@@ -59,7 +59,7 @@ function showErrors(functionName){
             "<div style='height:40px; background-color: #ffb7a3;margin-top:20px'>" +
             "<p style='padding-top: 10px;padding-left: 10px'>Error!Failed to get price data</p></div>"
         );
-        $("#stock-detail-table").html(
+        $("#stock-detail-table-div").html(
             "<div style='height:40px; background-color: #ffb7a3;margin-top:20px'>" +
             "<p style='padding-top: 10px;padding-left: 10px'>Error!Failed to get current stock data</p></div>"
         );
@@ -71,6 +71,19 @@ function showErrors(functionName){
         );
 
     }
+}
+
+
+// when price data not get these two cannot get too
+function showErrorsHisandNews() {
+    $("#historical-charts-container").html(
+        "<div style='height:40px; background-color: #ffb7a3;margin-top:20px'>" +
+        "<p style='padding-top: 10px;padding-left: 10px'>Error!Failed to get data</p></div>"
+    );
+    $("#news-item-div").html(
+        "<div style='height:40px; background-color: #ffb7a3;margin-top:20px'>" +
+        "<p style='padding-top: 10px;padding-left: 10px'>Error!Failed to get data</p></div>"
+    );
 }
 
 
@@ -218,6 +231,7 @@ function jqueryGetData(functionName, initData) {
 
 
 $("document").ready(function () {
+    refreshFavoriteTable(getLocalArr());
     $(".stockForm").submit(function () {
 
         // set initial value to 0
@@ -318,7 +332,8 @@ $("document").ready(function () {
                 saveError("PRICE");
                 ajaxCallNum++;
                 showErrors("PRICE");
-                showErrors("SMA");
+                // showErrors("SMA");
+                showErrorsHisandNews();
                 for (i=0; i<arrayIndicatorName.length; i++) {
                     showErrors(arrayIndicatorName[i]);
                 }
@@ -326,12 +341,14 @@ $("document").ready(function () {
         });
 
 
-
-
-
         return false;
 
     });
+    // $("#left-button").click(function () {
+    //     setTimeout(function () {
+    //         refreshFavoriteTable(getLocalArr());
+    //     },500);
+    // })
 });
 
 // draw price and volume charts
@@ -1423,7 +1440,7 @@ function showNews(symbol) {
 function  fbShare() {
     var activeTab = $("#charts.tab-content").find(".active");
     var id = activeTab.attr('id');
-    console.log("current tab: "+id);
+    // console.log("current tab: "+id);
 
     if (error.hasOwnProperty(id.toUpperCase())) {
         alert("Error: Cannot share empty chart on facebook!");
@@ -1460,10 +1477,14 @@ function favoriteChange() {
     var currentSymbol = jsonObj["basic info"]["symbol"];
     if(localStorage.getItem(currentSymbol) === null) {
         var obj={};
-        obj["stock price"]= jsonObj["basic info"]["last price"];
-        obj["change"]=jsonObj["basic info"]["change"];
+        obj["symbol"] = currentSymbol;
+        obj["price"]= parseFloat(jsonObj["basic info"]["last price"]);
+        obj["change"]=parseFloat(jsonObj["basic info"]["change"]);
         obj["change percent"] = jsonObj["basic info"]["change percent"];
-        obj["volume"]=jsonObj["basic info"]["volume"];
+        var tempVol = jsonObj["basic info"]["volume"];
+        tempVol = tempVol.split(',').join('');
+        obj["volume"]=parseInt(tempVol);
+        obj["default"] = Date.parse(new Date());
         localStorage.setItem(currentSymbol,JSON.stringify(obj));
         $("#favorite-button").html (
             " <span class=\"glyphicon glyphicon-star\" " +
@@ -1508,4 +1529,248 @@ function enableButtons() {
     $("#favorite-button").removeClass ("disabled");
     $("#fb-button").removeClass ("disabled");
 
+}
+
+// favorite list sort option
+// $("#sort-select").on('change',function(){
+//     var sortBy = this.value();
+//     alert(sortBy);
+//     if(sortBy != "default") {
+//         $("#order-select").prop("disabled",false);
+//
+//     }
+//     var orderBy = $("#order-select").value;
+//     alert(sortBy,orderBy);
+//
+// });
+
+
+// if sort select change
+$(document).on('change','#sort-select',function(){
+    var sortBy = this.value;
+    // getLocalArr();
+
+    if(sortBy == 'default') {
+        $("#order-select").prop("disabled",true);
+    }
+    else {
+        $("#order-select").prop("disabled",false);
+    }
+    var orderBy = $("#order-select").val();
+
+    // alert("sort change to: s:"+sortBy+" o:"+orderBy);
+    sortFavorite(sortBy,orderBy);
+});
+
+// if order select change
+$(document).on('change','#order-select',function(){
+    var orderBy = this.value;
+    var sortBy = $("#sort-select").val();
+
+    // alert("order change to: s:"+sortBy+" o:"+orderBy);
+
+    sortFavorite(sortBy,orderBy);
+});
+
+// use to sort favortie list
+function sortFavorite(sortBy, orderBy) {
+    var localArr=getLocalArr();
+    var sortArr= new Array();
+    if (sortBy=="default") {
+        sortArr = ascendingSort(localArr,sortBy);
+        // console.log(sortArr);
+    } else {
+        if(orderBy=='ascending') {
+           sortArr = ascendingSort(localArr,sortBy);
+           // console.log("ascending sortArray:");
+           // console.log(sortArr);
+        }
+        else {
+            sortArr = descendingSort(localArr,sortBy);
+            // console.log("descending sortArray:");
+            // console.log(sortArr);
+        }
+
+    }
+    // show result on html
+    refreshFavoriteTable(sortArr);
+}
+
+// ascending sort
+function ascendingSort(localArray, sortBy){
+
+    // sort prototype
+    Array.prototype.sortOnValue = function(key){
+        this.sort(function(a, b){
+            if(a[key] < b[key]){
+                return -1;
+            }else if(a[key] > b[key]){
+                return 1;
+            }
+            return 0;
+        });
+    }
+
+    var arr = [{country:'France', value:-1},{country:'Italy', value:-2},{country:'England', value:-9},
+        {country:'Germany', value:2}];
+
+    // arr.sortOnValue("value");
+    // console.log(arr);
+
+    localArray.sortOnValue(sortBy);
+
+    //console.log(localArr);
+    return localArray;
+}
+
+
+// descending sort
+function descendingSort(localArray, sortBy){
+
+    // sort prototype
+    Array.prototype.sortOnValue = function(key){
+        this.sort(function(a, b){
+            if(a[key] > b[key]){
+                return -1;
+            }else if(a[key] < b[key]){
+                return 1;
+            }
+            return 0;
+        });
+    }
+
+    // for debug sort
+    // var arr = [{country:'France', value:-1},{country:'Italy', value:-2},{country:'England', value:-9},
+    //     {country:'Germany', value:2}];
+    // arr.sortOnValue("value");
+    // console.log(arr);
+
+    localArray.sortOnValue(sortBy);
+
+    //console.log(localArr);
+    return localArray;
+}
+
+
+// get local storage array
+function  getLocalArr() {
+    var localArr = new Array();
+    for (var i = 0; i < localStorage.length; i++){
+        str = localStorage.getItem(localStorage.key(i))
+        // console.log(str);
+
+        localArr.push(JSON.parse(str));
+        // localobj.add(Json.parse(localStorage.getItem(localStorage.key(i))));
+    }
+    // console.log("orig array:")
+    // console.log(localArr);
+    return localArr;
+}
+
+// init favorite table
+function refreshFavoriteTable(currentArr) {
+    //var localStorageArr = getLocalArr();
+    var localStorageArr = currentArr;
+    var htmlStr = "";
+    for (i=0;i<localStorageArr.length; i++){
+
+        // string of Change - td
+        strChange = "";
+        if (localStorageArr[i]["change"]>0) {
+            strChange= "<td class=\"change-td\" style='color: green'>"+
+                localStorageArr[i]["change"]+"("+localStorageArr[i]["change percent"]+")"+"&nbsp&nbsp"+
+                '<img src="http://cs-server.usc.edu:45678/hw/hw8/images/Up.png"width=\"10px\" height=\"15px\">';
+
+        } else {
+            strChange= "<td class=\"change-td\" style='color: red'>"+
+                localStorageArr[i]["change"]+"("+localStorageArr[i]["change percent"]+")"+"&nbsp&nbsp"+
+                '<img src="http://cs-server.usc.edu:45678/hw/hw8/images/Down.png" width="10px" height="15px">';
+        }
+
+        
+        htmlStr += "<tr>\n" +
+            "                <td class=\"symbol-td\">"+localStorageArr[i]["symbol"]+"</td>\n" +
+            "                <td class=\"price-td\">"+localStorageArr[i]["price"]+"</td>\n" +
+                            strChange +
+            "                <td class=\"volume-td\">"+localStorageArr[i]["volume"].toLocaleString()+"</td>\n" +
+            "                <td class=\"button-td\">\n" + "<button class=\"btn btn-sm btn-default\" id=\""+
+            localStorageArr[i]["symbol"]+"-button\"\n" +
+            "                          onclick=\"deleteLocal("+"'"+localStorageArr[i]["symbol"]+"'"+")\" >\n" +
+            "                    <span class=\"glyphicon glyphicon-trash\" aria-hidden=\"true\"></span></button>"+
+            "                </td>\n" +
+            "              </tr>";
+    }
+    $("#favorite-table-body").html(htmlStr);
+}
+
+
+// delete a symbol
+function deleteLocal(symbol){
+    //delete local
+    localStorage.removeItem(symbol);
+
+    //refresh table
+    refreshFavoriteTable(getLocalArr());
+}
+
+// click button left to favorite page
+function  buttonLeft() {
+
+    //set time out for page load, or will not show
+    setTimeout(function () {
+        refreshFavoriteTable(getLocalArr());
+    },10);
+    //refreshFavoriteTable(getLocalArr());
+}
+
+function  buttonRight() {
+    setTimeout(function () {
+        //draw charts
+        if (ajaxCallNum == 9) {
+
+            for (var num in arrayIndicatorName) {
+                var name=arrayIndicatorName[num];
+                if(error.hasOwnProperty(name)){
+                    showErrors(name);
+                } else {
+                    drawCharts(name);
+                }
+            }
+
+            enableButtons();
+            redrawDetailTable();
+
+            // initialize favorite button
+            favoriteInit();
+
+            $("#symbol").html(jsonObj["basic info"]["symbol"]);
+            $("#timestamp").html(jsonObj["basic info"]["time stamp"]);
+            $("#last-price").html(jsonObj["basic info"]["last price"]);
+
+            if (jsonObj["basic info"]["change"]>0) {
+                $("#change-and-percent").html(
+                    jsonObj["basic info"]["change"]+"("+jsonObj["basic info"]["change percent"]+")"+"&nbsp"+
+                    '<img src="http://cs-server.usc.edu:45678/hw/hw8/images/Up.png"width=\"15px\" height=\"20px\">'
+                );
+                $("#change-and-percent").css({'color':'green'});
+            } else {
+                $("#change-and-percent").html(
+                    jsonObj["basic info"]["change"]+"("+jsonObj["basic info"]["change percent"]+")"+"&nbsp"+
+                    '<img src="http://cs-server.usc.edu:45678/hw/hw8/images/Down.png" width="15px" height="20px">'
+                );
+                $("#change-and-percent").css({'color':'red'});
+
+            }
+
+            $("#open").html(jsonObj["basic info"]["open"]);
+            $("#close").html(jsonObj["basic info"]["close"]);
+            $("#volume").html(jsonObj["basic info"]["volume"]);
+            $("#range").html(jsonObj["basic info"]["day's range"]);
+
+            drawCharts("PRICE");
+            showNews(symbol);
+
+
+        }
+    },10);
 }

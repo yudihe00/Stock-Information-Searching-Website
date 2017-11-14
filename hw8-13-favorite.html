@@ -156,19 +156,31 @@
             <span>Favorite List</span>
 
             <!--go detail page button-->
-            <button id="go-detail-button" ng-click="$parent.checked=false" class="btn grey-button" style="float: right; height: 30px;"  >
+            <button id="go-detail-button" ng-click="$parent.checked=false" onclick="buttonRight()" class="btn grey-button" style="float: right; height: 30px;"  >
               <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></button>
 
           </div>
 
           <div class="panel-body">
-            <div class="form-group col-md-6 col-xs-6 col-sm-6">
-              sort by
-              <select class="form-control col-md-6 col-xs-6 col-sm-6" id="sel1" >
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
+            <!--sort select grounp-->
+            <div class="col-md-3 col-xs-6 col-sm-6">
+              <span>Sort by&nbsp;</span>
+                <select id="sort-select">
+                  <option value="default">Default</option>
+                  <option value="symbol">Symbol</option>
+                  <option value="price">Price</option>
+                  <option value="change">Change</option>
+                  <option value="change">Change Percent</option>
+                  <option value="volume">Volume</option>
+                </select>
+            </div>
+
+            <!--order select group-->
+            <div class="col-md-3 col-xs-6 col-sm-6">
+              <span>Order &nbsp;</span>
+              <select disabled id="order-select">
+                <option value="descending" selected="selected">Descending</option>
+                <option value="ascending">Ascending</option>
               </select>
             </div>
           </div>
@@ -176,15 +188,26 @@
           <!-- Table -->
           <table class="table table-striped" id="favorite-table">
             <thead>
-            <tr>
-              <th>Symbol</th>
-              <th>Stock Price</th>
-              <th>Change(Change Percent)</th>
-              <th>Volume</th>
-            </tr>
+              <tr>
+                <th>Symbol</th>
+                <th>Stock Price</th>
+                <th>Change(Change Percent)</th>
+                <th>Volume</th>
+                <th></th>
+              </tr>
             </thead>
-            <tbody>
-
+            <tbody id="favorite-table-body" style="font-weight: normal">
+              <!--<tr>-->
+                <!--<td class="symbol-td">a</td>-->
+                <!--<td class="price-td">b</td>-->
+                <!--<td class="change-td">c</td>-->
+                <!--<td class="volume-td">d</td>-->
+                <!--<td class="button-td">-->
+                  <!--<button class="btn btn-sm btn-default" id="-button"-->
+                          <!--onclick="deleteLocal(symbol)" >-->
+                    <!--<span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>-->
+                <!--</td>-->
+              <!--</tr>-->
             </tbody>
           </table>
         </div>
@@ -195,7 +218,7 @@
         <div class="panel panel-default" style="margin-top: 10px">
 
           <div class="panel-heading" style="overflow: hidden;text-align: center; font-size: 130%;" >
-            <button ng-click="$parent.checked=true"class="btn grey-button" style="float: left; height: 30px;"  >
+            <button id ="left-button"ng-click="$parent.checked=true" onclick="buttonLeft()" class="btn grey-button" style="float: left; height: 30px;"  >
               <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></button>
             <span style="margin: auto; text-align: center">Stock Details</span>
           </div>
