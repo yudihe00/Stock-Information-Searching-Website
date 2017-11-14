@@ -66,6 +66,7 @@
 <body class="bodyClass" >
 
 
+
 <div class="container" ng-app="myApp" ng-controller="myCtrl">
 
   <!--input-div-->
@@ -190,7 +191,12 @@
               <div class="col-md-6 col-xs-12 col-sm-12" id="detail-table-div" style="margin-top: 10px">
                 <div class="panel-body">
                   <div class="col-md-8 col-xs-8 col-sm-8" >Stock Details</div>
-                  <div class="col-md-4 col-xs-4 col-sm-4" >buttons</div>
+                  <div class="col-md-4 col-xs-4 col-sm-4" id="favorite-fb-buttons" >
+                    <button class="btn" id="favorite-button" style="background-color: white; border: 1px solid #919191; padding: 6px;">tem</button>
+                    <button class="btn" id="fb-button" onclick="fbShare()" style="background-color: white; border: 1px solid #919191; padding: 6px;">
+                      <img src="http://cs-server.usc.edu:45678/hw/hw8/images/facebook.png" width="25px" height="25px" >
+                    </button>
+                  </div>
                 </div>
 
                 <div id="stock-detail-table-div">

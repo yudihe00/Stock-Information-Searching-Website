@@ -3,6 +3,7 @@ var ajaxCallNum = 0;
 var error = {};
 var phpUrlOrig = "http://localhost/hw8-2/php/multiAjax.php";
 var phpUrl = phpUrlOrig;
+var chartConfigObject = {};
 var symbol;
 var arrayIndicatorName=["PRICE","SMA","EMA","STOCH","RSI","ADX","CCI","BBANDS","MACD"];
 // var phpUrl = "http://localhost/hw8-2/php/multiAjax.php";
@@ -10,6 +11,7 @@ var arrayIndicatorName=["PRICE","SMA","EMA","STOCH","RSI","ADX","CCI","BBANDS","
 // set initial value to 0
 function initStat() {
     jsonObj = {};
+    chartConfigObject = {};
     ajaxCallNum = 0;
     error = {};
     phpUrl = phpUrlOrig;
@@ -352,11 +354,11 @@ function priceAndVolume() {
     var symbol = jsonObj["basic info"]["symbol"];
     var timeStamp = jsonObj["basic info"]["time stamp"];
 
-    var chart= new Highcharts.chart('price-chart', {
+    var chartConfig = {
         chart: {
             zoomType: 'x',
             borderWidth: 1,
-            
+
             borderColor: '#D6D6D6',
             marginBottom: 100 //put legend at bottom
             // alignTicks: false
@@ -436,7 +438,9 @@ function priceAndVolume() {
                 }
 
             }]
-    });
+    }
+    chartConfigObject["PRICE"]=chartConfig;
+    var chart= new Highcharts.chart('price-chart', chartConfig);
 }
 
 // SMAcharts, one line
@@ -1391,7 +1395,20 @@ function showNews(symbol) {
     });
 }
 
+// fb-share
+function  fbShare() {
+    chartConfig = chartConfigObject["PRICE"];
+    var data = {
+        options: JSON.stringify(chartConfig),
+        filename: 'test',
+        type: 'image/png',
+        async: true
+    };
 
-
-
+    var exportUrl = 'http://export.highcharts.com/';
+    $.post(exportUrl, data, function(data) {
+        var url = exportUrl + data;
+        window.open(url);
+    });
+}
 
