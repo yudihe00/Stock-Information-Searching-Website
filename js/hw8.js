@@ -223,9 +223,11 @@ $("document").ready(function () {
         // set initial value to 0
         initStat();
 
-
         // draw progress bar before ajax complete
         drawProgress();
+
+        // disable button
+        disableButtons();
 
         // use get basic data and daily data
         var data = {
@@ -240,8 +242,12 @@ $("document").ready(function () {
             url: phpUrl,
             data: data,  // data send to server
             success: function (data) {
+                enableButtons();
                 redrawDetailTable();
                 saveJson("basic info", data);
+
+                // initialize favorite button
+                favoriteInit();
                 $(".the-return").html(
                     "<br />JSON: " + data["json"] //data is a json object
                 );
@@ -1449,3 +1455,57 @@ function  fbShare() {
 
 }
 
+// add to favorite
+function favoriteChange() {
+    var currentSymbol = jsonObj["basic info"]["symbol"];
+    if(localStorage.getItem(currentSymbol) === null) {
+        var obj={};
+        obj["stock price"]= jsonObj["basic info"]["last price"];
+        obj["change"]=jsonObj["basic info"]["change"];
+        obj["change percent"] = jsonObj["basic info"]["change percent"];
+        obj["volume"]=jsonObj["basic info"]["volume"];
+        localStorage.setItem(currentSymbol,JSON.stringify(obj));
+        $("#favorite-button").html (
+            " <span class=\"glyphicon glyphicon-star\" " +
+            "style=\"font-size: 1.4em;color: #ffe506\" aria-hidden=\"true\"></span>"
+        );
+    } else {
+        localStorage.removeItem(currentSymbol);
+        $("#favorite-button").html (
+          "<span class=\"glyphicon glyphicon-star-empty\" " +
+            "style=\"font-size: 1.4em\" aria-hidden=\"true\"></span>"
+        );
+    }
+}
+
+// initialize favorite button
+function  favoriteInit() {
+    var currentSymbol = jsonObj["basic info"]["symbol"];
+    if(localStorage.getItem(currentSymbol) === null) {
+        $("#favorite-button").html (
+            "<span class=\"glyphicon glyphicon-star-empty\" " +
+            "style=\"font-size: 1.4em\" aria-hidden=\"true\"></span>"
+        );
+
+    } else {
+
+        $("#favorite-button").html (
+            " <span class=\"glyphicon glyphicon-star\" " +
+            "style=\"font-size: 1.4em;color: #ffe506\" aria-hidden=\"true\"></span>"
+        );
+    }
+}
+
+// disable buttons
+function disableButtons(){
+    $("#favorite-button").addClass ("disabled");
+
+    $("#fb-button").addClass("disabled");
+}
+
+// inable buttons
+function enableButtons() {
+    $("#favorite-button").removeClass ("disabled");
+    $("#fb-button").removeClass ("disabled");
+
+}
