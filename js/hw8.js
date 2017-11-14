@@ -138,7 +138,7 @@ function redrawNewsItemDiv() {
     );
 }
 
-// redrawDetailTable after ajax call for derail info
+// redrawDetailTable after ajax call for detail info
 // because progress bar has change the html for #stock-detail-table
 function redrawDetailTable(){
     $("#stock-detail-table-div").html(
