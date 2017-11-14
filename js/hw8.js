@@ -438,8 +438,8 @@ function priceAndVolume() {
                 }
 
             }]
-    }
-    chartConfigObject["PRICE"]=chartConfig;
+    };
+    chartConfigObject["price"]=chartConfig;
     var chart= new Highcharts.chart('price-chart', chartConfig);
 }
 
@@ -461,8 +461,7 @@ function SMAcharts() {
 
     var maxSma = Math.max.apply(null,arraySma);
     var minSma = Math.min.apply(null,arraySma);
-
-    var chart= new Highcharts.chart('sma-chart', {
+    var chartConfig = {
         chart: {
             zoomType: 'x',
             borderWidth: 1,
@@ -525,7 +524,9 @@ function SMAcharts() {
             data: arraySma,
             zIndex: 1
         }]
-    });
+    }
+    chartConfigObject["sma"]=chartConfig;
+    var chart= new Highcharts.chart('sma-chart',chartConfig );
 }
 
 
@@ -548,7 +549,7 @@ function EMAcharts() {
     var maxSma = Math.max.apply(null,arraySma);
     var minSma = Math.min.apply(null,arraySma);
 
-    var chart= new Highcharts.chart('ema-chart', {
+    var chartConfig = {
         chart: {
             zoomType: 'x',
             borderWidth: 1,
@@ -611,7 +612,9 @@ function EMAcharts() {
             data: arraySma,
             zIndex: 1
         }]
-    });
+    }
+    chartConfigObject["ema"] = chartConfig;
+    var chart= new Highcharts.chart('ema-chart',chartConfig );
 }
 
 // RSIcharts, one line
@@ -633,7 +636,7 @@ function RSIcharts() {  //change
     var maxSma = Math.max.apply(null,arraySma);
     var minSma = Math.min.apply(null,arraySma);
 
-    var chart= new Highcharts.chart('rsi-chart', { //change
+    var chartConfig = { //change
         chart: {
             zoomType: 'x',
             borderWidth: 1,
@@ -696,7 +699,10 @@ function RSIcharts() {  //change
             data: arraySma,
             zIndex: 1
         }]
-    });
+    };
+    chartConfigObject["rsi"]=chartConfig;
+
+    var chart= new Highcharts.chart('rsi-chart',chartConfig );
 }
 
 // ADXcharts, one line
@@ -718,7 +724,7 @@ function ADXcharts() {  //change
     var maxSma = Math.max.apply(null,arraySma);
     var minSma = Math.min.apply(null,arraySma);
 
-    var chart= new Highcharts.chart('adx-chart', { //change
+    var chartConfig = { //change
         chart: {
             zoomType: 'x',
             borderWidth: 1,
@@ -781,7 +787,9 @@ function ADXcharts() {  //change
             data: arraySma,
             zIndex: 1
         }]
-    });
+    };
+    chartConfigObject["adx"]=chartConfig;
+    var chart= new Highcharts.chart('adx-chart', chartConfig);
 }
 
 // CCIcharts, one line
@@ -803,7 +811,7 @@ function CCIcharts() {  //change
     var maxSma = Math.max.apply(null,arraySma);
     var minSma = Math.min.apply(null,arraySma);
 
-    var chart= new Highcharts.chart('cci-chart', { //change
+    var chartConfig = { //change
         chart: {
             zoomType: 'x',
             borderWidth: 1,
@@ -866,7 +874,9 @@ function CCIcharts() {  //change
             data: arraySma,
             zIndex: 1
         }]
-    });
+    };
+    chartConfigObject["cci"]=chartConfig;
+    var chart= new Highcharts.chart('cci-chart', chartConfig);
 }
 
 // STOCH charts, two lines
@@ -900,8 +910,7 @@ function STOCHcharts() {
 
     // var minY = Math.min(minSma,minK),
     // var maxY = Math.max(maxSma,maxK),
-
-    var chart= new Highcharts.chart('stoch-chart', { //change
+    var chartConfig = { //change
         chart: {
             zoomType: 'x',
             borderWidth: 1,
@@ -976,7 +985,9 @@ function STOCHcharts() {
 
 
         ]
-    });
+    };
+    chartConfigObject["stoch"] = chartConfig;
+    var chart= new Highcharts.chart('stoch-chart', chartConfig );
 }
 
 // BBANDS charts, three lines
@@ -1017,7 +1028,7 @@ function BBANDScharts() {
     var maxUpper = Math.max.apply(null,arrayUpper);
     var minUpper = Math.min.apply(null,arrayUpper);
 
-    var chart= new Highcharts.chart('bbands-chart', { //change
+    var chartConfig =  { //change
         chart: {
             zoomType: 'x',
             borderWidth: 1,
@@ -1107,7 +1118,11 @@ function BBANDScharts() {
 
 
         ]
-    });
+    };
+
+    chartConfigObject["bbands"]=chartConfig;
+
+    var chart= new Highcharts.chart('bbands-chart',chartConfig);
 }
 
 // MACD charts, three lines
@@ -1148,7 +1163,7 @@ function MACDcharts() {
     var maxUpper = Math.max.apply(null,arrayUpper);
     var minUpper = Math.min.apply(null,arrayUpper);
 
-    var chart= new Highcharts.chart('macd-chart', { //change
+    var chartConfig = { //change
         chart: {
             zoomType: 'x',
             borderWidth: 1,
@@ -1238,7 +1253,10 @@ function MACDcharts() {
 
 
         ]
-    });
+    };
+    chartConfigObject["macd"] = chartConfig;
+
+    var chart= new Highcharts.chart('macd-chart', chartConfig);
 }
 
 // draw history chart
@@ -1397,10 +1415,13 @@ function showNews(symbol) {
 
 // fb-share
 function  fbShare() {
-    chartConfig = chartConfigObject["PRICE"];
+    var activeTab = $("#charts.tab-content").find(".active");
+    var id = activeTab.attr('id');
+    console.log("current tab: "+id);
+    chartConfig = chartConfigObject[id];
     var data = {
         options: JSON.stringify(chartConfig),
-        filename: 'test',
+        filename: 'charts',
         type: 'image/png',
         async: true
     };
