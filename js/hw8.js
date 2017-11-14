@@ -1418,18 +1418,34 @@ function  fbShare() {
     var activeTab = $("#charts.tab-content").find(".active");
     var id = activeTab.attr('id');
     console.log("current tab: "+id);
-    chartConfig = chartConfigObject[id];
-    var data = {
-        options: JSON.stringify(chartConfig),
-        filename: 'charts',
-        type: 'image/png',
-        async: true
-    };
 
-    var exportUrl = 'http://export.highcharts.com/';
-    $.post(exportUrl, data, function(data) {
-        var url = exportUrl + data;
-        window.open(url);
-    });
+    if (error.hasOwnProperty(id.toUpperCase())) {
+        alert("Error: Cannot share empty chart on facebook!");
+    } else {
+        chartConfig = chartConfigObject[id];
+        var data = {
+            options: JSON.stringify(chartConfig),
+            filename: 'charts',
+            type: 'image/png',
+            async: true
+        };
+
+        var exportUrl = 'http://export.highcharts.com/';
+        $.post(exportUrl, data, function(data) {
+            var url = exportUrl + data;
+            FB.ui({
+                method: 'feed',
+                display: 'popup',
+                picture:url,
+            }, function(response){
+                if (response && !response.error_message) {
+                    alert('Posting completed.');
+                } else {
+                    alert('Error while posting.');
+                }
+            });
+        });
+    }
+
 }
 
