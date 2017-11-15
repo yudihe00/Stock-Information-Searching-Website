@@ -253,8 +253,9 @@ $("document").ready(function () {
         var data = {
             "action": "getStockData" // set "action" which will be tranfer to php
         };
-        data = $(this).serialize() + "&" + $.param(data);
-        var dataSave = data; // save for later use
+        var dataSave = $(this).serialize(); // save for later use
+        data = dataSave + "&" + $.param(data);
+
         //serialize every data with & eg: Favorite beverage=coke&favorite_restaurant=df&...&action=test
         $.ajax({
             type: "GET",

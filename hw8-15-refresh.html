@@ -155,9 +155,16 @@
           <div class="panel-heading" style="overflow: hidden;font-size: 130%;" >
             <span>Favorite List</span>
 
-            <!--go detail page button-->
-            <button id="go-detail-button" ng-disabled="true" ng-click="$parent.checked=false" onclick="buttonRight()" class="btn grey-button" style="float: right; height: 30px;"  >
-              <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></button>
+            <div id="favorite-button-group" style="float: right;">
+              <!--refresh button-->
+              <button id="refresh-button"  class="btn grey-button" ng-click="refreshFavTable()" style="height: 30px;"  >
+                <span class="glyphicon glyphicon glyphicon-refresh" aria-hidden="true"></span></button>
+
+              <!--go detail page button-->
+              <button id="go-detail-button" ng-disabled="true" ng-click="$parent.checked=false" onclick="buttonRight()" class="btn grey-button" style="height: 30px;"  >
+                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></button>
+            </div>
+
 
           </div>
 
@@ -188,9 +195,10 @@
               <!--<option value="ascending">Ascending</option>-->
               <!--</select>-->
             </div>
+
           </div>
 
-          <!-- Table -->
+          <!-- favorite table -->
           <div id="favorite-table-div"  class="col-md-12 col-xs-12 col-sm-12" style="overflow: hidden; padding: 0;">
             <table class="table table-striped " id="favorite-table" >
               <thead>
@@ -467,6 +475,15 @@
             }
 
         };
+
+//        $scope.refreshFavTable = function() {
+//
+//            for(symbolInfo in fArray) {
+//                getRefresh: function(symbolInfo.symbol) {
+//                    var url ="http://localhost/hw8-2/php/multiAjax.php?name="+str;
+//                }
+//            }
+//        }
 
     });
 
