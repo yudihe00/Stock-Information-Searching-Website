@@ -163,9 +163,10 @@
 
           <div class="panel-body">
             <!--sort select grounp-->
-            <div class="col-md-3 col-xs-6 col-sm-6">
+            <div class="col-md-3 col-xs-12 col-sm-12">
               <span>Sort by&nbsp;</span>
-              <select ng-model="selectedOrder" ng-options="option.value as option.name for option in options" ng-init="selectedOrder = options[0].value"></select>
+              <select class="form-control" ng-model="selectedOrder" ng-options="option.value as option.name for option in options"
+                      ng-init="selectedOrder = options[0].value"></select>
                 <!--<select id="sort-select">-->
                   <!--<option value="default">Default</option>-->
                   <!--<option value="symbol">Symbol</option>-->
@@ -178,45 +179,49 @@
             </div>
 
             <!--order select group-->
-            <div class="col-md-3 col-xs-6 col-sm-6">
+            <div class="col-md-3 col-xs-12 col-sm-12">
               <span>Order &nbsp;</span>
-              <select disabled id="order-select">
-                <option value="descending" selected="selected">Descending</option>
-                <option value="ascending">Ascending</option>
-              </select>
+              <select class="form-control" ng-model="reverse" ng-options="option.value as option.name for option in reverseoptions"
+                      ng-init="reverse = reverseoptions[1].value" ng-disabled="selectedOrder=='default'" ></select>
+              <!--<select disabled id="order-select">-->
+                <!--<option value="descending" selected="selected">Descending</option>-->
+                <!--<option value="ascending">Ascending</option>-->
+              <!--</select>-->
             </div>
           </div>
 
           <!-- Table -->
-          <table class="table table-striped" id="favorite-table">
-            <thead>
-              <tr>
-                <th>Symbol</th>
-                <th>Stock Price</th>
-                <th>Change(Change Percent)</th>
-                <th>Volume</th>
-                <th></th>
-              </tr>
-            </thead>
+          <div id="favorite-table-div"  class="col-md-12 col-xs-12 col-sm-12" style="overflow: hidden; padding: 0;">
+            <table class="table table-striped " id="favorite-table" >
+              <thead>
+                <tr>
+                  <th>Symbol</th>
+                  <th>Stock Price</th>
+                  <th>Change(Change Percent)</th>
+                  <th>Volume</th>
+                  <th></th>
+                </tr>
+              </thead>
 
 
-
-            <tbody id="favorite-table-body" style="font-weight: normal">
-              <tr ng-repeat="fSymbol in fArray| orderBy:selectedOrder"  >
-                <td class="symbol-td" ><a ng-click="$parent.$parent.checked=false; showFavInfo(fSymbol.symbol);">{{fSymbol.symbol}}</a></td>
-                <td class="price-td" >{{fSymbol.price}}</td>
-                <td class="change-td" ng-class="[{'red-color': fSymbol.color == 'red'},
-                  {'green-color': fSymbol.color == 'green'}] ">{{fSymbol.change}} ({{fSymbol["changepercent"]}}%)
-                    <img ng-src="{{ fSymbol['url'] }}" width="10px" height="15px"/>`</td>
-                <td class="volume-td"><span id='number-default'>{{fSymbol.volume|number}}</span></td>
-                <td class="button-td">
-                  <button class="btn btn-sm btn-default" id="-button" ng-click="deleteLocalFav(fSymbol.symbol)"
-                          onclick="" >
-                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+              <!--use ng-repeat to generate table body-->
+              <tbody id="favorite-table-body" style="font-weight: normal">
+                <tr ng-repeat="fSymbol in fArray| orderBy:selectedOrder:reverse"  >
+                  <td class="symbol-td" ><a ng-click="$parent.$parent.checked=false; showFavInfo(fSymbol.symbol);">{{fSymbol.symbol}}</a></td>
+                  <td class="price-td" >{{fSymbol.price}}</td>
+                  <td class="change-td" ng-class="[{'red-color': fSymbol.color == 'red'},
+                    {'green-color': fSymbol.color == 'green'}] ">{{fSymbol.change}} ({{fSymbol["changepercent"]}}%)
+                      <img ng-src="{{ fSymbol['url'] }}" width="10px" height="15px"/>`</td>
+                  <td class="volume-td"><span id='number-default'>{{fSymbol.volume|number}}</span></td>
+                  <td class="button-td">
+                    <button class="btn btn-sm btn-default" id="-button" ng-click="deleteLocalFav(fSymbol.symbol)"
+                            onclick="" >
+                      <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
 
@@ -392,13 +397,15 @@
         $scope.selectedItem = [];
         $scope.isDisabled = false;
         $scope.noCache = false;
-        $scope.fArray = localArrayGlobol;
+        $scope.fArray = getLocalArr();
         $scope.options = [{name:"default",value:"default"},
                           {name:"symbol",value:"symbol"},
                           {name:"price",value:"price"},
                           {name:"change",value:"change"},
                           {name:"change percent",value:"changepercent"},
                           {name:"volume",value:"volume"}];
+        $scope.reverseoptions = [{name:"descending",value:true},
+            {name:"ascending",value:false}];
         $scope.option="default";
 
         $scope.selectedItemChange = function (item) {
