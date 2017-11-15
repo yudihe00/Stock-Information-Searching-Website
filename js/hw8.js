@@ -234,6 +234,8 @@ function jqueryGetData(functionName, initData) {
 
 $("document").ready(function () {
     refreshFavoriteTable(getLocalArr());
+    // $("#go-detail-button").addClass("disabled");
+    // $("#go-detail-button").removeAttr("disabled");
     $(".stockForm").submit(function () {
 
         // set initial value to 0
@@ -1533,12 +1535,14 @@ function disableButtons(){
     $("#favorite-button").addClass ("disabled");
 
     $("#fb-button").addClass("disabled");
+
 }
 
 // inable buttons
 function enableButtons() {
     $("#favorite-button").removeClass ("disabled");
     $("#fb-button").removeClass ("disabled");
+    $("#go-detail-button").removeAttr ("disabled");
 
 }
 
@@ -1729,6 +1733,7 @@ function  buttonLeft() {
 
     //set time out for page load, or will not show
     setTimeout(function () {
+        enableButtons();
         refreshFavoriteTable(getLocalArr());
     },10);
     //refreshFavoriteTable(getLocalArr());
@@ -1786,4 +1791,128 @@ function  buttonRight() {
 
         }
     },1);
+
+    // show favorite data new
+    setTimeout(function (){showInfoFromFavorite("AAPL");},1);
+
+}
+
+// fatch data from favorite table
+function showInfoFromFavorite(symbol) {
+
+    // set initial value to 0
+    initStat();
+
+    // draw progress bar before ajax complete
+    drawProgress();
+
+    // disable button
+    disableButtons();
+
+    // use get basic data and daily data
+    var data = {
+        "action": "getStockData" // set "action" which will be tranfer to php
+    };
+    data = "symbol="+symbol + "&" + $.param(data);
+    var dataSave = data; // save for later use
+    //serialize every data with & eg: Favorite beverage=coke&favorite_restaurant=df&...&action=test
+
+    setTimeout(function () {
+        $.ajax({
+            type: "GET",
+            dataType: "json", // dataType send back
+            url: phpUrl,
+            data: data,  // data send to server
+            success: function (data) {
+                enableButtons();
+                redrawDetailTable();
+                saveJson("basic info", data);
+
+                // initialize favorite button
+                favoriteInit();
+                $(".the-return").html(
+                    "<br />JSON: " + data["json"] //data is a json object
+                );
+                ajaxCallNum++;
+                $("#symbol").html(jsonObj["basic info"]["symbol"]);
+                $("#timestamp").html(jsonObj["basic info"]["time stamp"]);
+                $("#last-price").html(jsonObj["basic info"]["last price"]);
+
+                if (jsonObj["basic info"]["change"]>0) {
+                    $("#change-and-percent").html(
+                        jsonObj["basic info"]["change"]+"("+jsonObj["basic info"]["change percent"]+")"+"&nbsp"+
+                        '<img src="http://cs-server.usc.edu:45678/hw/hw8/images/Up.png"width=\"15px\" height=\"20px\">'
+                    );
+                    $("#change-and-percent").css({'color':'green'});
+                } else {
+                    $("#change-and-percent").html(
+                        jsonObj["basic info"]["change"]+"("+jsonObj["basic info"]["change percent"]+")"+"&nbsp"+
+                        '<img src="http://cs-server.usc.edu:45678/hw/hw8/images/Down.png" width="15px" height="20px">'
+                    );
+                    $("#change-and-percent").css({'color':'red'});
+
+                }
+
+                $("#open").html(jsonObj["basic info"]["open"]);
+                $("#close").html(jsonObj["basic info"]["close"]);
+                $("#volume").html(jsonObj["basic info"]["volume"]);
+                $("#range").html(jsonObj["basic info"]["day's range"]);
+
+                // drawCharts("PRICE");
+
+                // use get SMA data
+                jqueryGetData("SMA", dataSave);
+
+                // use get EMA data
+                jqueryGetData("EMA", dataSave);
+
+                // use get RSI data
+                jqueryGetData("RSI", dataSave);
+
+                // use get ADX data
+                jqueryGetData("ADX", dataSave);
+
+                // use get CCI data
+                jqueryGetData("CCI", dataSave);
+
+                // use get BBANDS data
+                jqueryGetData("BBANDS", dataSave);
+
+                // use get MCAD data
+                jqueryGetData("MACD", dataSave);
+
+                // use get STOCH data
+                jqueryGetData("STOCH", dataSave);
+
+                // draw histrory charts
+                drawHisCharts(jsonObj["basic info"]["symbol"]);
+
+                // show news
+                showNews(jsonObj["basic info"]["symbol"]);
+
+                checkAllJqueryDone();
+
+
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                alert("detail data " + XMLHttpRequest.readyState + XMLHttpRequest.status + XMLHttpRequest.responseText);
+                //saveError("Current stock");
+                saveError("PRICE");
+                ajaxCallNum++;
+                showErrors("PRICE");
+                // showErrors("SMA");
+                showErrorsHisandNews();
+                for (i=0; i<arrayIndicatorName.length; i++) {
+                    showErrors(arrayIndicatorName[i]);
+                }
+            }
+        });
+
+
+        return false;
+
+    },2)
+
+
+
 }

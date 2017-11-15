@@ -31,7 +31,7 @@
   <!--<link href="css/bootstrap.min.css" rel="stylesheet">//-->
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 
@@ -156,7 +156,7 @@
             <span>Favorite List</span>
 
             <!--go detail page button-->
-            <button id="go-detail-button" ng-click="$parent.checked=false" onclick="buttonRight()" class="btn grey-button" style="float: right; height: 30px;"  >
+            <button id="go-detail-button" ng-disabled="true" ng-click="$parent.checked=false" onclick="buttonRight()" class="btn grey-button" style="float: right; height: 30px;"  >
               <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></button>
 
           </div>
@@ -379,6 +379,7 @@
 
     app.controller('myCtrl', function ($scope, $http, $q, GetCountryService) {
 
+//        $scope.mycustomattr=true;
         $scope.searchText = "";
         $scope.Person = [];
         $scope.selectedItem = [];
