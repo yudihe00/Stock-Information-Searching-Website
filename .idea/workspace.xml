@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="b6392831-faf1-49bc-8e79-1a0f72d53c38" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hw8-15-refresh.html" afterPath="$PROJECT_DIR$/hw8-15-refresh.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/php/multiajax.php" afterPath="$PROJECT_DIR$/php/multiajax.php" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -62,10 +61,9 @@
       <file leaf-file-name="hw8-15-refresh.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/hw8-15-refresh.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="311">
-              <caret line="505" column="50" lean-forward="false" selection-start-line="505" selection-start-column="50" selection-end-line="505" selection-end-column="50" />
+            <state relative-caret-position="153">
+              <caret line="163" column="112" lean-forward="false" selection-start-line="163" selection-start-column="98" selection-end-line="163" selection-end-column="112" />
               <folding>
-                <element signature="n#head#0;n#html#0;n#!!top" expanded="false" />
                 <element signature="n#script#0;n#body#0;n#html#0;n#!!top" expanded="false" />
                 <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#h1#0;n#form#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -107,8 +105,9 @@
                 <element signature="n#style#0;n#div#0;n#div#8;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#div#1;n#div#1;n#div#0;n#div#1;n#div#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#2;n#div#1;n#div#0;n#div#1;n#div#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <marker date="1510774676830" expanded="true" signature="21030:21061" ph="..." />
-                <marker date="1510774676830" expanded="true" signature="21384:21400" ph="..." />
+                <element signature="e#22363#24871#0" expanded="false" />
+                <marker date="1510784979949" expanded="true" signature="21782:21813" ph="..." />
+                <marker date="1510784979949" expanded="true" signature="22136:22152" ph="..." />
               </folding>
             </state>
           </provider>
@@ -136,17 +135,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>selectedItemChange</find>
-      <find>favorite-button</find>
-      <find>MyCtrl</find>
-      <find>addFavorite</find>
-      <find>add</find>
-      <find>refreshFav</find>
-      <find>checked</find>
-      <find>$scope.checked=false</find>
-      <find>goRight</find>
-      <find>false</find>
-      <find>buttonR</find>
       <find>deletelocal</find>
       <find>deleteLocalFav</find>
       <find>localstorage</find>
@@ -159,13 +147,24 @@
       <find>GetCountryService</find>
       <find>factory</find>
       <find>showinfofrom</find>
-      <find>refreshFavTable</find>
       <find>fArray</find>
       <find>getstock</find>
       <find>setTimeout</find>
       <find>savejson</find>
       <find>localStorage</find>
       <find>change percent</find>
+      <find>refreshFavTable</find>
+      <find>settimeout</find>
+      <find>autorefreshfavtable</find>
+      <find>confirm</find>
+      <find>confirmRefresh</find>
+      <find>jquery</find>
+      <find>app</find>
+      <find>auto-refresh-</find>
+      <find>auto-refresh-button</find>
+      <find>toggle</find>
+      <find>autoRefreshFavTable</find>
+      <find>toggleschedule</find>
     </findStrings>
     <replaceStrings>
       <replace>enableButtons</replace>
@@ -399,7 +398,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="163346000" />
+    <option name="totallyTimeSpent" value="167424000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1167,10 +1166,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/hw8-15-refresh.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="311">
-          <caret line="505" column="50" lean-forward="false" selection-start-line="505" selection-start-column="50" selection-end-line="505" selection-end-column="50" />
+        <state relative-caret-position="153">
+          <caret line="163" column="112" lean-forward="false" selection-start-line="163" selection-start-column="98" selection-end-line="163" selection-end-column="112" />
           <folding>
-            <element signature="n#head#0;n#html#0;n#!!top" expanded="false" />
             <element signature="n#script#0;n#body#0;n#html#0;n#!!top" expanded="false" />
             <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#h1#0;n#form#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -1212,8 +1210,9 @@
             <element signature="n#style#0;n#div#0;n#div#8;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#1;n#div#1;n#div#0;n#div#1;n#div#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#2;n#div#1;n#div#0;n#div#1;n#div#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <marker date="1510774676830" expanded="true" signature="21030:21061" ph="..." />
-            <marker date="1510774676830" expanded="true" signature="21384:21400" ph="..." />
+            <element signature="e#22363#24871#0" expanded="false" />
+            <marker date="1510784979949" expanded="true" signature="21782:21813" ph="..." />
+            <marker date="1510784979949" expanded="true" signature="22136:22152" ph="..." />
           </folding>
         </state>
       </provider>

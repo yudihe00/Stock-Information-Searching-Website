@@ -48,7 +48,9 @@
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
 
-
+  <!--for bootstrap - toggle-->
+  <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+  <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 
   <!-- Bootstrap core JavaScript
 ================================================== -->
@@ -85,7 +87,7 @@
     }(document, 'script', 'facebook-jssdk'));
 </script>
 
-<div class="container" ng-app="myApp" ng-controller="myCtrl">
+<div class="container" ng-app="myApp" ng-controller="myCtrl" >
 
   <!--input-div-->
   <div class="col-md-12 col-xs-12 col-sm-12" id="input-div" style="margin-top: 10px;">
@@ -156,6 +158,11 @@
             <span>Favorite List</span>
 
             <div id="favorite-button-group" style="float: right;">
+
+              <!--auto refresh button-->
+              <!--<input  id="auto-refresh-button"data-toggle="toggle" type="checkbox" ng-model="confirmRefresh" ng-click="autoRefreshFavTable(confirmRefresh)" style="height: 20px;">-->
+              <input toggle-checkbox class="form-control schedule" ng-model="schedule" ng-change='toggleschedule()' type="checkbox">
+
               <!--refresh button-->
               <button id="refresh-button"  class="btn grey-button" ng-click="refreshFavTable()" style="height: 30px;"  >
                 <span class="glyphicon glyphicon glyphicon-refresh" aria-hidden="true"></span></button>
@@ -416,6 +423,14 @@
             {name:"ascending",value:false}];
         $scope.option="default";
 
+        $scope.schedule = false;
+
+        $scope.toggleschedule = function(){
+            console.log("toggle: " + $scope.schedule);
+        };
+
+
+
         $scope.selectedItemChange = function (item) {
             //alert("Item Changed");
         }
@@ -514,9 +529,6 @@
                                 $scope.fArray=getLocalArr();
 
 
-                                //localArrayGlobol=getLocalArr();
-
-
                             } else {
                                 // invalid response
                                 return $q.reject(response.data.records);
@@ -531,7 +543,113 @@
 
         }
 
+        $scope.autoRefreshFavTable = function(confirmRefresh) {
+            if(confirmRefresh == false){
+                console.log("unchecked");
+            } else {
+                console.log("checked");
+            }
+
+//            setTimeout(function (){
+//                angular.forEach($scope.fArray, function(value, key){
+//                    //console.log(key + ': ' + value);
+//                    setTimeout(function (){
+//                        var symbolInfo = value;
+//                        var symbol = value.symbol;
+//                        var url ="http://localhost/hw8-2/php/multiAjax.php?symbol="+symbol+"&action=getStockData";
+//                        $http.get(url)
+//                            .then(function(response) {
+//                                if (typeof response === 'object') {
+//
+//                                    //delete symbol then add back with refresh info
+//                                    localStorage.removeItem(symbol);
+//                                    var responseData = response.data;
+//                                    var obj={};
+//                                    obj["symbol"] = responseData.symbol;
+//                                    obj["price"]= parseFloat(responseData["last price"]);
+//                                    obj["change"]=parseFloat(responseData["change"]);
+//                                    var tempPercent = responseData["change percent"];
+//                                    obj["changepercent"] = parseFloat(tempPercent.split('%').join(''));
+//
+//                                    var tempVol = responseData["volume"];
+//                                    tempVol = tempVol.split(',').join('');
+//                                    obj["volume"]=parseInt(tempVol);
+//                                    obj["default"] = Date.parse(new Date());
+//
+//                                    if(obj["change"]>=0.0){
+//                                        obj["color"]="green";
+//                                        obj["url"]="http://cs-server.usc.edu:45678/hw/hw8/images/Up.png";
+//                                    } else {
+//                                        obj["color"]="red";
+//                                        obj["url"]="http://cs-server.usc.edu:45678/hw/hw8/images/Down.png";
+//                                    }
+//                                    localStorage.setItem(obj["symbol"],JSON.stringify(obj));
+//                                    $scope.fArray=getLocalArr();
+//
+//
+//                                } else {
+//                                    // invalid response
+//                                    return $q.reject(response.data.records);
+//                                }
+//
+//                            }, function(response) {
+//                                // something went wrong
+//                                return $q.reject(response.data.records);
+//                            });
+//                    },1);
+//                });
+//            },30);
+
+
+
+        }
+
     });
+    app.directive('toggleCheckbox', [
+        function toggleCheckbox() {
+            /**
+             * Directive
+             */
+            return {
+                restrict: 'A',
+                transclude: true,
+                replace: false,
+                require: 'ngModel',
+                link: function ($scope, $element, $attr, ngModel) {
+
+                    // update model from Element
+                    var updateModelFromElement = function() {
+                        // If modified
+                        var checked = $element.prop('checked');
+                        if (checked != ngModel.$viewValue) {
+                            // Update ngModel
+                            ngModel.$setViewValue(checked);
+                            $scope.$apply();
+                        }
+                    };
+
+                    // Update input from Model
+                    var updateElementFromModel = function(newValue) {
+                        $element.trigger('change');
+                    };
+
+                    // Observe: Element changes affect Model
+                    $element.on('change', function() {
+                        updateModelFromElement();
+                    });
+
+                    $scope.$watch(function() {
+                        return ngModel.$viewValue;
+                    }, function(newValue) {
+                        updateElementFromModel(newValue);
+                    }, true);
+
+                    // Initialise BootstrapToggle
+                    $element.bootstrapToggle({ on: $attr.on, off: $attr.off, size:$attr.size, onstyle: $attr.onstyle, offstyle: $attr.offstyle, style: $attr.style, width: $attr.width, height: $attr.height });
+                }
+            };
+        }]);
+
 
     app.factory('GetCountryService', function ($http, $q) {
         return {
@@ -557,11 +675,19 @@
         };
     });
 
+
+
     function addFavorite($scope) {
         //$scope.items = ["A", "B", "C", "D"];
 
 
     }
+//    $(function() {
+//        $('#auto-refresh-button').change(function() {
+//            $scope.confirmRefresh=true;
+//            console.log("change check");
+//        })
+//    };
 
 </script>
 
