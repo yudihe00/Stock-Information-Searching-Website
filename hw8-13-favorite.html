@@ -165,14 +165,16 @@
             <!--sort select grounp-->
             <div class="col-md-3 col-xs-6 col-sm-6">
               <span>Sort by&nbsp;</span>
-                <select id="sort-select">
-                  <option value="default">Default</option>
-                  <option value="symbol">Symbol</option>
-                  <option value="price">Price</option>
-                  <option value="change">Change</option>
-                  <option value="change">Change Percent</option>
-                  <option value="volume">Volume</option>
-                </select>
+              <select ng-model="selectedOrder" ng-options="option.value as option.name for option in options" ng-init="selectedOrder = options[0].value"></select>
+                <!--<select id="sort-select">-->
+                  <!--<option value="default">Default</option>-->
+                  <!--<option value="symbol">Symbol</option>-->
+                  <!--<option value="price">Price</option>-->
+                  <!--<option value="change">Change</option>-->
+                  <!--<option value="change">Change Percent</option>-->
+                  <!--<option value="volume">Volume</option>-->
+                <!--</select>-->
+
             </div>
 
             <!--order select group-->
@@ -196,18 +198,23 @@
                 <th></th>
               </tr>
             </thead>
+
+
+
             <tbody id="favorite-table-body" style="font-weight: normal">
-              <!--<tr>-->
-                <!--<td class="symbol-td">a</td>-->
-                <!--<td class="price-td">b</td>-->
-                <!--<td class="change-td">c</td>-->
-                <!--<td class="volume-td">d</td>-->
-                <!--<td class="button-td">-->
-                  <!--<button class="btn btn-sm btn-default" id="-button"-->
-                          <!--onclick="deleteLocal(symbol)" >-->
-                    <!--<span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>-->
-                <!--</td>-->
-              <!--</tr>-->
+              <tr ng-repeat="fSymbol in fArray| orderBy:selectedOrder"  >
+                <td class="symbol-td" ><a ng-click="$parent.$parent.checked=false; showFavInfo(fSymbol.symbol);">{{fSymbol.symbol}}</a></td>
+                <td class="price-td" >{{fSymbol.price}}</td>
+                <td class="change-td" ng-class="[{'red-color': fSymbol.color == 'red'},
+                  {'green-color': fSymbol.color == 'green'}] ">{{fSymbol.change}} ({{fSymbol["changepercent"]}}%)
+                    <img ng-src="{{ fSymbol['url'] }}" width="10px" height="15px"/>`</td>
+                <td class="volume-td"><span id='number-default'>{{fSymbol.volume|number}}</span></td>
+                <td class="button-td">
+                  <button class="btn btn-sm btn-default" id="-button" ng-click="deleteLocalFav(fSymbol.symbol)"
+                          onclick="" >
+                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+                </td>
+              </tr>
             </tbody>
           </table>
         </div>
@@ -246,7 +253,7 @@
                 <div class="panel-body ">
                   <div class="col-md-8 col-xs-6 col-sm-6" >Stock Details</div>
                   <div class="col-md-4 col-xs-6 col-sm-6" id="favorite-fb-buttons" >
-                    <button class="btn" id="favorite-button" onclick="favoriteChange()" style="background-color: white; border: 1px solid #919191; padding: 6px;">
+                    <button class="btn" id="favorite-button"  ng-click="refreshFav()" onclick="favoriteChange()" style="background-color: white; border: 1px solid #919191; padding: 6px;">
                       <span class="glyphicon glyphicon-star-empty" style="font-size: 1.4em" aria-hidden="true"></span>
                     </button>
                     <button class="btn" id="fb-button" onclick="fbShare()" style="background-color: white; border: 1px solid #919191; padding: 6px;">
@@ -385,6 +392,14 @@
         $scope.selectedItem = [];
         $scope.isDisabled = false;
         $scope.noCache = false;
+        $scope.fArray = localArrayGlobol;
+        $scope.options = [{name:"default",value:"default"},
+                          {name:"symbol",value:"symbol"},
+                          {name:"price",value:"price"},
+                          {name:"change",value:"change"},
+                          {name:"change percent",value:"changepercent"},
+                          {name:"volume",value:"volume"}];
+        $scope.option="default";
 
         $scope.selectedItemChange = function (item) {
             //alert("Item Changed");
@@ -392,6 +407,59 @@
         $scope.searchTextChange = function (str) {
             return GetCountryService.getCountry(str);
         }
+
+//      when click favorite symbol show current stock info
+        $scope.showFavInfo= function(symbol){
+            setTimeout(function (){showInfoFromFavorite(symbol);},1);
+        }
+
+
+        $scope.deleteLocalFav = function(symbol){
+            localStorage.removeItem(symbol);
+            $scope.fArray=getLocalArr();
+        }
+
+        $scope.refreshFav = function() {
+            var currentSymbol = jsonObj["basic info"]["symbol"];
+            if(localStorage.getItem(currentSymbol) === null) {
+                var obj={};
+                obj["symbol"] = currentSymbol;
+                obj["price"]= parseFloat(jsonObj["basic info"]["last price"]);
+                obj["change"]=parseFloat(jsonObj["basic info"]["change"]);
+                var tempPercent = jsonObj["basic info"]["change percent"]
+                obj["changepercent"] = parseFloat(tempPercent.split('%').join(''));
+
+                var tempVol = jsonObj["basic info"]["volume"];
+                tempVol = tempVol.split(',').join('');
+                obj["volume"]=parseInt(tempVol);
+                obj["default"] = Date.parse(new Date());
+
+                if(obj["change"]>0.0){
+                    obj["color"]="green";
+                    obj["url"]="http://cs-server.usc.edu:45678/hw/hw8/images/Up.png";
+                } else {
+                    obj["color"]="red";
+                    obj["url"]="http://cs-server.usc.edu:45678/hw/hw8/images/Down.png";
+                }
+                $scope.fArray.push(obj);
+
+                localStorage.setItem(currentSymbol,JSON.stringify(obj));
+                $("#favorite-button").html (
+                    " <span class=\"glyphicon glyphicon-star\" " +
+                    "style=\"font-size: 1.4em;color: #ffe506\" aria-hidden=\"true\"></span>"
+                );
+                localArrayGlobol=getLocalArr();
+            } else {
+                localStorage.removeItem(currentSymbol);
+                $("#favorite-button").html (
+                    "<span class=\"glyphicon glyphicon-star-empty\" " +
+                    "style=\"font-size: 1.4em\" aria-hidden=\"true\"></span>"
+                );
+                $scope.fArray.pop(obj);
+                localArrayGlobol=getLocalArr();
+            }
+
+        };
 
     });
 
@@ -418,6 +486,13 @@
             }
         };
     });
+
+    function addFavorite($scope) {
+        //$scope.items = ["A", "B", "C", "D"];
+
+
+    }
+
 </script>
 
 

@@ -139,3 +139,10 @@ select #favorite-table-body {
     /*background-color: #d1d1d1;*/
 /*}*/
 
+/*for table red and green css*/
+.red-color {
+    color: red;
+}
+.green-color {
+    color: green;
+}

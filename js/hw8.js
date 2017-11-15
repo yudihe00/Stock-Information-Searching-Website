@@ -6,6 +6,7 @@ var phpUrl = phpUrlOrig;
 var chartConfigObject = {};
 var symbol;
 var hisData = [];
+var localArrayGlobol = getLocalArr();
 var arrayIndicatorName=["PRICE","SMA","EMA","STOCH","RSI","ADX","CCI","BBANDS","MACD"];
 // var phpUrl = "http://localhost/hw8-2/php/multiAjax.php";
 // var phpUrl = "php/multiAjax.php";
@@ -17,6 +18,7 @@ function initStat() {
     error = {};
     hisData = [];
     phpUrl = phpUrlOrig;
+
     return true;
 
 }
@@ -233,7 +235,7 @@ function jqueryGetData(functionName, initData) {
 
 
 $("document").ready(function () {
-    refreshFavoriteTable(getLocalArr());
+    // refreshFavoriteTable(getLocalArr());
     // $("#go-detail-button").addClass("disabled");
     // $("#go-detail-button").removeAttr("disabled");
     $(".stockForm").submit(function () {
@@ -1487,29 +1489,41 @@ function  fbShare() {
 
 // add to favorite
 function favoriteChange() {
-    var currentSymbol = jsonObj["basic info"]["symbol"];
-    if(localStorage.getItem(currentSymbol) === null) {
-        var obj={};
-        obj["symbol"] = currentSymbol;
-        obj["price"]= parseFloat(jsonObj["basic info"]["last price"]);
-        obj["change"]=parseFloat(jsonObj["basic info"]["change"]);
-        obj["change percent"] = jsonObj["basic info"]["change percent"];
-        var tempVol = jsonObj["basic info"]["volume"];
-        tempVol = tempVol.split(',').join('');
-        obj["volume"]=parseInt(tempVol);
-        obj["default"] = Date.parse(new Date());
-        localStorage.setItem(currentSymbol,JSON.stringify(obj));
-        $("#favorite-button").html (
-            " <span class=\"glyphicon glyphicon-star\" " +
-            "style=\"font-size: 1.4em;color: #ffe506\" aria-hidden=\"true\"></span>"
-        );
-    } else {
-        localStorage.removeItem(currentSymbol);
-        $("#favorite-button").html (
-          "<span class=\"glyphicon glyphicon-star-empty\" " +
-            "style=\"font-size: 1.4em\" aria-hidden=\"true\"></span>"
-        );
-    }
+    // var currentSymbol = jsonObj["basic info"]["symbol"];
+    // if(localStorage.getItem(currentSymbol) === null) {
+    //     var obj={};
+    //     obj["symbol"] = currentSymbol;
+    //     obj["price"]= parseFloat(jsonObj["basic info"]["last price"]);
+    //     obj["change"]=parseFloat(jsonObj["basic info"]["change"]);
+    //     obj["change percent"] = jsonObj["basic info"]["change percent"];
+    //     var tempVol = jsonObj["basic info"]["volume"];
+    //     tempVol = tempVol.split(',').join('');
+    //     obj["volume"]=parseInt(tempVol);
+    //     obj["default"] = Date.parse(new Date());
+    //
+    //     if(obj["change"]>0.0){
+    //         obj["color"]="green";
+    //         obj["url"]="http://cs-server.usc.edu:45678/hw/hw8/images/Up.png";
+    //     } else {
+    //         obj["color"]="red";
+    //         obj["url"]="http://cs-server.usc.edu:45678/hw/hw8/images/Down.png";
+    //     }
+    //     $scope.fArray.push(obj);
+    //
+    //     localStorage.setItem(currentSymbol,JSON.stringify(obj));
+    //     $("#favorite-button").html (
+    //         " <span class=\"glyphicon glyphicon-star\" " +
+    //         "style=\"font-size: 1.4em;color: #ffe506\" aria-hidden=\"true\"></span>"
+    //     );
+    //     localArrayGlobol=getLocalArr();
+    // } else {
+    //     localStorage.removeItem(currentSymbol);
+    //     $("#favorite-button").html (
+    //       "<span class=\"glyphicon glyphicon-star-empty\" " +
+    //         "style=\"font-size: 1.4em\" aria-hidden=\"true\"></span>"
+    //     );
+    //     localArrayGlobol=getLocalArr();
+    // }
 }
 
 // initialize favorite button
@@ -1677,8 +1691,8 @@ function  getLocalArr() {
         localArr.push(JSON.parse(str));
         // localobj.add(Json.parse(localStorage.getItem(localStorage.key(i))));
     }
-    // console.log("orig array:")
-    // console.log(localArr);
+    console.log("orig array:")
+    console.log(localArr);
     return localArr;
 }
 
@@ -1703,20 +1717,31 @@ function refreshFavoriteTable(currentArr) {
         }
 
         
-        htmlStr += "<tr>\n" +
-            "                <td class=\"symbol-td\">"+localStorageArr[i]["symbol"]+"</td>\n" +
-            "                <td class=\"price-td\">"+localStorageArr[i]["price"]+"</td>\n" +
-                            strChange +
-            "                <td class=\"volume-td\">"+localStorageArr[i]["volume"].toLocaleString()+"</td>\n" +
-            "                <td class=\"button-td\">\n" + "<button class=\"btn btn-sm btn-default\" id=\""+
-            localStorageArr[i]["symbol"]+"-button\"\n" +
-            "                          onclick=\"deleteLocal("+"'"+localStorageArr[i]["symbol"]+"'"+")\" >\n" +
-            "                    <span class=\"glyphicon glyphicon-trash\" aria-hidden=\"true\"></span></button>"+
-            "                </td>\n" +
-            "              </tr>";
+        // htmlStr += "<tr>\n" +
+        //     "                <td class='symbol-td'><a onclick='loadSymbol()'>"+localStorageArr[i]["symbol"]+"</a></td>\n" +
+        //     "                <td class=\"price-td\">"+localStorageArr[i]["price"]+"</td>\n" +
+        //                     strChange +
+        //     "                <td class=\"volume-td\">"+localStorageArr[i]["volume"].toLocaleString()+"</td>\n" +
+        //     "                <td class=\"button-td\">\n" + "<button class=\"btn btn-sm btn-default\" id=\""+
+        //     localStorageArr[i]["symbol"]+"-button\"\n" +
+        //     "                          onclick=\"deleteLocal("+"'"+localStorageArr[i]["symbol"]+"'"+")\" >\n" +
+        //     "                    <span class=\"glyphicon glyphicon-trash\" aria-hidden=\"true\"></span></button>"+
+        //     "                </td>\n" +
+        //     "              </tr>";
     }
-    $("#favorite-table-body").html(htmlStr);
+
+    // $("#favorite-table-body").html(htmlStr);
+
+
+
 }
+
+// // load symbol
+// function loadSymbol(){
+//    favSymbol="FB";
+//     $("#favorite-list").animate({left: '250px'});
+//
+// }
 
 
 // delete a symbol
@@ -1793,7 +1818,7 @@ function  buttonRight() {
     },1);
 
     // show favorite data new
-    setTimeout(function (){showInfoFromFavorite("AAPL");},1);
+    //setTimeout(function (){showInfoFromFavorite("AAPL");},1);
 
 }
 
