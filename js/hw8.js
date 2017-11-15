@@ -5,6 +5,7 @@ var phpUrlOrig = "http://localhost/hw8-2/php/multiAjax.php";
 var phpUrl = phpUrlOrig;
 var chartConfigObject = {};
 var symbol;
+var hisData = [];
 var arrayIndicatorName=["PRICE","SMA","EMA","STOCH","RSI","ADX","CCI","BBANDS","MACD"];
 // var phpUrl = "http://localhost/hw8-2/php/multiAjax.php";
 // var phpUrl = "php/multiAjax.php";
@@ -14,6 +15,7 @@ function initStat() {
     chartConfigObject = {};
     ajaxCallNum = 0;
     error = {};
+    hisData = [];
     phpUrl = phpUrlOrig;
     return true;
 
@@ -290,7 +292,7 @@ $("document").ready(function () {
                 $("#volume").html(jsonObj["basic info"]["volume"]);
                 $("#range").html(jsonObj["basic info"]["day's range"]);
 
-                drawCharts("PRICE");
+                // drawCharts("PRICE");
 
                 // use get SMA data
                 jqueryGetData("SMA", dataSave);
@@ -1282,9 +1284,115 @@ function MACDcharts() {
     var chart= new Highcharts.chart('macd-chart', chartConfig);
 }
 
+// get history data
+
+function drawHisChartsFrom(hisData) {
+    // Create the chart
+    symbol = jsonObj["basic info"]["symbol"];
+    Highcharts.stockChart('historical-charts-container', { //change
+
+        rangeSelector: {
+            allButtonsEnabled: true,
+            buttons: [
+                {
+                    type: 'week',
+                    count: 1,
+                    text: '1w'
+                }, {
+                    type: 'month',
+                    count: 1,
+                    text: '1m'
+                }, {
+                    type: 'month',
+                    count: 3,
+                    text: '3m'
+                }, {
+                    type: 'month',
+                    count: 6,
+                    text: '6m'
+                }, {
+                    type: 'ytd',
+                    text: 'YTD'
+                }, {
+                    type: 'year',
+                    count: 1,
+                    text: '1y'
+                }, {
+                    type: 'all',
+                    text: 'All'
+                }],
+            buttonTheme: {
+                width: 30
+            },
+            selected: 0
+        },
+
+        title: {
+            text: symbol + ' Stock Price'
+        },
+        subtitle: {
+            text: '<a href="https://www.alphavantage.co/" >Source: Alpha Vantage </a>',
+            useHTML: true
+
+        },
+        tooltip: {
+            split: false,
+            xDateFormat: '%A, %b %d, %Y',
+        },
+
+        series: [{
+            name: symbol,
+            data: hisData,
+            type:'area',
+            tooltip: {
+                valueDecimals: 2
+            }
+        }],
+        responsive:{
+            rules:[{
+                condition:{
+                    maxWidth:410
+                },
+                chartOptions:{
+                    rangeSelector: {
+                        allButtonsEnabled: true,
+                        buttons: [
+                            {
+                                type: 'month',
+                                count: 1,
+                                text: '1m'
+                            }, {
+                                type: 'month',
+                                count: 3,
+                                text: '3m'
+                            }, {
+                                type: 'month',
+                                count: 6,
+                                text: '6m'
+                            }, {
+                                type: 'year',
+                                count: 1,
+                                text: '1y'
+                            }, {
+                                type: 'all',
+                                text: 'All'
+                            }],
+                        buttonTheme: {
+                            width: 30
+                        },
+                        selected: 0
+                    },
+
+                }
+            }]
+        }
+    });
+}
+
+
 // draw history chart
 function drawHisCharts(symbol) {
-    var hisData = [];
+
 //        var symbol = 'FB';
     phpUrl = phpUrl+"?input=";
     phpUrl = phpUrl + symbol;
@@ -1298,105 +1406,8 @@ function drawHisCharts(symbol) {
             hisData[num] = temp;
         }
         //var width= $("#historical-charts-container").width();
-        // Create the chart
-        Highcharts.stockChart('historical-charts-container', { //change
+        drawHisChartsFrom(hisData);
 
-            rangeSelector: {
-                allButtonsEnabled: true,
-                buttons: [
-                    {
-                        type: 'week',
-                        count: 1,
-                        text: '1w'
-                    }, {
-                        type: 'month',
-                        count: 1,
-                        text: '1m'
-                    }, {
-                        type: 'month',
-                        count: 3,
-                        text: '3m'
-                    }, {
-                        type: 'month',
-                        count: 6,
-                        text: '6m'
-                    }, {
-                        type: 'ytd',
-                        text: 'YTD'
-                    }, {
-                        type: 'year',
-                        count: 1,
-                        text: '1y'
-                    }, {
-                        type: 'all',
-                        text: 'All'
-                    }],
-                buttonTheme: {
-                    width: 30
-                },
-                selected: 0
-            },
-
-            title: {
-                text: symbol + ' Stock Price'
-            },
-            subtitle: {
-                text: '<a href="https://www.alphavantage.co/" >Source: Alpha Vantage </a>',
-                useHTML: true
-
-            },
-            tooltip: {
-                split: false,
-                xDateFormat: '%A, %b %d, %Y',
-            },
-
-            series: [{
-                name: symbol,
-                data: hisData,
-                type:'area',
-                tooltip: {
-                    valueDecimals: 2
-                }
-            }],
-            responsive:{
-                rules:[{
-                    condition:{
-                        maxWidth:410
-                    },
-                    chartOptions:{
-                        rangeSelector: {
-                            allButtonsEnabled: true,
-                            buttons: [
-                                 {
-                                    type: 'month',
-                                    count: 1,
-                                    text: '1m'
-                                }, {
-                                    type: 'month',
-                                    count: 3,
-                                    text: '3m'
-                                }, {
-                                    type: 'month',
-                                    count: 6,
-                                    text: '6m'
-                                }, {
-                                    type: 'year',
-                                    count: 1,
-                                    text: '1y'
-                                }, {
-                                    type: 'all',
-                                    text: 'All'
-                                }],
-                            buttonTheme: {
-                                width: 30
-                            },
-                            selected: 0
-                        },
-
-                    }
-                }]
-            }
-        });
     });
 
 }
@@ -1767,10 +1778,12 @@ function  buttonRight() {
             $("#volume").html(jsonObj["basic info"]["volume"]);
             $("#range").html(jsonObj["basic info"]["day's range"]);
 
-            drawCharts("PRICE");
-            showNews(symbol);
+            // drawCharts("PRICE");
+            showNews(jsonObj["basic info"]["symbol"]);
+            drawHisChartsFrom(hisData);
+
 
 
         }
-    },10);
+    },1);
 }
