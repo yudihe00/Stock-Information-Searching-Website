@@ -3,25 +3,24 @@ header('Access-Control-Allow-Origin: *');
 date_default_timezone_set('America/New_York');
 
 // get data for current stock tab
-if (is_ajax()) {
-    if (isset($_GET["action"]) && !empty($_GET["action"])) { //Checks if action value exists
-        $action = $_GET["action"];
-        // console.log($action);
-        switch($action) { //Switch case for value of action
-            case "getStockData": getStockData(); break;
-            case "getSMAData": getOneVariableIndicatorData("SMA"); break;
-            case "getEMAData": getOneVariableIndicatorData("EMA"); break;
-            case "getRSIData": getOneVariableIndicatorData("RSI"); break;
-            case "getADXData": getOneVariableIndicatorData("ADX"); break;
-            case "getCCIData": getOneVariableIndicatorData("CCI"); break;
-            case "getBBANDSData": getThreeVariableIndicatorData("BBANDS","Real Middle Band","Real Lower Band","Real Upper Band"); break;
+if (isset($_GET["action"]) && !empty($_GET["action"])) { //Checks if action value exists
+    $action = $_GET["action"];
+    // console.log($action);
+    switch($action) { //Switch case for value of action
+        case "getStockData": getStockData(); break;
+        case "getSMAData": getOneVariableIndicatorData("SMA"); break;
+        case "getEMAData": getOneVariableIndicatorData("EMA"); break;
+        case "getRSIData": getOneVariableIndicatorData("RSI"); break;
+        case "getADXData": getOneVariableIndicatorData("ADX"); break;
+        case "getCCIData": getOneVariableIndicatorData("CCI"); break;
+        case "getBBANDSData": getThreeVariableIndicatorData("BBANDS","Real Middle Band","Real Lower Band","Real Upper Band"); break;
 
-            case "getMACDData": getThreeVariableIndicatorData("MACD","MACD_Signal","MACD_Hist","MACD"); break;
+        case "getMACDData": getThreeVariableIndicatorData("MACD","MACD_Signal","MACD_Hist","MACD"); break;
 
-            case "getSTOCHData": getTwoVariableIndicatorData("STOCH","SlowD","SlowK"); break;
-        }
+        case "getSTOCHData": getTwoVariableIndicatorData("STOCH","SlowD","SlowK"); break;
     }
 }
+
 
 //Function to check if the request is an AJAX request
 function is_ajax() {

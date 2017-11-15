@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b6392831-faf1-49bc-8e79-1a0f72d53c38" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hw8-15-refresh.html" afterPath="$PROJECT_DIR$/hw8-15-refresh.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/hw8.js" afterPath="$PROJECT_DIR$/js/hw8.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/php/multiajax.php" afterPath="$PROJECT_DIR$/php/multiajax.php" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -21,8 +20,8 @@
       <file leaf-file-name="hw8.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/hw8.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2690">
-              <caret line="256" column="23" lean-forward="false" selection-start-line="256" selection-start-column="23" selection-end-line="256" selection-end-column="23" />
+            <state relative-caret-position="153">
+              <caret line="281" column="97" lean-forward="false" selection-start-line="281" selection-start-column="83" selection-end-line="281" selection-end-column="97" />
               <folding>
                 <element signature="n#!!block;n#isEmpty#0" expanded="false" />
                 <element signature="n#!!block;n#showErrors#0" expanded="false" />
@@ -63,8 +62,8 @@
       <file leaf-file-name="hw8-15-refresh.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/hw8-15-refresh.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="280">
-              <caret line="485" column="11" lean-forward="true" selection-start-line="485" selection-start-column="11" selection-end-line="485" selection-end-column="11" />
+            <state relative-caret-position="311">
+              <caret line="505" column="50" lean-forward="false" selection-start-line="505" selection-start-column="50" selection-end-line="505" selection-end-column="50" />
               <folding>
                 <element signature="n#head#0;n#html#0;n#!!top" expanded="false" />
                 <element signature="n#script#0;n#body#0;n#html#0;n#!!top" expanded="false" />
@@ -108,8 +107,8 @@
                 <element signature="n#style#0;n#div#0;n#div#8;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#div#1;n#div#1;n#div#0;n#div#1;n#div#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#2;n#div#1;n#div#0;n#div#1;n#div#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <marker date="1510769206205" expanded="true" signature="21030:21061" ph="..." />
-                <marker date="1510769206205" expanded="true" signature="21384:21400" ph="..." />
+                <marker date="1510774676830" expanded="true" signature="21030:21061" ph="..." />
+                <marker date="1510774676830" expanded="true" signature="21384:21400" ph="..." />
               </folding>
             </state>
           </provider>
@@ -137,11 +136,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>contro</find>
-      <find>favorite-bu</find>
-      <find>ng-click</find>
-      <find>getlo</find>
-      <find>get</find>
       <find>selectedItemChange</find>
       <find>favorite-button</find>
       <find>MyCtrl</find>
@@ -155,7 +149,6 @@
       <find>buttonR</find>
       <find>deletelocal</find>
       <find>deleteLocalFav</find>
-      <find>change percent</find>
       <find>localstorage</find>
       <find>selectedOrder</find>
       <find>options</find>
@@ -165,8 +158,14 @@
       <find>showFavInfo</find>
       <find>GetCountryService</find>
       <find>factory</find>
-      <find>fArray</find>
       <find>showinfofrom</find>
+      <find>refreshFavTable</find>
+      <find>fArray</find>
+      <find>getstock</find>
+      <find>setTimeout</find>
+      <find>savejson</find>
+      <find>localStorage</find>
+      <find>change percent</find>
     </findStrings>
     <replaceStrings>
       <replace>enableButtons</replace>
@@ -208,8 +207,8 @@
         <option value="$PROJECT_DIR$/hw8-13-fb.html" />
         <option value="$PROJECT_DIR$/css/hw8.css" />
         <option value="$PROJECT_DIR$/hw8-13-favorite.html" />
-        <option value="$PROJECT_DIR$/hw8-15-refresh.html" />
         <option value="$PROJECT_DIR$/js/hw8.js" />
+        <option value="$PROJECT_DIR$/hw8-15-refresh.html" />
       </list>
     </option>
   </component>
@@ -400,7 +399,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="159361000" />
+    <option name="totallyTimeSpent" value="163346000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1128,8 +1127,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/js/hw8.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2690">
-          <caret line="256" column="23" lean-forward="false" selection-start-line="256" selection-start-column="23" selection-end-line="256" selection-end-column="23" />
+        <state relative-caret-position="153">
+          <caret line="281" column="97" lean-forward="false" selection-start-line="281" selection-start-column="83" selection-end-line="281" selection-end-column="97" />
           <folding>
             <element signature="n#!!block;n#isEmpty#0" expanded="false" />
             <element signature="n#!!block;n#showErrors#0" expanded="false" />
@@ -1168,8 +1167,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/hw8-15-refresh.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="485" column="11" lean-forward="true" selection-start-line="485" selection-start-column="11" selection-end-line="485" selection-end-column="11" />
+        <state relative-caret-position="311">
+          <caret line="505" column="50" lean-forward="false" selection-start-line="505" selection-start-column="50" selection-end-line="505" selection-end-column="50" />
           <folding>
             <element signature="n#head#0;n#html#0;n#!!top" expanded="false" />
             <element signature="n#script#0;n#body#0;n#html#0;n#!!top" expanded="false" />
@@ -1213,8 +1212,8 @@
             <element signature="n#style#0;n#div#0;n#div#8;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#1;n#div#1;n#div#0;n#div#1;n#div#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#2;n#div#1;n#div#0;n#div#1;n#div#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <marker date="1510769206205" expanded="true" signature="21030:21061" ph="..." />
-            <marker date="1510769206205" expanded="true" signature="21384:21400" ph="..." />
+            <marker date="1510774676830" expanded="true" signature="21030:21061" ph="..." />
+            <marker date="1510774676830" expanded="true" signature="21384:21400" ph="..." />
           </folding>
         </state>
       </provider>

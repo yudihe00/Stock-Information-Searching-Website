@@ -476,14 +476,60 @@
 
         };
 
-//        $scope.refreshFavTable = function() {
-//
-//            for(symbolInfo in fArray) {
-//                getRefresh: function(symbolInfo.symbol) {
-//                    var url ="http://localhost/hw8-2/php/multiAjax.php?name="+str;
-//                }
-//            }
-//        }
+        $scope.refreshFavTable = function() {
+
+            angular.forEach($scope.fArray, function(value, key){
+                //console.log(key + ': ' + value);
+                setTimeout(function (){
+                    var symbolInfo = value;
+                    var symbol = value.symbol;
+                    var url ="http://localhost/hw8-2/php/multiAjax.php?symbol="+symbol+"&action=getStockData";
+                    $http.get(url)
+                        .then(function(response) {
+                            if (typeof response === 'object') {
+
+                                //delete symbol then add back with refresh info
+                                localStorage.removeItem(symbol);
+                                var responseData = response.data;
+                                var obj={};
+                                obj["symbol"] = responseData.symbol;
+                                obj["price"]= parseFloat(responseData["last price"]);
+                                obj["change"]=parseFloat(responseData["change"]);
+                                var tempPercent = responseData["change percent"];
+                                obj["changepercent"] = parseFloat(tempPercent.split('%').join(''));
+
+                                var tempVol = responseData["volume"];
+                                tempVol = tempVol.split(',').join('');
+                                obj["volume"]=parseInt(tempVol);
+                                obj["default"] = Date.parse(new Date());
+
+                                if(obj["change"]>=0.0){
+                                    obj["color"]="green";
+                                    obj["url"]="http://cs-server.usc.edu:45678/hw/hw8/images/Up.png";
+                                } else {
+                                    obj["color"]="red";
+                                    obj["url"]="http://cs-server.usc.edu:45678/hw/hw8/images/Down.png";
+                                }
+                                localStorage.setItem(obj["symbol"],JSON.stringify(obj));
+                                $scope.fArray=getLocalArr();
+
+
+                                //localArrayGlobol=getLocalArr();
+
+
+                            } else {
+                                // invalid response
+                                return $q.reject(response.data.records);
+                            }
+
+                        }, function(response) {
+                            // something went wrong
+                            return $q.reject(response.data.records);
+                        });
+                },1);
+            });
+
+        }
 
     });
 
