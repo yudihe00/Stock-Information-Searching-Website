@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b6392831-faf1-49bc-8e79-1a0f72d53c38" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hw8-15-refresh.html" afterPath="$PROJECT_DIR$/hw8-15-refresh.html" />
-    </list>
+    <list default="true" id="b6392831-faf1-49bc-8e79-1a0f72d53c38" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -19,7 +17,7 @@
       <file leaf-file-name="hw8.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/js/hw8.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="25">
+            <state relative-caret-position="19920">
               <caret line="1454" column="5" lean-forward="false" selection-start-line="1454" selection-start-column="3" selection-end-line="1454" selection-end-column="5" />
               <folding>
                 <element signature="n#!!block;n#isEmpty#0" expanded="false" />
@@ -397,7 +395,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="170959000" />
+    <option name="totallyTimeSpent" value="171071000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1177,7 +1175,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/js/hw8.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="25">
+        <state relative-caret-position="19920">
           <caret line="1454" column="5" lean-forward="false" selection-start-line="1454" selection-start-column="3" selection-end-line="1454" selection-end-column="5" />
           <folding>
             <element signature="n#!!block;n#isEmpty#0" expanded="false" />
