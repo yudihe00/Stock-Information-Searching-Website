@@ -1,8 +1,8 @@
 var jsonObj = {};
 var ajaxCallNum = 0;
 var error = {};
-var phpUrlOrig = "http://localhost/hw8-2/php/multiAjax.php";
-// var phpUrlOrig = "http://csci571yudihe-php.us-east-2.elasticbeanstalk.com";
+// var phpUrlOrig = "http://localhost/hw8-2/php/multiAjax.php";
+var phpUrlOrig = "http://csci571yudihe-php.us-east-2.elasticbeanstalk.com";
 var phpUrl = phpUrlOrig;
 var chartConfigObject = {};
 var symbol;
