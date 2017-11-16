@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b6392831-faf1-49bc-8e79-1a0f72d53c38" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hw8-15-refresh.html" afterPath="$PROJECT_DIR$/hw8-15-refresh.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/hw8.js" afterPath="$PROJECT_DIR$/js/hw8.js" />
-    </list>
+    <list default="true" id="b6392831-faf1-49bc-8e79-1a0f72d53c38" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -399,7 +396,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="176861000" />
+    <option name="totallyTimeSpent" value="176905000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
