@@ -2,6 +2,8 @@
 header('Access-Control-Allow-Origin: *');
 date_default_timezone_set('America/New_York');
 
+$dataReadError = "Get Data Error";
+
 // get data for current stock tab
 if (isset($_GET["action"]) && !empty($_GET["action"])) { //Checks if action value exists
     $action = $_GET["action"];
@@ -38,8 +40,11 @@ function getIndicatorsJson($functionName, $symbol){
 
     if (isJSON($contents)) {
         $initJson = json_decode($contents,true);
-        return $initJson;
-    } else return getIndicatorsJson($functionName, $symbol);
+        if ($initJson==null) {
+            return $dataReadError;
+        }
+        else return $initJson;
+    } else return $dataReadError;
 }
 
 // use function get 1 variable indicator data
@@ -68,7 +73,10 @@ function getOneVariableIndicatorData($functionName){
     $dataJson[$functionName] = getOneVariableDataArray($functionName,$symbol);
     // use: print string of return json
     $dataJson["json"] = json_encode($dataJson); //return the string of json, saved as a string value in $return object
-    echo json_encode($dataJson);
+    if ($dataJson[$functionName]==$dataReadError) {
+        echo $dataReadError;
+    }
+    else echo json_encode($dataJson);
 
 }
 
@@ -97,13 +105,18 @@ function getThreeVariableIndicatorData($functionName,$term1,$term2,$term3){
     $symbol = $return["symbol"];
     $symbol = strtoupper($symbol); //change to uppercase
     $iniWholeJson = getIndicatorsJson($functionName,$symbol);
-    $dataJson[$functionName][$term1]=getSpecificOneVariableDataArray($functionName,$symbol,$term1,$iniWholeJson);
-    $dataJson[$functionName][$term2]=getSpecificOneVariableDataArray($functionName,$symbol,$term2,$iniWholeJson);
-    $dataJson[$functionName][$term3]=getSpecificOneVariableDataArray($functionName,$symbol,$term3,$iniWholeJson);
+    if($iniWholeJson == $dataReadError) {
+        echo $dataReadError;
+    } else {
+        $dataJson[$functionName][$term1]=getSpecificOneVariableDataArray($functionName,$symbol,$term1,$iniWholeJson);
+        $dataJson[$functionName][$term2]=getSpecificOneVariableDataArray($functionName,$symbol,$term2,$iniWholeJson);
+        $dataJson[$functionName][$term3]=getSpecificOneVariableDataArray($functionName,$symbol,$term3,$iniWholeJson);
 
-    // use: print string of return json
-    $dataJson["json"] = json_encode($dataJson); //return the string of json, saved as a string value in $return object
-    echo json_encode($dataJson);
+        // use: print string of return json
+        $dataJson["json"] = json_encode($dataJson); //return the string of json, saved as a string value in $return object
+        echo json_encode($dataJson);
+    }
+    
 
 }
 
@@ -113,13 +126,17 @@ function getTwoVariableIndicatorData($functionName,$term1,$term2){
     $symbol = $return["symbol"];
     $symbol = strtoupper($symbol); //change to uppercase
     $iniWholeJson = getIndicatorsJson($functionName,$symbol);
-    $dataJson[$functionName][$term1]=getSpecificOneVariableDataArray($functionName,$symbol,$term1,$iniWholeJson);
-    $dataJson[$functionName][$term2]=getSpecificOneVariableDataArray($functionName,$symbol,$term2,$iniWholeJson);
+    if($iniWholeJson == $dataReadError) {
+        echo $dataReadError;
+    } else {
+        $dataJson[$functionName][$term1]=getSpecificOneVariableDataArray($functionName,$symbol,$term1,$iniWholeJson);
+        $dataJson[$functionName][$term2]=getSpecificOneVariableDataArray($functionName,$symbol,$term2,$iniWholeJson);
 
-    // use: print string of return json
-    $dataJson["json"] = json_encode($dataJson); //return the string of json, saved as a string value in $return object
-    echo json_encode($dataJson);
-
+        // use: print string of return json
+        $dataJson["json"] = json_encode($dataJson); //return the string of json, saved as a string value in $return object
+        echo json_encode($dataJson);
+    }
+    
 }
 
 
@@ -136,7 +153,8 @@ function getStockData(){
 
     // if isjson() contents, need to add
     $initJson = json_decode($contents,true);
-    $dataJson["symbol"] = $symbol;
+    if ($initJson != null) {
+        $dataJson["symbol"] = $symbol;
 
     //get timeStamp
     $timeStamp = $initJson["Meta Data"]["3. Last Refreshed"]; //on market has time, otherwise only have date
@@ -239,6 +257,8 @@ function getStockData(){
     // use: print string of return json
     $dataJson["json"] = json_encode($dataJson); //return the string of json, saved as a string value in $return object
     echo json_encode($dataJson);
+    }
+    else echo $dataReadError;
 }
 
 // get data for draw history charts

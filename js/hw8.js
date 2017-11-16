@@ -1,8 +1,8 @@
 var jsonObj = {};
 var ajaxCallNum = 0;
 var error = {};
-// var phpUrlOrig = "http://localhost/hw8-2/php/multiAjax.php";
-var phpUrlOrig = "http://csci571yudihe-php.us-east-2.elasticbeanstalk.com";
+var phpUrlOrig = "http://localhost/hw8-2/php/multiAjax.php";
+// var phpUrlOrig = "http://csci571yudihe-php.us-east-2.elasticbeanstalk.com";
 var phpUrl = phpUrlOrig;
 var chartConfigObject = {};
 var symbol;
@@ -217,14 +217,19 @@ function jqueryGetData(functionName, initData) {
                 "<br />JSON: " + jsonObj[functionName]["json"] //data is a json object
             );
             ajaxCallNum++;
-            drawCharts(functionName);
+            if(jsonObj[functionName]["json"]!="") {
+                drawCharts(functionName);
+            } else {
+                saveError(functionName);
+            }
+
             checkAllJqueryDone();
 
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
             // alert(functionName + " data " + XMLHttpRequest.readyState + "\n" + XMLHttpRequest.status + "\n" + errorThrown);
 
-            //showErrors(functionName);
+            // showErrors(functionName);
 
             saveError(functionName);
             ajaxCallNum++;
