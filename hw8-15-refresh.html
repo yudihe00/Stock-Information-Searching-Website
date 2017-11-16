@@ -468,7 +468,7 @@
                     setTimeout(function (){
                         var symbolInfo = value;
                         var symbol = value.symbol;
-                        var url ="http://localhost/hw8-2/php/multiAjax.php?symbol="+symbol+"&action=getStockData";
+                        var url =phpUrlOrig+"?symbol="+symbol+"&action=getStockData";
                         $http.get(url)
                             .then(function(response) {
                                 if (typeof response === 'object') {
@@ -596,7 +596,7 @@
                 setTimeout(function (){
                     var symbolInfo = value;
                     var symbol = value.symbol;
-                    var url ="http://localhost/hw8-2/php/multiAjax.php?symbol="+symbol+"&action=getStockData";
+                    var url =phpUrlOrig+"?symbol="+symbol+"&action=getStockData";
                     $http.get(url)
                         .then(function(response) {
                             if (typeof response === 'object') {
@@ -704,7 +704,7 @@
                 // the $http API is based on the deferred/promise APIs exposed by the $q service
                 // so it returns a promise for us by default
                 //                var url = "https://www.bbminfo.com/sample.php?token="+str;
-                var url ="http://localhost/hw8-2/php/multiAjax.php?name="+str;
+                var url =phpUrlOrig+"?name="+str;
                 return $http.get(url)
                     .then(function(response) {
                         if (typeof response.data.records === 'object') {
