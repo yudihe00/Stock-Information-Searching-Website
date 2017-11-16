@@ -222,7 +222,7 @@ function jqueryGetData(functionName, initData) {
 
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
-            alert(functionName + " data " + XMLHttpRequest.readyState + "\n" + XMLHttpRequest.status + "\n" + errorThrown);
+            // alert(functionName + " data " + XMLHttpRequest.readyState + "\n" + XMLHttpRequest.status + "\n" + errorThrown);
 
             //showErrors(functionName);
 
@@ -335,7 +335,7 @@ $("document").ready(function () {
 
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
-                alert("detail data " + XMLHttpRequest.readyState + XMLHttpRequest.status + XMLHttpRequest.responseText);
+                // alert("detail data " + XMLHttpRequest.readyState + XMLHttpRequest.status + XMLHttpRequest.responseText);
                 //saveError("Current stock");
                 saveError("PRICE");
                 ajaxCallNum++;
@@ -1693,8 +1693,8 @@ function  getLocalArr() {
         localArr.push(JSON.parse(str));
         // localobj.add(Json.parse(localStorage.getItem(localStorage.key(i))));
     }
-    console.log("orig array:")
-    console.log(localArr);
+    // console.log("orig array:")
+    // console.log(localArr);
     return localArr;
 }
 
@@ -1922,7 +1922,7 @@ function showInfoFromFavorite(symbol) {
 
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
-                alert("detail data " + XMLHttpRequest.readyState + XMLHttpRequest.status + XMLHttpRequest.responseText);
+                // alert("detail data " + XMLHttpRequest.readyState + XMLHttpRequest.status + XMLHttpRequest.responseText);
                 //saveError("Current stock");
                 saveError("PRICE");
                 ajaxCallNum++;

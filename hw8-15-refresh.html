@@ -282,7 +282,7 @@
               <div class="col-md-6 col-xs-12 col-sm-12" id="detail-table-div" style="margin-top: 10px">
                 <div class="panel-body ">
                   <div class="col-md-8 col-xs-6 col-sm-6" >Stock Details</div>
-                  <div class="col-md-4 col-xs-6 col-sm-6" id="favorite-fb-buttons" >
+                  <div class="col-md-4 col-xs-6 col-sm-6" id="favorite-fb-buttons" style="text-align: right;" >
                     <button class="btn" id="favorite-button"  ng-click="refreshFav()" onclick="favoriteChange()" style="background-color: white; border: 1px solid #919191; padding: 6px;">
                       <span class="glyphicon glyphicon-star-empty" style="font-size: 1.4em" aria-hidden="true"></span>
                     </button>
@@ -465,7 +465,7 @@
                 }
                 angular.forEach($scope.fArray, function(value, key){
                     //console.log(key + ': ' + value);
-                    setTimeout(function (){
+//                    setTimeout(function (){
                         var symbolInfo = value;
                         var symbol = value.symbol;
                         var url =phpUrlOrig+"?symbol="+symbol+"&action=getStockData";
@@ -486,7 +486,13 @@
                                     var tempVol = responseData["volume"];
                                     tempVol = tempVol.split(',').join('');
                                     obj["volume"]=parseInt(tempVol);
-                                    obj["default"] = Date.parse(new Date());
+//                                    obj["default"] = Date.parse(new Date());
+                                    angular.forEach($scope.fArray, function(value, key){
+                                        if(value["symbol"] == obj["symbol"] ){
+                                            obj["default"] = obj["default"];
+                                        }
+                                    });
+
 
                                     if(obj["change"]>=0.0){
                                         obj["color"]="green";
@@ -508,11 +514,11 @@
                                 // something went wrong
                                 return $q.reject(response.data.records);
                             });
-                    },1);
+//                    },1);
                 });
 
 
-            },6000);
+            },6500);
         }
 
         $scope.killtimer=function(){
@@ -593,7 +599,7 @@
 
             angular.forEach($scope.fArray, function(value, key){
                 //console.log(key + ': ' + value);
-                setTimeout(function (){
+//                setTimeout(function (){
                     var symbolInfo = value;
                     var symbol = value.symbol;
                     var url =phpUrlOrig+"?symbol="+symbol+"&action=getStockData";
@@ -614,7 +620,11 @@
                                 var tempVol = responseData["volume"];
                                 tempVol = tempVol.split(',').join('');
                                 obj["volume"]=parseInt(tempVol);
-                                obj["default"] = Date.parse(new Date());
+                                angular.forEach($scope.fArray, function(value, key){
+                                    if(value["symbol"] == obj["symbol"] ){
+                                        obj["default"] = obj["default"];
+                                    }
+                                });
 
                                 if(obj["change"]>=0.0){
                                     obj["color"]="green";
@@ -624,6 +634,7 @@
                                     obj["url"]="http://cs-server.usc.edu:45678/hw/hw8/images/Down.png";
                                 }
                                 localStorage.setItem(obj["symbol"],JSON.stringify(obj));
+//                                $scope.refreshfArray(obj.symbol,obj);
                                 $scope.fArray=getLocalArr();
 
 
@@ -636,10 +647,22 @@
                             // something went wrong
                             return $q.reject(response.data.records);
                         });
-                },1);
+//                },1);
             });
 
         }
+
+//        $scope.refreshfArray = function(ChangeSymbol,obj){
+//            angular.forEach($scope.fArray, function(value, key) {
+//                if(value.symbol == ChangeSymbol) {
+//                    value.volume = obj.volume;
+//                    value.change = obj.change;
+//                    value.changepercent = obj.changepercent;
+//                    value.color= obj["color"];
+//                    value.url=obj["url"];
+//                }
+//            });
+//        }
 
         $scope.autoRefreshFavTable = function(confirmRefresh) {
             if(confirmRefresh == false){
