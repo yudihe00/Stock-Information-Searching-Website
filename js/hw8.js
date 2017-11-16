@@ -1942,3 +1942,5 @@ function showInfoFromFavorite(symbol) {
 
 
 }
+
+
