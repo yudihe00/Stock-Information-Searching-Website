@@ -63,6 +63,16 @@
   <!--<script src="js/bootstrap.min.js"></script>-->
 
 
+
+  <!--angular bootstrap toggle-->
+  <!--<link-->
+      <!--href="https://gitcdn.github.io/angular-bootstrap-toggle/2.2.0/dist/angular-bootstrap-toggle.min.css"-->
+      <!--rel="stylesheet">-->
+  <!--<script-->
+      <!--src="https://gitcdn.github.io/bootstrap-toggle/2.2.0/dist/angular-bootstrap-toggle.min.js"></script>-->
+  <link href="js/angular-bootstrap-toggle.min.css">
+  <script src="js/angular-bootstrap-toggle.min.js"></script>
+
 </head>
 
 <body class="bodyClass" >
@@ -161,8 +171,8 @@
 
               <!--auto refresh button-->
               <!--<input  id="auto-refresh-button"data-toggle="toggle" type="checkbox" ng-model="confirmRefresh" ng-click="autoRefreshFavTable(confirmRefresh)" style="height: 20px;">-->
-              <input toggle-checkbox class="form-control schedule" ng-model="schedule" ng-change='toggleschedule()' type="checkbox">
-
+              <!--<input toggle-checkbox class="form-control schedule" ng-model="schedule" ng-change='toggleschedule()' type="checkbox">-->
+              <toggle ng-model="toggleValue" ng-change="autoRefreshFavTable(toggleValue)"></toggle>
               <!--refresh button-->
               <button id="refresh-button"  class="btn grey-button" ng-click="refreshFavTable()" style="height: 30px;"  >
                 <span class="glyphicon glyphicon glyphicon-refresh" aria-hidden="true"></span></button>
@@ -402,9 +412,9 @@
 
 <!-- js for auto complete -->
 <script>
-    var app = angular.module('myApp', ['ngMaterial','ngAnimate']);
+    var app = angular.module('myApp', ['ngMaterial','ngAnimate','ui.toggle']);
 
-    app.controller('myCtrl', function ($scope, $http, $q, GetCountryService) {
+    app.controller('myCtrl', function ($scope, $http, $q, GetCountryService,$interval) {
 
 //        $scope.mycustomattr=true;
         $scope.searchText = "";
@@ -428,6 +438,84 @@
         $scope.toggleschedule = function(){
             console.log("toggle: " + $scope.schedule);
         };
+
+//for toggle timer
+        var c=0;
+        $scope.message="This DIV is refreshed "+c+" time.";
+        var timer;
+
+        $scope.starttimer=function () {
+            timer=$interval(function(){
+                console.log("This DIV is refreshed "+c+" time.");
+                c++;
+                if(c===100)
+                {
+                    console.log("Restarting the timer again :-");
+                    c=0;
+                }
+                angular.forEach($scope.fArray, function(value, key){
+                    //console.log(key + ': ' + value);
+                    setTimeout(function (){
+                        var symbolInfo = value;
+                        var symbol = value.symbol;
+                        var url ="http://localhost/hw8-2/php/multiAjax.php?symbol="+symbol+"&action=getStockData";
+                        $http.get(url)
+                            .then(function(response) {
+                                if (typeof response === 'object') {
+
+                                    //delete symbol then add back with refresh info
+                                    localStorage.removeItem(symbol);
+                                    var responseData = response.data;
+                                    var obj={};
+                                    obj["symbol"] = responseData.symbol;
+                                    obj["price"]= parseFloat(responseData["last price"]);
+                                    obj["change"]=parseFloat(responseData["change"]);
+                                    var tempPercent = responseData["change percent"];
+                                    obj["changepercent"] = parseFloat(tempPercent.split('%').join(''));
+
+                                    var tempVol = responseData["volume"];
+                                    tempVol = tempVol.split(',').join('');
+                                    obj["volume"]=parseInt(tempVol);
+                                    obj["default"] = Date.parse(new Date());
+
+                                    if(obj["change"]>=0.0){
+                                        obj["color"]="green";
+                                        obj["url"]="http://cs-server.usc.edu:45678/hw/hw8/images/Up.png";
+                                    } else {
+                                        obj["color"]="red";
+                                        obj["url"]="http://cs-server.usc.edu:45678/hw/hw8/images/Down.png";
+                                    }
+                                    localStorage.setItem(obj["symbol"],JSON.stringify(obj));
+                                    $scope.fArray=getLocalArr();
+
+
+                                } else {
+                                    // invalid response
+                                    return $q.reject(response.data.records);
+                                }
+
+                            }, function(response) {
+                                // something went wrong
+                                return $q.reject(response.data.records);
+                            });
+                    },1);
+                });
+
+
+            },6000);
+        }
+
+        $scope.killtimer=function(){
+            if(angular.isDefined(timer))
+            {
+                $interval.cancel(timer);
+                timer=undefined;
+                c=0;
+                console.log("Timer is killed :-(");
+            }
+        };
+
+
 
 
 
@@ -546,62 +634,11 @@
         $scope.autoRefreshFavTable = function(confirmRefresh) {
             if(confirmRefresh == false){
                 console.log("unchecked");
+                $scope.killtimer();
             } else {
                 console.log("checked");
+                $scope.starttimer();
             }
-
-//            setTimeout(function (){
-//                angular.forEach($scope.fArray, function(value, key){
-//                    //console.log(key + ': ' + value);
-//                    setTimeout(function (){
-//                        var symbolInfo = value;
-//                        var symbol = value.symbol;
-//                        var url ="http://localhost/hw8-2/php/multiAjax.php?symbol="+symbol+"&action=getStockData";
-//                        $http.get(url)
-//                            .then(function(response) {
-//                                if (typeof response === 'object') {
-//
-//                                    //delete symbol then add back with refresh info
-//                                    localStorage.removeItem(symbol);
-//                                    var responseData = response.data;
-//                                    var obj={};
-//                                    obj["symbol"] = responseData.symbol;
-//                                    obj["price"]= parseFloat(responseData["last price"]);
-//                                    obj["change"]=parseFloat(responseData["change"]);
-//                                    var tempPercent = responseData["change percent"];
-//                                    obj["changepercent"] = parseFloat(tempPercent.split('%').join(''));
-//
-//                                    var tempVol = responseData["volume"];
-//                                    tempVol = tempVol.split(',').join('');
-//                                    obj["volume"]=parseInt(tempVol);
-//                                    obj["default"] = Date.parse(new Date());
-//
-//                                    if(obj["change"]>=0.0){
-//                                        obj["color"]="green";
-//                                        obj["url"]="http://cs-server.usc.edu:45678/hw/hw8/images/Up.png";
-//                                    } else {
-//                                        obj["color"]="red";
-//                                        obj["url"]="http://cs-server.usc.edu:45678/hw/hw8/images/Down.png";
-//                                    }
-//                                    localStorage.setItem(obj["symbol"],JSON.stringify(obj));
-//                                    $scope.fArray=getLocalArr();
-//
-//
-//                                } else {
-//                                    // invalid response
-//                                    return $q.reject(response.data.records);
-//                                }
-//
-//                            }, function(response) {
-//                                // something went wrong
-//                                return $q.reject(response.data.records);
-//                            });
-//                    },1);
-//                });
-//            },30);
-
-
-
         }
 
     });
